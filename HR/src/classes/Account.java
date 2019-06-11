@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class Account {
 	
-	private Date regDate;
 	private String username;
 	private String passHash;
+	private Date regDate;
 	
 	public Account(Date regDate, String username, String passHash) {
-		this.regDate = regDate;
 		this.username = username;
 		this.passHash = passHash;
+		this.regDate = regDate;
 	}
 	
 	public Date getRegDate() {

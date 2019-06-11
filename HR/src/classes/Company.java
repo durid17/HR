@@ -7,13 +7,11 @@ public class Company {
 	private int id;
 	private Account account;
 	private CompanyProfile profile;
-	private List<Vacancy> vacancies;
 	
-	public Company(int id, Account account, CompanyProfile profile, List<Vacancy> vacancies) {
+	public Company(int id, Account account, CompanyProfile profile) {
 		this.id = id;
 		this.account = account;
 		this.profile = profile;
-		this.vacancies = vacancies;
 	}
 
 	public int getId() {
@@ -24,14 +22,6 @@ public class Company {
 		return account;
 	}
 
-	public List<Vacancy> getVacancies() {
-		return vacancies;
-	}
-
-	public void setVacancies(List<Vacancy> vacancies) {
-		this.vacancies = vacancies;
-	}
-
 	public CompanyProfile getProfile() {
 		return profile;
 	}
@@ -39,12 +29,6 @@ public class Company {
 	public void setProfile(CompanyProfile profile) {
 		this.profile = profile;
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 }

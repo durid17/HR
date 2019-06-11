@@ -1,7 +1,10 @@
 package classes;
 
+import java.util.List;
+
 public class DBManager {
 
+	//
 	public void addAccount (Account account) {
 		
 	}
@@ -10,7 +13,7 @@ public class DBManager {
 		
 	}
 	
-	public void updateCompany(Company company) {
+	public void deleteAccount(Account account) { 
 		
 	}
 	
@@ -19,26 +22,44 @@ public class DBManager {
 		return null;
 	}
 	
+	//
+	public void updateCompany(Company company) {
+		
+	}
+	
 	public Company getCompany(Account account) {
 		
 		return null;
 	}
 	
-	public Employee getEmployee(Account account) {
+	public List<Vacancy> getCompanyVacancies(int companyId) {
 		
 		return null;
 	}
 	
 	
+	//
+	public Employee getEmployee(Account account) {
+		
+		return null;
+	}
 	
-	public void updateEmployee(Employee account) {
+	public void updateEmployee(Employee employee) {
 		
 	}
 	
-	public void deleteAccount(Account account) { 
+	public List<Vacancy> getEmployeeApplications(int employeeId) {
 		
+		return null;
 	}
 	
+	public List<Company> getEmployeeFollowing(int employeeId) {	
+		
+		return null;
+	}
+	
+	
+	//
 	public void addVacancy(Vacancy vacancy) {
 		
 	}
@@ -50,4 +71,19 @@ public class DBManager {
 	public void deleteVacancy(Vacancy vacancy) {
 		
 	}
+	
+	
+	//
+	public void addFollower(int companyId, int employeeId) {
+		
+	}
+	
+	public void addApplication(int employeeId, int vacancyId) {
+		
+	}
+	
+	
+	
+	
+	
 }
