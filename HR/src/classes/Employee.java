@@ -3,6 +3,7 @@ package classes;
 import java.util.List;
 
 public class Employee {
+	
 	private int id;
 	private Account account;
 	private EmployeeProfile profile;

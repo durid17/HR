@@ -3,6 +3,7 @@ package classes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBConnection {
 	static String account = MyDBInfo.MYSQL_USERNAME;
@@ -19,7 +20,9 @@ public class DBConnection {
 			
 			if(con == null) {
 				Class.forName("com.mysql.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);				
+				con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);	
+				Statement statement = con.createStatement();
+				statement.executeQuery("USE " + database);
 			}
 
 		} catch (SQLException e) {
