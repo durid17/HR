@@ -44,11 +44,11 @@ public class DBConnection {
 	
 	public static void main(String[] args) {
 		DBManager manager = new DBManager(DBConnection.getCon());
-		/*Account account = new Account(0, new Date(System.currentTimeMillis()), "gega", "12345", Account.EMPLOYEE_ACCOUNT_TYPE);
-		manager.addAccount(account);
-		account.setPassHash("123");
-		manager.updateAccount(account);
-		manager.deleteAccount(account);*/
+//		Account account = new Account(0, new Date(System.currentTimeMillis()), "gega", "12345", Account.EMPLOYEE_ACCOUNT_TYPE);
+//		manager.addAccount(account);
+//		account.setPassHash("123");
+//		manager.updateAccount(account);
+//		manager.deleteAccount(account);
 		
 		
 //		 System.out.println(manager.getCompanyVacancies(8).size());

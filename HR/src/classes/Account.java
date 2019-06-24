@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class Account {
 	
-	public static final String EMPLOYEE_ACCOUNT_TYPE = "employee";
-	public static final String COMPANY_ACCOUNT_TYPE = "company";
+	public static final String EMPLOYEE_ACCOUNT_TYPE = "Employee";
+	public static final String COMPANY_ACCOUNT_TYPE = "Company";
 	
 	private int id;
 	private String username;
@@ -44,7 +44,4 @@ public class Account {
 	public String getAccountType() {
 		return accountType;
 	}
-
-	
-	
 }

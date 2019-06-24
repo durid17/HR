@@ -17,7 +17,7 @@ public class DBManager {
 	}
 
 	//
-	public void addAccount(Account account) {
+	public Account addAccount(Account account) {
 		try {
 			PreparedStatement stmt1 = con.prepareStatement("INSERT INTO accounts (username, password_hash, account_type) VALUES (?, ?, ?)");
 			stmt1.setString(1, account.getUsername());
@@ -25,7 +25,7 @@ public class DBManager {
 			stmt1.setString(3, account.getAccountType());
 			stmt1.executeUpdate();
 
-			int accountID = account.getID();
+			int accountID = getAccountID(account);
 
 			if (account.getAccountType().equals(Account.EMPLOYEE_ACCOUNT_TYPE)) {
 				PreparedStatement stmt2 = con.prepareStatement("INSERT INTO employees (id) VALUES (?)");
@@ -36,11 +36,29 @@ public class DBManager {
 				stmt3.setInt(1, accountID);
 				stmt3.executeUpdate();
 			}
+			return getAccount(accountID);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
+	private int getAccountID (Account account) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT id FROM accounts WHERE username = ?");
+			stmt.setString(1, account.getUsername());
+			ResultSet resultSet = stmt.executeQuery();
+			int accountID = 0;
+			if (resultSet.next()) {
+				accountID = resultSet.getInt("id");
+			}
+			return accountID;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 	public void updateAccount(Account account) {
 		try {
 			PreparedStatement stmt = con.prepareStatement("UPDATE accounts SET password_hash = ? WHERE username = ?");
@@ -307,7 +325,6 @@ public class DBManager {
 			stmt.setString(5, req.getPosition());
 			stmt.setString(6, req.getLocation());
 			stmt.setString(7, req.getJobType());
-			stmt.setString(8, "mosafiqrebelia");
 
 			stmt.executeUpdate();
 
