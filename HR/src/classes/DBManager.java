@@ -140,7 +140,7 @@ public class DBManager {
 				Date foundedDate = resultSet.getDate("founded_date");
 
 				profile = new CompanyProfile(name, description, foundedDate, logo);
-				company = new Company(id, getAccount(companyId), profile);
+				company = new Company(getAccount(companyId), profile);
 			}
 
 		} catch (SQLException e) {
@@ -187,11 +187,10 @@ public class DBManager {
 	}
 
 	//
-	public Employee getEmployee(Account account) {
+	public Employee getEmployee(int employeeId) {
 		try {
-			int id = account.getID();
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM employees WHERE id = ?");
-			stmt.setInt(1, id);
+			stmt.setInt(1, employeeId);
 			ResultSet resultSet = stmt.executeQuery();
 			
 			if (resultSet.next()) {
@@ -206,7 +205,7 @@ public class DBManager {
 															  resultSet.getString("address"),
 															  resultSet.getString("description"),
 															  resultSet.getString("profile_picture"));
-				Employee employee = new Employee(id, account, profile);
+				Employee employee = new Employee(getAccount(employeeId), profile);
 				return employee;
 			}
 		} catch (SQLException e) {

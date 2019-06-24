@@ -50,13 +50,13 @@ public class DBConnection {
 		manager.updateAccount(account);
 		manager.deleteAccount(account);*/
 		
-		/*
-		 System.out.println(manager.getCompanyVacancies(7).size());
-		 System.out.println(manager.getCompanyVacancies(7).get(0).getEndDate());
-		 System.out.println(manager.getCompanyVacancies(7).get(1).getEndDate());
-		  
-		 System.out.println(manager.getCompanyVacancies(8).size());
-		 System.out.println(manager.getCompanyVacancies(9).size());
+		
+//		 System.out.println(manager.getCompanyVacancies(8).size());
+//		 System.out.println(manager.getCompanyVacancies(8).get(0).getEndDate());
+//		 System.out.println(manager.getCompanyVacancies(8).get(1).getEndDate());
+//		  
+//		 System.out.println(manager.getCompanyVacancies(8).size());
+//		 System.out.println(manager.getCompanyVacancies(9).size());
 		 
 		
 		/*

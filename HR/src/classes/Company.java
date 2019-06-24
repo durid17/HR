@@ -4,18 +4,16 @@ import java.util.List;
 
 public class Company {
 
-	private int id;
 	private Account account;
 	private CompanyProfile profile;
 	
-	public Company(int id, Account account, CompanyProfile profile) {
-		this.id = id;
+	public Company(Account account, CompanyProfile profile) {
 		this.account = account;
 		this.profile = profile;
 	}
 
 	public int getId() {
-		return id;
+		return account.getID();
 	}
 
 	public Account getAccount() {

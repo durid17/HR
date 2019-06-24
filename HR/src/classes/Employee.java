@@ -4,18 +4,16 @@ import java.util.List;
 
 public class Employee {
 	
-	private int id;
 	private Account account;
 	private EmployeeProfile profile;
 	
-	public Employee(int id, Account account, EmployeeProfile profile) {
-		this.id = id;
+	public Employee(Account account, EmployeeProfile profile) {
 		this.account = account;
 		this.profile = profile;
 	}
 
 	public int getId() {
-		return id;
+		return account.getID();
 	}
 
 	public Account getAccount() {
