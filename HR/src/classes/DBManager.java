@@ -19,8 +19,7 @@ public class DBManager {
 	//
 	public void addAccount(Account account) {
 		try {
-			PreparedStatement stmt1 = con
-					.prepareStatement("INSERT INTO accounts (username, password_hash, account_type) VALUES (?, ?, ?)");
+			PreparedStatement stmt1 = con.prepareStatement("INSERT INTO accounts (username, password_hash, account_type) VALUES (?, ?, ?)");
 			stmt1.setString(1, account.getUsername());
 			stmt1.setString(2, account.getPassHash());
 			stmt1.setString(3, account.getAccountType());
@@ -70,9 +69,11 @@ public class DBManager {
 			ResultSet resultSet = stmt.executeQuery();
 
 			if (resultSet.next()) {
-				return new Account(resultSet.getInt("id"), resultSet.getDate("registration_date"),
-						resultSet.getString("username"), resultSet.getString("password_hash"),
-						resultSet.getString("account_type"));
+				return new Account(resultSet.getInt("id"), 
+								   resultSet.getDate("registration_date"),
+								   resultSet.getString("username"), 
+								   resultSet.getString("password_hash"),
+								   resultSet.getString("account_type"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,7 +165,7 @@ public class DBManager {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
-				String title = resultSet.getString("title");
+				String heading = resultSet.getString("heading");
 				int company_id = resultSet.getInt("company_id");
 				String description = resultSet.getString("description");
 				Date creation_date = resultSet.getDate("creation_date");
@@ -174,7 +175,7 @@ public class DBManager {
 				String job_type = resultSet.getString("job_type");
 
 				Requirement req = new Requirement(location, position, job_type);
-				Vacancy vac = new Vacancy(id, title, description, company_id, req, creation_date, expiry_date);
+				Vacancy vac = new Vacancy(id, heading, description, company_id, req, creation_date, expiry_date);
 				res.add(vac);
 			}
 
@@ -192,14 +193,22 @@ public class DBManager {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM employees WHERE id = ?");
 			stmt.setInt(1, id);
 			ResultSet resultSet = stmt.executeQuery();
-
-			EmployeeProfile profile = new EmployeeProfile();
-			Employee employee = new Employee(id, account, profile);
-
+			
 			if (resultSet.next()) {
-				// TODO profile initialization
+				EmployeeProfile profile = new EmployeeProfile(resultSet.getString("firstname"),
+															  resultSet.getString("lastname"),
+															  resultSet.getString("gender"),
+															  resultSet.getDate("birth_date"),
+															  resultSet.getString("major_profession"),
+															  resultSet.getString("minor_profession"),
+															  resultSet.getString("email"),
+															  resultSet.getString("phone"),
+															  resultSet.getString("address"),
+															  resultSet.getString("description"),
+															  resultSet.getString("profile_picture"));
+				Employee employee = new Employee(id, account, profile);
+				return employee;
 			}
-			return employee;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -208,18 +217,38 @@ public class DBManager {
 
 	public void updateEmployee(Employee employee) {
 		try {
-			PreparedStatement stmt1 = con.prepareStatement("UPDATE employees SET firstname = ?, " + "lastname = ?, "
-					+ "gender = ?, " + "birth_date = ?," + "adress = ?," + "profile_picture = ?," + "WHERE id = ?");
+			PreparedStatement stmt1 = con.prepareStatement("UPDATE employees SET firstname = ?, " 
+																			  + "lastname = ?, "
+																			  + "gender = ?, " 
+																			  + "birth_date = ?," 
+																			  + "major_profession = ?" 
+																			  + "minor_profession = ?" 
+																			  + "email = ?" 
+																			  + "phone = ?"
+																			  + "adress = ?,"
+																			  + "profile_picture = ?"
+																			  + "WHERE id = ?");
 
-			stmt1.setInt(1, employee.getId());
-			// TODO set?s
+			stmt1.setString(1, employee.getProfile().getName());
+			stmt1.setString(2, employee.getProfile().getSurname());
+			stmt1.setString(3, employee.getProfile().getGender());
+			stmt1.setDate(4, employee.getProfile().getBirthDate());
+			stmt1.setString(5, employee.getProfile().getMajorProfession());
+			stmt1.setString(6, employee.getProfile().getMinorProfession());
+			stmt1.setString(7, employee.getProfile().getEmail());
+			stmt1.setString(8, employee.getProfile().getPhoneNumber());
+			stmt1.setString(9, employee.getProfile().getAddress());
+			stmt1.setString(10, employee.getProfile().getProfilePicture());
+			stmt1.setInt(11, employee.getAccount().getID());
+			
 			stmt1.executeUpdate();
 
-			PreparedStatement stmt2 = con.prepareStatement("UPDATE employees SET firstname = ?");
-
-			stmt2.setInt(1, employee.getId());
-			// TODO set?s
-			stmt2.executeUpdate();
+			/*
+			 * PreparedStatement stmt2 =
+			 * con.prepareStatement("UPDATE employees SET firstname = ?");
+			 * 
+			 * stmt2.setInt(1, employee.getId()); // TODO set?s stmt2.executeUpdate();
+			 */
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -267,8 +296,8 @@ public class DBManager {
 		Requirement req = vacancy.getReq();
 		PreparedStatement stmt = null;
 		String query = "insert into vacancies "
-				+ "(title, company_id, description, expiry_date, position, location, job_type, requirements) "
-				+ "VALUES (?,?,?,?,?,?,?,?)";
+				+ "(heading, company_id, description, expiry_date, position, location, job_type) "
+				+ "VALUES (?,?,?,?,?,?,?)";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -291,8 +320,8 @@ public class DBManager {
 	public void updateVacancy(Vacancy vacancy) {
 		Requirement req = vacancy.getReq();
 		PreparedStatement updateVacancy = null;
-		String updateString = "update vacancies " + "set title = ?, description = ?, expiry_date = ?, "
-				+ "position = ?, location = ?, job_type = ?, requirements = ? " + "where id = ?";
+		String updateString = "update vacancies " + "set heading = ?, description = ?, expiry_date = ?, "
+				+ "position = ?, location = ?, job_type = ?" + "where id = ?";
 
 		try {
 			updateVacancy = con.prepareStatement(updateString);
@@ -303,21 +332,21 @@ public class DBManager {
 			updateVacancy.setString(4, req.getPosition());
 			updateVacancy.setString(5, req.getLocation());
 			updateVacancy.setString(6, req.getJobType());
-			updateVacancy.setString(7, "mosafiqrebelia");
-
+			updateVacancy.setInt(7, vacancy.getId());
+			
 			updateVacancy.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void deleteVacancy(Vacancy vacancy) {
+	public void deleteVacancy(int id) {
 		PreparedStatement stmt = null;
 		String query = "delete from vacancies where id = ?";
 
 		try {
 			stmt = con.prepareStatement(query);
-			stmt.setInt(1, vacancy.getId());
+			stmt.setInt(1, id);
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -326,7 +355,34 @@ public class DBManager {
 	}
 	
 	public Vacancy getVacancy(int id) {
-		return null;
+		PreparedStatement getCompany = null;
+		Vacancy vacancy = null;
+		Requirement req = null;
+		String query = "select * from vacancies " + "where id = ?";
+
+		try {
+			getCompany = con.prepareStatement(query);
+			getCompany.setInt(1, id);
+			ResultSet resultSet = getCompany.executeQuery();
+
+			if (resultSet.next()) {
+				String heading = resultSet.getString("heading");
+				int companyId = resultSet.getInt("company_id");
+				String description = resultSet.getString("description");
+				Date creation_date = resultSet.getDate("creation_date");
+				Date expiry_date = resultSet.getDate("expiry_date");
+				String position = resultSet.getString("position");
+				String location = resultSet.getString("location");
+				String job_type = resultSet.getString("job_type");	
+
+				req = new Requirement(location, position, job_type);
+				vacancy = new Vacancy(id, heading, description, companyId, req, creation_date, expiry_date);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return vacancy;
 	}
 
 	//
@@ -389,5 +445,4 @@ public class DBManager {
 			e.printStackTrace();
 		}
 	}
-
 }
