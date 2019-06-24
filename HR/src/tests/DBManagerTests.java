@@ -1,0 +1,146 @@
+package tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.Statement;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import classes.Account;
+import classes.Company;
+import classes.CompanyProfile;
+import classes.DBConnection;
+import classes.DBManager;
+import classes.Requirement;
+import classes.Vacancy;
+
+class DBManagerTests {
+	DBManager manager = new DBManager(DBConnection.getCon());
+	
+	@BeforeEach
+	void setUp() throws Exception {
+//		String scriptFilePath = "src\\hr.sql";
+//		BufferedReader reader = null;
+//		Connection con = null;
+//		Statement statement = null;
+//		try {
+//			con = DBConnection.getCon();
+//			// create statement object
+//			statement = con.createStatement();
+//			// initialize file reader
+//			reader = new BufferedReader(new FileReader(scriptFilePath));
+//			String line = null;
+//			// read script line by line
+//			while (true) {
+//				line = reader.readLine();
+//				if (line == null)
+//					break;
+//				// execute query
+//				statement.execute(line);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			// close file reader
+//			if (reader != null) {
+//				reader.close();
+//			}
+//		}
+	}
+	
+	@Test
+	void accountTest() {
+		Account account = new Account(0, new Date(System.currentTimeMillis()), "testUser", "password", Account.EMPLOYEE_ACCOUNT_TYPE);
+		manager.addAccount(account);
+		
+		Account fromDBAccount = manager.getAccount(account.getUsername());
+		assertEquals(account.getUsername(), fromDBAccount.getUsername());
+		assertEquals(account.getPassHash(), fromDBAccount.getPassHash());
+//		assertEquals(account.getRegDate(), fromDBAccount.getRegDate());
+		assertEquals(account.getAccountType(), fromDBAccount.getAccountType());
+
+		account.setPassHash("newPassword");
+		manager.updateAccount(account);
+		fromDBAccount = manager.getAccount(account.getUsername());
+		assertEquals(fromDBAccount.getPassHash(), account.getPassHash());
+		
+		manager.deleteAccount(account);
+	}
+	
+	@Test
+	void companyTest() {
+		Account account = new Account(0, new Date(System.currentTimeMillis()), "testUser", "password", Account.COMPANY_ACCOUNT_TYPE);
+		account = manager.addAccount(account);
+		
+		Company company = new Company(account, new CompanyProfile("Test University", "Desc", new Date(System.currentTimeMillis()), "logo.jpg"));
+		manager.updateCompany(company);
+		Company fromDBCompany = manager.getCompany(account.getID());
+		assertEquals(account.getUsername(), fromDBCompany.getAccount().getUsername());
+		assertEquals(account.getPassHash(), fromDBCompany.getAccount().getPassHash());
+		assertEquals(account.getAccountType(), fromDBCompany.getAccount().getAccountType());
+		assertEquals(company.getProfile().getName(), fromDBCompany.getProfile().getName());
+		assertEquals(company.getProfile().getDescription(), fromDBCompany.getProfile().getDescription());
+//		assertEquals(company.getProfile().getFounded(), fromDBCompany.getProfile().getFounded());
+		assertEquals(company.getProfile().getLogo(), fromDBCompany.getProfile().getLogo());
+		
+		manager.deleteAccount(account);
+	}
+	
+	@Test
+	void employeeTest() {
+//		Account account = new Account(0, new Date(System.currentTimeMillis()), "testUser", "password", Account.COMPANY_ACCOUNT_TYPE);
+//		account = manager.addAccount(account);
+//		
+//		Company company = new Company(account, new CompanyProfile("Test University", "Desc", new Date(System.currentTimeMillis()), "logo.jpg"));
+//		manager.updateCompany(company);
+//		Company fromDBCompany = manager.getCompany(account.getID());
+//		assertEquals(account.getUsername(), fromDBCompany.getAccount().getUsername());
+//		assertEquals(account.getPassHash(), fromDBCompany.getAccount().getPassHash());
+//		assertEquals(account.getAccountType(), fromDBCompany.getAccount().getAccountType());
+//		assertEquals(company.getProfile().getName(), fromDBCompany.getProfile().getName());
+//		assertEquals(company.getProfile().getDescription(), fromDBCompany.getProfile().getDescription());
+////		assertEquals(company.getProfile().getFounded(), fromDBCompany.getProfile().getFounded());
+//		assertEquals(company.getProfile().getLogo(), fromDBCompany.getProfile().getLogo());
+//		
+//		manager.deleteAccount(account);
+	}
+	
+	@Test
+	void vacancyTest() {
+		Requirement requirement = new Requirement("Tbilisi", "Salesperson", "Full Time");
+		Vacancy vacancy = new Vacancy(0, "Heading", "Desc", 7, requirement, null, new Date(System.currentTimeMillis() + 5000000));
+		manager.addVacancy(vacancy);
+		
+		Vacancy fromDBVacancy = manager.getVacancy(7);
+		assertEquals(vacancy.getCompanyId(), fromDBVacancy.getCompanyId());
+		assertEquals(vacancy.getHeading(), fromDBVacancy.getHeading());
+		assertEquals(vacancy.getDescription(), fromDBVacancy.getDescription());
+//		assertEquals(vacancy.getStartDate(), fromDBVacancy.getStartDate());
+//		assertEquals(vacancy.getEndDate(), fromDBVacancy.getEndDate());
+		assertEquals(vacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
+		assertEquals(vacancy.getReq().getPosition(), fromDBVacancy.getReq().getPosition());
+		assertEquals(vacancy.getReq().getJobType(), fromDBVacancy.getReq().getJobType());
+		
+		Requirement updatedRequirement = new Requirement("Batumi", "Salesperson", "Part Time");
+		Vacancy updatedVacancy = new Vacancy(7, "UpdatedHeading", "UpdatedDesc", 7, updatedRequirement, null, new Date(System.currentTimeMillis() + 10000));
+		manager.updateVacancy(updatedVacancy);
+		
+		fromDBVacancy = manager.getVacancy(7);
+		assertEquals(updatedVacancy.getCompanyId(), fromDBVacancy.getCompanyId());
+		assertEquals(updatedVacancy.getHeading(), fromDBVacancy.getHeading());
+		assertEquals(updatedVacancy.getDescription(), fromDBVacancy.getDescription());
+//		assertEquals(updatedVacancy.getStartDate(), fromDBVacancy.getStartDate());
+//		assertEquals(updatedVacancy.getEndDate(), fromDBVacancy.getEndDate());
+		assertEquals(updatedVacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
+		assertEquals(updatedVacancy.getReq().getPosition(), fromDBVacancy.getReq().getPosition());
+		assertEquals(updatedVacancy.getReq().getJobType(), fromDBVacancy.getReq().getJobType());
+		
+		manager.deleteVacancy(fromDBVacancy.getId());
+	}
+
+}
