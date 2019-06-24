@@ -1,0 +1,47 @@
+body {
+	box-sizing: border-box;
+}
+
+.leftMenu {
+	position: relative;
+	margin: 0;
+	width: 200px;
+	background-color: white;
+	height: 40%;
+	top: 20px;
+	left: 20px;
+	float: left;
+}
+
+.leftMenu a {
+	display: block;
+	color: black;
+	padding: 16px;
+	text-decoration: none;
+}
+
+label {
+	font-size: 20px;
+}
+
+.leftMenu a.active {
+	color: blue;
+}
+
+.leftMenu a:hover:not (.active ) {
+	color: #0074E8;
+	opacity: 0.85;
+}
+
+.right {
+	left: 50px; 
+	top : 20px;
+	position: relative;
+	float: left;	
+	top: 20px;
+
+}
+.right label{	display: block;
+	padding: 5px;
+	font-size: 14px;
+}

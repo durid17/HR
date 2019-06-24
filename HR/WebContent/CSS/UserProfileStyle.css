@@ -1,0 +1,52 @@
+body {
+	
+}
+div{
+	border: none;
+	border-radius: 2px;
+}
+
+.container {
+	position: relative;
+	top: 15px;
+}
+
+.profileInfoLeft {
+	position: relative;
+	background-color: #E5E7E9;
+	left: 20px;
+	width: 200px;
+	height: 350px;
+	float: left;
+}
+
+#profileImage {
+	height: 100%;
+	width: 100%;
+}
+
+.workExpereience {
+	position: relative;
+	float: right;
+	right: 20px;
+	background-color: #E5E7E9;
+	width: 700px;
+	height: 150px;
+}
+.workExpereience p{
+	padding-left: 10px;
+}
+
+.education {
+	position: relative;
+	top: 10px;
+	float: right;
+	right: 20px;
+	background-color: #E5E7E9;
+	width: 700px;
+	height: 150px;
+}
+.education p{
+	padding-left: 10px;
+}
+

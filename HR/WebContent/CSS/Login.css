@@ -1,0 +1,46 @@
+body {
+	background-color: #323F6C;
+}
+
+h2 {
+	color: white;
+	text-align: center;
+}
+
+form {
+	
+	text-align: center;
+	margin: auto;
+	background-color: white;
+	width: 500px;
+	height: 300px;
+	border: none;
+	border-radius: 5px;
+	
+}
+
+input {
+	position: relative;
+	top: 20px;
+	border: none;
+	border-radius: 2px;
+	opacity: 0.85;
+	background-color: #DFDFDF;
+	width: 200px;
+	height: 40px;
+	font-size: 14px;
+	border-bottom:1px solid #ccc
+}
+
+
+button {
+	font-family: serif;
+	position: relative;
+	top: 20px;
+	background-color: #0C226C;
+	color: white;
+	border: none;
+	border-radius: 2px;
+	width: 200px;
+	height: 40px;
+}

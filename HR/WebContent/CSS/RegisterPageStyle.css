@@ -1,0 +1,45 @@
+body {
+	background-image: url("back.jpg");
+	background-size: 100%;
+}
+
+h1 {
+	font-style: oblique;
+	text-align: center;
+	color: white;
+}
+
+button[id=company] {
+	left: 150px;
+	float: left; /* Header 1 goes to left of page */
+}
+
+button[id=worker] {
+	right: 150px;
+	float: right; /* Header 2 goes to right of page */
+}
+
+button {
+	font-style: italic;
+	color: white;
+	font-size: 20px;
+	border: none;
+	padding: 15px 30px;
+	background-color: #323F6C;
+	cursor: pointer;
+	margin: 4px 2px;
+	position: absolute;
+	top: 50%;
+	border-radius: 12px;
+}
+
+button:hover {
+	transform: scale(1.25)
+}
+
+<
+.container {
+	clear: both;
+
+	/* container won't collapse, next element outside container won't float up */
+}
