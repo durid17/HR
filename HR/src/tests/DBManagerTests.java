@@ -16,6 +16,8 @@ import classes.Company;
 import classes.CompanyProfile;
 import classes.DBConnection;
 import classes.DBManager;
+import classes.Employee;
+import classes.EmployeeProfile;
 import classes.Requirement;
 import classes.Vacancy;
 
@@ -74,7 +76,7 @@ class DBManagerTests {
 	
 	@Test
 	void companyTest() {
-		Account account = new Account(0, new Date(System.currentTimeMillis()), "testUser", "password", Account.COMPANY_ACCOUNT_TYPE);
+		Account account = new Account(0, new Date(System.currentTimeMillis()), "testCompany", "password", Account.COMPANY_ACCOUNT_TYPE);
 		account = manager.addAccount(account);
 		
 		Company company = new Company(account, new CompanyProfile("Test University", "Desc", new Date(System.currentTimeMillis()), "logo.jpg"));
@@ -93,21 +95,29 @@ class DBManagerTests {
 	
 	@Test
 	void employeeTest() {
-//		Account account = new Account(0, new Date(System.currentTimeMillis()), "testUser", "password", Account.COMPANY_ACCOUNT_TYPE);
-//		account = manager.addAccount(account);
-//		
-//		Company company = new Company(account, new CompanyProfile("Test University", "Desc", new Date(System.currentTimeMillis()), "logo.jpg"));
-//		manager.updateCompany(company);
-//		Company fromDBCompany = manager.getCompany(account.getID());
-//		assertEquals(account.getUsername(), fromDBCompany.getAccount().getUsername());
-//		assertEquals(account.getPassHash(), fromDBCompany.getAccount().getPassHash());
-//		assertEquals(account.getAccountType(), fromDBCompany.getAccount().getAccountType());
-//		assertEquals(company.getProfile().getName(), fromDBCompany.getProfile().getName());
-//		assertEquals(company.getProfile().getDescription(), fromDBCompany.getProfile().getDescription());
-////		assertEquals(company.getProfile().getFounded(), fromDBCompany.getProfile().getFounded());
-//		assertEquals(company.getProfile().getLogo(), fromDBCompany.getProfile().getLogo());
-//		
-//		manager.deleteAccount(account);
+		Account account = new Account(0, new Date(System.currentTimeMillis()), "testEmployee", "password", Account.EMPLOYEE_ACCOUNT_TYPE);
+		account = manager.addAccount(account);
+		
+		Employee employee = new Employee(account, new EmployeeProfile("Name", "Surname", "Sex", new Date(123133), 
+				"Major", "Minor", "email@email.com", "579101010", "Tbilisi", "Desc",  "logo.jpg"));
+		manager.updateEmployee(employee);
+		Employee fromDBEmployee = manager.getEmployee(account.getID());
+		assertEquals(account.getUsername(), fromDBEmployee.getAccount().getUsername());
+		assertEquals(account.getPassHash(), fromDBEmployee.getAccount().getPassHash());
+		assertEquals(account.getAccountType(), fromDBEmployee.getAccount().getAccountType());
+		assertEquals(employee.getProfile().getName(), fromDBEmployee.getProfile().getName());
+		assertEquals(employee.getProfile().getSurname(), fromDBEmployee.getProfile().getSurname());
+		assertEquals(employee.getProfile().getGender(), fromDBEmployee.getProfile().getGender());
+		assertEquals(employee.getProfile().getMajorProfession(), fromDBEmployee.getProfile().getMajorProfession());
+		assertEquals(employee.getProfile().getMinorProfession(), fromDBEmployee.getProfile().getMinorProfession());
+		assertEquals(employee.getProfile().getEmail(), fromDBEmployee.getProfile().getEmail());
+		assertEquals(employee.getProfile().getPhoneNumber(), fromDBEmployee.getProfile().getPhoneNumber());
+		assertEquals(employee.getProfile().getAddress(), fromDBEmployee.getProfile().getAddress());
+		assertEquals(employee.getProfile().getDescription(), fromDBEmployee.getProfile().getDescription());
+		assertEquals(employee.getProfile().getProfilePicture(), fromDBEmployee.getProfile().getProfilePicture());
+//		assertEquals(employee.getProfile().getBirthDate(), fromDBEmployee.getProfile().getBirthDate());
+		
+		manager.deleteAccount(account);
 	}
 	
 	@Test
@@ -142,5 +152,4 @@ class DBManagerTests {
 		
 		manager.deleteVacancy(fromDBVacancy.getId());
 	}
-
-}
+} 

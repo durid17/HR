@@ -237,15 +237,16 @@ public class DBManager {
 			PreparedStatement stmt1 = con.prepareStatement("UPDATE employees SET firstname = ?, " 
 																			  + "lastname = ?, "
 																			  + "gender = ?, " 
-																			  + "birth_date = ?," 
-																			  + "major_profession = ?" 
-																			  + "minor_profession = ?" 
-																			  + "email = ?" 
-																			  + "phone = ?"
-																			  + "adress = ?,"
-																			  + "profile_picture = ?"
+																			  + "birth_date = ?, " 
+																			  + "major_profession = ?, " 
+																			  + "minor_profession = ?, " 
+																			  + "email = ?, " 
+																			  + "phone = ?, "
+																			  + "address = ?, "
+																			  + "profile_picture = ?, "
+																			  + "description = ? "
 																			  + "WHERE id = ?");
-
+			
 			stmt1.setString(1, employee.getProfile().getName());
 			stmt1.setString(2, employee.getProfile().getSurname());
 			stmt1.setString(3, employee.getProfile().getGender());
@@ -256,8 +257,9 @@ public class DBManager {
 			stmt1.setString(8, employee.getProfile().getPhoneNumber());
 			stmt1.setString(9, employee.getProfile().getAddress());
 			stmt1.setString(10, employee.getProfile().getProfilePicture());
-			stmt1.setInt(11, employee.getAccount().getID());
-			
+			stmt1.setString(11, employee.getProfile().getDescription());
+			stmt1.setInt(12, employee.getAccount().getID());
+
 			stmt1.executeUpdate();
 
 			/*

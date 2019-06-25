@@ -27,6 +27,4 @@ public class Company {
 	public void setProfile(CompanyProfile profile) {
 		this.profile = profile;
 	}
-	
-	
 }
