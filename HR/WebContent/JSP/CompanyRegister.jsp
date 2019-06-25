@@ -6,14 +6,17 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="../CSS/CompanyRegisterStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/CompanyRegisterStyle.css">
 <body>
 
-<form action="/action_page.php">
+<form action = "${pageContext.request.contextPath}/CompanyRegister" method ="post">
   <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create an account. Required fields are marked with an asterisk (*).</p>
     <hr>
+    
+    <label for="username"><b>Username *</b></label>
+    <input type="text" placeholder="Username" name="username" required>
 
     <label for="email"><b>Email *</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
@@ -29,9 +32,6 @@
    
     <label for="description"><b>Company Description *</b></label>
     <input type="text"  name="description" required>
-   
-    
-    
     
     
     <hr>

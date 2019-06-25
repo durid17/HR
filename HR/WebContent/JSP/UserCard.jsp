@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../CSS/UserCardStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/UserCardStyle.css">
 </head>
 <body>
 

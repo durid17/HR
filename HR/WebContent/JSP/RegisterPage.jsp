@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Register Page</title>
 
-<link rel="stylesheet" href="../CSS/RegisterPageStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/RegisterPageStyle.css">
 
 
 </head>

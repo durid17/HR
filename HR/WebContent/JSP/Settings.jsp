@@ -14,7 +14,7 @@
 </script>
 
 </head>
-<link rel="stylesheet" href="../CSS/SettingsStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/SettingsStyle.css">
 
 </head>
 <body>

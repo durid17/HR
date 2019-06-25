@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<link rel="stylesheet" href="../CSS/Login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Login.css">
 
 
 </head>

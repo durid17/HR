@@ -14,7 +14,7 @@
 </script>
 
 </head>
-<link rel="stylesheet" href="../CSS/UserProfileStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/UserProfileStyle.css">
 
 
 

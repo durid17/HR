@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Header</title>
 
-<link rel="stylesheet" href="../CSS/HeaderStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/HeaderStyle.css">
 
 </head>
 
