@@ -24,7 +24,7 @@
 	<div class = "container">
 		<div class = "profileInfoLeft">
 			<div class = "imgAvatar">
-				<img id = "profileImage" src="../Images/avatar.png" alt="Avatar">
+				<img id = "profileImage" src="${pageContext.request.contextPath}/Images/avatar.png" alt="Avatar">
 			</div>
 		    
 		    <div class="mainInfo">

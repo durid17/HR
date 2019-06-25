@@ -41,9 +41,10 @@ public class CompanyRegister extends HttpServlet {
 		
 		//Get account info
 		String username = request.getParameter("username");
-		
 		String password = request.getParameter("psw");
-
+		String passHash = Hash.getHash(password);
+		
+		
 		//Check account
 		if(manager.getAccount(username) != null) {
 			request.getRequestDispatcher("JSP/CompanyRegister.jsp").forward(request, response);
@@ -52,7 +53,7 @@ public class CompanyRegister extends HttpServlet {
 		
 		//Create account
 		Account newAccount = new Account(Account.DEFAULT_ID, new Date(System.currentTimeMillis()),
-											username, password, Account.COMPANY_ACCOUNT_TYPE); 
+											username, passHash, Account.COMPANY_ACCOUNT_TYPE); 
 		//Add account in base
 		manager.addAccount(newAccount);
 		

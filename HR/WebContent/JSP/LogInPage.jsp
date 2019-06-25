@@ -10,7 +10,7 @@
 	
 	<h2>SIGN IN</h2>
 
-	<form action="LoginServlet" method="POST">
+	<form action="${pageContext.request.contextPath}/LoginServlet" method="POST">
 			<input type="text" name="username" class="input-field" placeholder=" Username"  required /> 
 			<br>
 			<br>
@@ -24,7 +24,7 @@
 			<br>
 			<br>
 			
-			Not registered? <a href="RegisterPage.jsp">Create an account</a> 
+			Not registered? <a href="${pageContext.request.contextPath}/JSP/RegisterPage.jsp">Create an account</a> 
 	</form>
 	
 	
