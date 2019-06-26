@@ -55,18 +55,25 @@ public class CompanyRegister extends HttpServlet {
 		Account newAccount = new Account(Account.DEFAULT_ID, new Date(System.currentTimeMillis()),
 											username, passHash, Account.COMPANY_ACCOUNT_TYPE); 
 		//Add account in base
-		manager.addAccount(newAccount);
+		newAccount = manager.addAccount(newAccount);
 		
 		//Update personal info
 		String email = request.getParameter("email");
+		String phoneNumber = request.getParameter("phoneNumber");
+		String address = request.getParameter("address");
 		String companyName = request.getParameter("companyName");
 		String description = request.getParameter("description");
 		
-		CompanyProfile cmpPrf = new CompanyProfile(companyName, description,  null, null); 
+		CompanyProfile cmpPrf = new CompanyProfile(companyName, null, null, description,  email, phoneNumber, address); 
 		Company newCompany = new  Company(newAccount, cmpPrf);
+		
 		//Add info in base
 		manager.updateCompany(newCompany);
-		request.getRequestDispatcher("JSP/UserProfile.jsp").forward(request, response);
+		request.getSession().setAttribute("account", newAccount);
+		
+		// company profiles unda aq
+		//request.getRequestDispatcher("JSP/UserProfile.jsp").forward(request, response);
 		//doGet(request, response);
+		System.out.println(123);
 	}
 }

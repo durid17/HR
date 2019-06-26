@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/CompanyRegisterStyle.css">
 <body>
 
-<form onsubmit="method(); return false;">
+<form action = "${pageContext.request.contextPath}/ClientRegister" method ="post">
 
   <div class="container">
     <h1>Register</h1>

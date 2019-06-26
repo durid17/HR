@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="classes.Account, classes.DBManager, classes.Employee, classes.EmployeeProfile" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,14 @@
 		$("#header").load("Header.jsp");
 	});
 </script>
+
+<% 
+	Account acc = (Account)request.getSession().getAttribute("account");
+	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
+	Employee employee = manager.getEmployee(acc.getID());
+	//education
+	EmployeeProfile profile = employee.getProfile();
+%>
 
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/UserProfileStyle.css">
@@ -29,17 +38,17 @@
 		    
 		    <div class="mainInfo">
 		    	<h4><b></b></h4> 
-		    	<p> Software Engineer</p> 
+		    	<p> <%= profile.getMajorProfession() %></p> 
 		  	</div>
 		  	<hr>
 		  	<div class = "other">
-		  		<p> About</p> 
+		  		<p> About <%= profile.getDescription() %></p> 
 		  	</div>	  	
 		</div>
 		
 		
 		<div class = "workExpereience" > 
-			<p>Work Experience</p>
+			<p>Work Experience </p>
 		</div>
 		
 		<div class = "education" > 

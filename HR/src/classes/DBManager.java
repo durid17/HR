@@ -252,9 +252,8 @@ public class DBManager {
 																			  + "address = ?, "
 																			  + "profile_picture = ?, "
 																			  + "description = ?, "
-																			  + "isWorking = ?"
+																			  + "isWorking = ? "
 																			  + "WHERE id = ?");
-			
 			stmt1.setString(1, employee.getProfile().getName());
 			stmt1.setString(2, employee.getProfile().getSurname());
 			stmt1.setString(3, employee.getProfile().getGender());
@@ -323,10 +322,16 @@ public class DBManager {
 	public void addVacancy(Vacancy vacancy) {
 		Requirement req = vacancy.getReq();
 		PreparedStatement stmt = null;
-		String query = "insert into vacancies "
-							+ "(company_id, heading,  description, expiry_date, "
-									+ "emp_type, position, job_type, years_of_experience, location, degree) "
-										+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String query = "insert into vacancies (company_id, "
+											+ "heading, "
+											+ "description, "
+											+ "expiry_date, "
+											+ "emp_type, "
+											+ "position, "
+											+ "job_type, "
+											+ "years_of_experience, "
+											+ "location, "
+											+ "degree) VALUES (?,?,?,?,?,?,?,?,?,?)";
 //	
 //		PreparedStatement stmt2 = null;
 //		String query2 = "insert into ReqLanguages "
@@ -366,12 +371,12 @@ public class DBManager {
 		String updateQuery = "UPDATE vacancies SET heading = ?, "
 												+ "description = ?, "
 												+ "expiry_date = ?, "
-												+ "emp_type = ?,  "
+												+ "emp_type = ?, "
 												+ "position = ?, "
 												+ "job_type = ?, "
-												+ "years_of_experience = ?,"
-												+ "location = ?,"
-												+ "degree = ? where id = ?";
+												+ "years_of_experience = ?, "
+												+ "location = ?, "
+												+ "degree = ? WHERE id = ?";
 		
 //		PreparedStatement updateLanguage = null;
 //		String updateQuery2 = "update ReqLanguages " + "set language_name = ?, quality = ? "
@@ -383,16 +388,16 @@ public class DBManager {
 			updateVacancy.setString(1, vacancy.getHeading());
 			updateVacancy.setString(2, vacancy.getDescription());
 			updateVacancy.setDate(3, vacancy.getEndDate());
-			updateVacancy.setString(4,  vacancy.getEmpType());
+			updateVacancy.setString(4, vacancy.getEmpType());
 			updateVacancy.setString(5, vacancy.getPosition());
 			updateVacancy.setString(6, vacancy.getJobType());
-			updateVacancy.setInt(7, vacancy.getId());
-			updateVacancy.setInt(8,  vacancy.getReq().getYearsOfExp());
-			updateVacancy.setString(9,  vacancy.getReq().getLocation());
-			updateVacancy.setString(10,  vacancy.getReq().getDegree());
-			
+			updateVacancy.setInt(7, vacancy.getReq().getYearsOfExp());
+			updateVacancy.setString(8, vacancy.getReq().getLocation());
+			updateVacancy.setString(9, vacancy.getReq().getDegree());
+			updateVacancy.setInt(10, vacancy.getId());
+
 			updateVacancy.executeUpdate();
-//			
+			
 //			updateLanguage = con.prepareStatement(updateQuery2);
 //			
 //			updateLanguage.setString(1, lan.getLanguage());
@@ -444,7 +449,7 @@ public class DBManager {
 				String location = resultSet.getString("location");
 				String jobType = resultSet.getString("job_type");
 				String degree = resultSet.getString("degree");
-				int yearsOfExp = resultSet.getInt("years_of_experince");
+				int yearsOfExp = resultSet.getInt("years_of_experience");
 
 				req = new Requirement(location, yearsOfExp, degree);
 				vac = new Vacancy(vacId, title, position, description, empType,

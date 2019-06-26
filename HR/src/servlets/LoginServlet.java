@@ -30,8 +30,12 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("agaeg ").append(request.getContextPath());
+		Account acc = (Account)request.getSession().getAttribute("account");
+		if(acc != null) {
+			request.getRequestDispatcher("/JSP/MainPage.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/JSP/LogInPage.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -49,9 +53,13 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("/JSP/LogInPage.jsp").forward(request, response);
 			System.out.println("aaaaa");
 		} else {
-			//request.getRequestDispatcher("/welcomeUser.jsp").forward(request, response);
-			System.out.println("bbbb");
-			request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);
+	
+			request.getSession().setAttribute("account", acc);
+			if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)) {
+				request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);
+			} else if(acc.getAccountType().equals(Account.EMPLOYEE_ACCOUNT_TYPE)){
+				request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);	
+			}
 		}
 		
 	}

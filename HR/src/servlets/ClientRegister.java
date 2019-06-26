@@ -15,11 +15,12 @@ import classes.CompanyProfile;
 import classes.DBManager;
 import classes.Employee;
 import classes.EmployeeProfile;
+import classes.Hash;
 
 /**
  * Servlet implementation class Register
  */
-@WebServlet("/Register")
+@WebServlet("/ClientRegister")
 public class ClientRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,41 +36,47 @@ public class ClientRegister extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Account acc = (Account)request.getSession().getAttribute("account");
+		if(acc != null) {
+			request.getRequestDispatcher("/JSP/MainPage.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/JSP/ClientRegister.jsp").forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
-		String username = request.getParameter("username");
 		
+		String username = request.getParameter("userName");
 		String password = request.getParameter("psw");
+		String passHash = Hash.getHash(password);
 		
 		if(manager.getAccount(username) != null) {
 			request.getRequestDispatcher("JSP/ClientRegister.jsp").forward(request, response);
 			return;
 		} 	
 		
-		Account newAccount = new Account(Account.DEFAULT_ID, new Date(System.currentTimeMillis()),
-											username, password, Account.EMPLOYEE_ACCOUNT_TYPE); 
+		Account newAccount = new Account(Account.DEFAULT_ID, new Date(System.currentTimeMillis()), username, passHash, Account.EMPLOYEE_ACCOUNT_TYPE); 
 
-		manager.addAccount(newAccount);
+		newAccount = manager.addAccount(newAccount);
 		
+		System.out.println(newAccount.getID());
 		String firstname = request.getParameter("firstName");
 		String lastname = request.getParameter("lastName");
-		
 		String about = request.getParameter("comments");
+		String email = request.getParameter("email");
+		String gender = request.getParameter("gender");
 		
-//		EmployeeProfile profile = new EmployeeProfile(firstname, lastname, gender, birthDate, majorProf,
-//				minorProf, email, phoneNumber, address, description, profilePicture);
+		EmployeeProfile profile = new EmployeeProfile(firstname, lastname, gender, null, null, null, email, null, null, about, null, false);	
+		Employee employee = new Employee(newAccount, profile);
 		
-//		Employee employee = new Employee(newAccount, profile);
-		
+		manager.updateEmployee(employee);
+		request.getSession().setAttribute("account", newAccount);
 		request.getRequestDispatcher("JSP/UserProfile.jsp").forward(request, response);
+		System.out.println(1213515);
 		
 	}
 

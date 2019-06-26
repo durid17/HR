@@ -18,20 +18,26 @@
     <label for="username"><b>Username *</b></label>
     <input type="text" placeholder="Username" name="username" required>
 
-    <label for="email"><b>Email *</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-   
     <label for="psw"><b>Password *</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
    
     <label for="psw-repeat"><b>Repeat Password *</b></label>
     <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-   
+    
+    <label for="email"><b>Email *</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+    
+    <label for="phoneNumber"><b>Phone Number *</b></label>
+    <input type="text" placeholder="Enter Phone Number" name="phoneNumber" required>
+    
     <label for="companyName"><b>Company Name *</b></label>
-    <input type="text"  name="companyName" required>
+    <input type="text" placeholder="Enter Company Name" name="companyName" required>
+    
+    <label for="address"><b>Address *</b></label>
+    <input type="text" placeholder="Enter Address" name="address" required>
    
     <label for="description"><b>Company Description *</b></label>
-    <input type="text"  name="description" required>
+    <input type="text" placeholder="Enter Company Description" name="description" required>
     
     
     <hr>
