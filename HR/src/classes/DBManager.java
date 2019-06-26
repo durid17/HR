@@ -156,8 +156,11 @@ public class DBManager {
 				String description = resultSet.getString("description");
 				String logo = resultSet.getString("logo");
 				Date foundedDate = resultSet.getDate("founded_date");
+				String email = resultSet.getString("email");
+				String phone = resultSet.getString("phone");
+				String address = resultSet.getString("address");
 
-				profile = new CompanyProfile(name, description, foundedDate, logo);
+				profile = new CompanyProfile(name, description, foundedDate, logo, email, phone, address);
 				company = new Company(getAccount(companyId), profile);
 			}
 
@@ -172,12 +175,7 @@ public class DBManager {
 		List<Vacancy> res = new ArrayList<Vacancy>();
 
 		PreparedStatement stmt = null;
-		String query = "select * from " + "vacancies join companies " + 
-							"on vacancies.company_id = companies.id " + "join on Requirements on "
-									+ "vacancies.id = Requirements.vacancy_id"  
-										+ " left join ReqLanguages on "
-											+ "Requirements.id = ReqLanguages.requirements_id"
-												+ "where vacancies.company_id = ?";
+		String query = "SELECT * FROM vacancise WHERE company_id = ?";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -194,19 +192,14 @@ public class DBManager {
 				String empType = resultSet.getString("emp_type");
 				Date creationDate = resultSet.getDate("creation_date");
 				Date expiryDate = resultSet.getDate("expiry_date");
-				int reqId = resultSet.getInt("id"); //aq es rogor mixvdeba romlis id wamoigos req-ebis tu vacanciebies
 				String location = resultSet.getString("location");
 				String jobType = resultSet.getString("job_type");
-				String language = resultSet.getString("language_name");
-				String tag = resultSet.getString("tag");
 				String degree = resultSet.getString("degree");
 				int yearsOfExp = resultSet.getInt("years_of_experince");
-				String quality = resultSet.getString("quality");
 
-				Language lan = new Language(language, quality, "");
-				Requirement req = new Requirement(reqId, location, tag, lan, yearsOfExp, degree);
+				Requirement req = new Requirement(location, yearsOfExp, degree);
 				Vacancy vac = new Vacancy(id, title, position, description, empType,
-						 company_id, jobType, req, creationDate, expiryDate);
+						company_id, jobType, req, creationDate, expiryDate);
 				res.add(vac);
 			}
 
@@ -329,23 +322,17 @@ public class DBManager {
 	//
 	public void addVacancy(Vacancy vacancy) {
 		Requirement req = vacancy.getReq();
-		Language lan = req.getLanguage();
 		PreparedStatement stmt = null;
 		String query = "insert into vacancies "
 							+ "(company_id, heading,  description, expiry_date, "
-									+ "emp_type, position, job_type) "
-										+ "VALUES (?,?,?,?,?,?,?)";
-		
-		PreparedStatement stmt1 = null;
-		String query1 = "insert into Requirements " 
-							+ "(vacancy_id, years_of_experience, tag, location, degree) "
-								+ "VALUES (?, ?, ?, ?, ?)";
-				
-		PreparedStatement stmt2 = null;
-		String query2 = "insert into ReqLanguages "
-							+ "(requirements_id, language_name, quality) "
-								+ "VALUES (?, ?, ?)";
-		
+									+ "emp_type, position, job_type, years_of_experience, location, degree) "
+										+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+//	
+//		PreparedStatement stmt2 = null;
+//		String query2 = "insert into ReqLanguages "
+//							+ "(requirements_id, language_name, quality) "
+//								+ "VALUES (?, ?, ?)";
+//		
 		try {
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, vacancy.getCompanyId());
@@ -355,24 +342,18 @@ public class DBManager {
 			stmt.setString(5, vacancy.getEmpType());
 			stmt.setString(6, vacancy.getPosition());
 			stmt.setString(7,  vacancy.getJobType());
-		
+			stmt.setInt(8,  vacancy.getReq().getYearsOfExp());
+			stmt.setString(9,  vacancy.getReq().getLocation());
+			stmt.setString(10,  vacancy.getReq().getDegree());
+
 			stmt.executeUpdate();
 			
-			stmt1 = con.prepareStatement(query1);
-			stmt1.setInt(1, vacancy.getId());
-			stmt1.setInt(2, req.getYearsOfExp());
-			stmt1.setString(3, req.getTag());
-			stmt1.setString(4, req.getLocation());
-			stmt1.setString(5, req.getDegree());
-			
-			stmt1.executeUpdate();
-			
-			stmt2 = con.prepareStatement(query2);
-			stmt2.setInt(1, req.getId());
-			stmt2.setString(2, lan.getLanguage());
-			stmt2.setString(3, lan.getQuality());
-			
-			stmt2.executeUpdate();
+//			stmt2 = con.prepareStatement(query2);
+//			stmt2.setInt(1, req.getId());
+//			stmt2.setString(2, lan.getLanguage());
+//			stmt2.setString(3, lan.getQuality());
+//			
+//			stmt2.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -381,18 +362,20 @@ public class DBManager {
 
 	public void updateVacancy(Vacancy vacancy) {
 		Requirement req = vacancy.getReq();
-		Language lan = req.getLanguage();
 		PreparedStatement updateVacancy = null;
-		String updateQuery = "update vacancies " + "set heading = ?, description = ?, expiry_date = ?, "
-								+ "emp_type = ?,  position = ?, job_type = ?" + "where id = ?";
-
-		PreparedStatement updateRequirement = null;
-		String updateQuery1 = "update Requirements " + "set years_of_experience = ?, tag = ?"
-								+ " location = ?, degree = ?" + "where vacancy_id = ?";
+		String updateQuery = "UPDATE vacancies SET heading = ?, "
+												+ "description = ?, "
+												+ "expiry_date = ?, "
+												+ "emp_type = ?,  "
+												+ "position = ?, "
+												+ "job_type = ?, "
+												+ "years_of_experience = ?,"
+												+ "location = ?,"
+												+ "degree = ? where id = ?";
 		
-		PreparedStatement updateLanguage = null;
-		String updateQuery2 = "update ReqLanguages " + "set language_name = ?, quality = ? "
-								+ "where requirements_id = ?";
+//		PreparedStatement updateLanguage = null;
+//		String updateQuery2 = "update ReqLanguages " + "set language_name = ?, quality = ? "
+//								+ "where requirements_id = ?";
 		
 		try {
 			updateVacancy = con.prepareStatement(updateQuery);
@@ -404,24 +387,19 @@ public class DBManager {
 			updateVacancy.setString(5, vacancy.getPosition());
 			updateVacancy.setString(6, vacancy.getJobType());
 			updateVacancy.setInt(7, vacancy.getId());
+			updateVacancy.setInt(8,  vacancy.getReq().getYearsOfExp());
+			updateVacancy.setString(9,  vacancy.getReq().getLocation());
+			updateVacancy.setString(10,  vacancy.getReq().getDegree());
 			
 			updateVacancy.executeUpdate();
-			
-			updateRequirement = con.prepareStatement(updateQuery1);
-			updateRequirement.setInt(1, req.getYearsOfExp());
-			updateRequirement.setString(2, req.getTag());
-			updateRequirement.setString(3, req.getDegree());
-			updateRequirement.setInt(4, vacancy.getId());
-			
-			updateRequirement.executeUpdate();
-			
-			updateLanguage = con.prepareStatement(updateQuery2);
-			
-			updateLanguage.setString(1, lan.getLanguage());
-			updateLanguage.setString(2, lan.getQuality());
-			updateLanguage.setInt(3, req.getId());
-			
-			updateLanguage.executeUpdate();
+//			
+//			updateLanguage = con.prepareStatement(updateQuery2);
+//			
+//			updateLanguage.setString(1, lan.getLanguage());
+//			updateLanguage.setString(2, lan.getQuality());
+//			updateLanguage.setInt(3, req.getId());
+//			
+//			updateLanguage.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -442,13 +420,12 @@ public class DBManager {
 		}
 	}
 	
-	//??????????????????????????
+	//
 	public Vacancy getVacancy(int id) {
 		PreparedStatement getCompany = null;
 		Requirement req = null;
-		Language lan = null;
 		Vacancy vac = null;
-		String query = "select * from vacancies " + "where id = ?";//aq company_id ar unda?
+		String query = "SELECT * FROM vacancies WHERE id = ?";
 
 		try {
 			getCompany = con.prepareStatement(query);
@@ -464,17 +441,12 @@ public class DBManager {
 				String empType = resultSet.getString("emp_type");
 				Date creationDate = resultSet.getDate("creation_date");
 				Date expiryDate = resultSet.getDate("expiry_date");
-				int reqId = resultSet.getInt("id"); //aq es rogor mixvdeba romlis id wamoigos req-ebis tu vacanciebies
 				String location = resultSet.getString("location");
 				String jobType = resultSet.getString("job_type");
-				String language = resultSet.getString("language_name");
-				String tag = resultSet.getString("tag");
 				String degree = resultSet.getString("degree");
 				int yearsOfExp = resultSet.getInt("years_of_experince");
-				String quality = resultSet.getString("quality");
 
-				lan = new Language(language, quality, "");
-				req = new Requirement(reqId, location, tag, lan, yearsOfExp, degree);
+				req = new Requirement(location, yearsOfExp, degree);
 				vac = new Vacancy(vacId, title, position, description, empType,
 						 company_id, jobType, req, creationDate, expiryDate);
 
