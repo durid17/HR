@@ -7,7 +7,6 @@ public class Account {
 	public static final String EMPLOYEE_ACCOUNT_TYPE = "Employee";
 	public static final String COMPANY_ACCOUNT_TYPE = "Company";
 	public static final int DEFAULT_ID = 0;
-
 	
 	private int id;
 	private String username;

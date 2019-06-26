@@ -51,17 +51,16 @@ public class LoginServlet extends HttpServlet {
 		
 		if(acc == null || !acc.getPassHash().equals(passHash)) {
 			request.getRequestDispatcher("/JSP/LogInPage.jsp").forward(request, response);
-			System.out.println("aaaaa");
 		} else {
-	
 			request.getSession().setAttribute("account", acc);
 			if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)) {
-				request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);
+//				request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);
 			} else if(acc.getAccountType().equals(Account.EMPLOYEE_ACCOUNT_TYPE)){
 				request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);	
 			}
-		}
-		
+		}	
 	}
-
+	
+	
+	
 }

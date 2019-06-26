@@ -7,11 +7,8 @@
 <title>Insert title here</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script>
-	$(function() {
-		$("#header").load("Header.jsp");
-	});
-</script>
+
+<jsp:include page="Header.jsp" />
 
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/SettingsStyle.css">

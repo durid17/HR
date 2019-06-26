@@ -10,7 +10,6 @@
 
 </head>
 
-
 <body>
 	
 	<div class="navbar">
@@ -25,9 +24,9 @@
 		<div class="dropdown">
    			 <button class="dropbtn">User <i class="arrow down"></i> </button>
     			<div class="dropdown-content" style="right:0">
-			      <a href="#UserProfile">Profile</a>
-			      <a href="#">Settings</a>
-			      <a href="MainPage.jsp">Log Out</a>
+			      <a href="UserProfile.jsp">Profile</a>
+			      <a href="Settings.jsp">Settings</a>
+			      <a href="${pageContext.request.contextPath}/logOut">Log Out</a>
     			</div>
   		</div> 
 	</div>

@@ -55,7 +55,7 @@ public class CompanyRegister extends HttpServlet {
 		Account newAccount = new Account(Account.DEFAULT_ID, new Date(System.currentTimeMillis()),
 											username, passHash, Account.COMPANY_ACCOUNT_TYPE); 
 		//Add account in base
-		newAccount = manager.addAccount(newAccount);
+		newAccount = manager.addAccount(newAccount);	
 		
 		//Update personal info
 		String email = request.getParameter("email");
@@ -64,7 +64,7 @@ public class CompanyRegister extends HttpServlet {
 		String companyName = request.getParameter("companyName");
 		String description = request.getParameter("description");
 		
-		CompanyProfile cmpPrf = new CompanyProfile(companyName, null, null, description,  email, phoneNumber, address); 
+		CompanyProfile cmpPrf = new CompanyProfile(companyName, description , null, null,  email, phoneNumber, address); 
 		Company newCompany = new  Company(newAccount, cmpPrf);
 		
 		//Add info in base
@@ -72,7 +72,7 @@ public class CompanyRegister extends HttpServlet {
 		request.getSession().setAttribute("account", newAccount);
 		
 		// company profiles unda aq
-		//request.getRequestDispatcher("JSP/UserProfile.jsp").forward(request, response);
+		request.getRequestDispatcher("JSP/MainPage.jsp").forward(request, response);
 		//doGet(request, response);
 		System.out.println(123);
 	}
