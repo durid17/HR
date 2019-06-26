@@ -16,9 +16,11 @@ public class EmployeeProfile {
 	private String address;
 	private String description;
 	private String profilePicture;
+	private boolean isWorking; // works currently or not
 	
 	public EmployeeProfile(String name, String surname, String gender, Date birthDate, String majorProf,
-				String minorProf, String email, String phoneNumber, String address, String description, String profilePicture) {
+				String minorProf, String email, String phoneNumber, String address, 
+				String description, String profilePicture, boolean isWorking) {
 		this.name = name;
 		this.surname = surname;
 		this.gender = gender;
@@ -30,6 +32,7 @@ public class EmployeeProfile {
 		this.address = address;
 		this.description = description;
 		this.setProfilePicture(profilePicture);
+		this.isWorking = isWorking;
 	}
 	
 	public String getName() {
@@ -119,5 +122,14 @@ public class EmployeeProfile {
 	public void setProfilePicture(String profilePicture) {
 		this.profilePicture = profilePicture;
 	}
+
+	public boolean isWorking() {
+		return isWorking;
+	}
+
+	public void setWorking(boolean isWorking) {
+		this.isWorking = isWorking;
+	}
+
 		
 }

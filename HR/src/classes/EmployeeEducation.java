@@ -10,10 +10,9 @@ public class EmployeeEducation {
 	private String institutionName;
 	private String degree;
 	private String grade;
-	private Language language;
 	
 	public EmployeeEducation(int id, Date start, Date end, String educationalInstitution, 
-			String institutionName, String degree, String grade, Language language) {
+			String institutionName, String degree, String grade) {
 		this.id = id;
 		this.startDate = start;
 		this.endDate = end;
@@ -21,7 +20,6 @@ public class EmployeeEducation {
 		this.institutionName = institutionName;
 		this.degree = degree;
 		this.grade = grade;
-		this.language = language;
 	}
 	
 	public Date getStartDate() {
@@ -76,12 +74,5 @@ public class EmployeeEducation {
 		return id;
 	}
 
-	public Language getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
 
 }

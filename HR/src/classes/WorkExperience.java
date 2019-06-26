@@ -8,18 +8,20 @@ public class WorkExperience {
 	private Date endDate;
 	private String companyName;
 	private String position;
-	private String jobType;
+	private String jobType;//is it internship or not
+	private String employmentType; //full-time, part-time
 	private String duty;
 	private String achievement;
 	
 	public WorkExperience(int id, Date start, Date end, String company, String pos, 
-			String type, String duty, String award) {
+			String type, String empType, String duty, String award) {
 		this.id = id;
 		this.startDate = start;
 		this.endDate = end;
 		this.companyName = company;
 		this.position = pos;
 		this.jobType = type;
+		this.employmentType = empType;
 		this.duty = duty;
 		this.achievement = award;
 	}
@@ -82,6 +84,14 @@ public class WorkExperience {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getEmploymentType() {
+		return employmentType;
+	}
+
+	public void setEmploymentType(String employmentType) {
+		this.employmentType = employmentType;
 	}
 	
 }
