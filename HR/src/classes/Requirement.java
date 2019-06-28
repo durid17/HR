@@ -36,4 +36,43 @@ public class Requirement {
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
+
+	@Override
+	public String toString() {
+		return "Requirement [location=" + location + ", degree=" + degree + ", yearsOfExp=" + yearsOfExp + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((degree == null) ? 0 : degree.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + yearsOfExp;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Requirement other = (Requirement) obj;
+		if (degree == null) {
+			if (other.degree != null)
+				return false;
+		} else if (!degree.equals(other.degree))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (yearsOfExp != other.yearsOfExp)
+			return false;
+		return true;
+	}
 }

@@ -69,6 +69,11 @@ public class DBConnection {
 		
 		//manager.addFollower(7, 4);
 		//manager.unFollow(7, 4);
+		
+		
+		Date date1 = new Date(21414123);
+		Date date2 = new Date(21414123);
+		
+		System.out.println(date1.equals(date2));
 	}
-	
 }
