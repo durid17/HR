@@ -58,18 +58,15 @@ class DBManagerTests {
 	@Test
 	void accountTest() {
 		Account account = new Account(0, new Date(System.currentTimeMillis()), "testUser", "password", Account.EMPLOYEE_ACCOUNT_TYPE);
-		manager.addAccount(account);
+		account = manager.addAccount(account);
 		
 		Account fromDBAccount = manager.getAccount(account.getUsername());
-		assertEquals(account.getUsername(), fromDBAccount.getUsername());
-		assertEquals(account.getPassHash(), fromDBAccount.getPassHash());
-//		assertEquals(account.getRegDate(), fromDBAccount.getRegDate());
-		assertEquals(account.getAccountType(), fromDBAccount.getAccountType());
+		assertEquals(account, fromDBAccount);
 
 		account.setPassHash("newPassword");
 		manager.updateAccount(account);
 		fromDBAccount = manager.getAccount(account.getUsername());
-		assertEquals(fromDBAccount.getPassHash(), account.getPassHash());
+		assertEquals(account, fromDBAccount);
 		
 		manager.deleteAccount(account);
 	}
@@ -79,18 +76,12 @@ class DBManagerTests {
 		Account account = new Account(0, new Date(System.currentTimeMillis()), "testCompany", "password", Account.COMPANY_ACCOUNT_TYPE);
 		account = manager.addAccount(account);
 		
-		CompanyProfile profile = new CompanyProfile("Test University", "Desc", new Date(System.currentTimeMillis()), "logo.jpg", "em", "num", "ad");
+		CompanyProfile profile = new CompanyProfile("Test University", "Desc", new Date(12371237), "logo.jpg", "email", "599111213", "Address 1");
 		Company company = new Company(account, profile);
 		manager.updateCompany(company);
+
 		Company fromDBCompany = manager.getCompany(account.getID());
-		assertEquals(account.getUsername(), fromDBCompany.getAccount().getUsername());
-		assertEquals(account.getPassHash(), fromDBCompany.getAccount().getPassHash());
-		assertEquals(account.getAccountType(), fromDBCompany.getAccount().getAccountType());
-		assertEquals(company.getProfile().getName(), fromDBCompany.getProfile().getName());
-		assertEquals(company.getProfile().getDescription(), fromDBCompany.getProfile().getDescription());
-//		assertEquals(company.getProfile().getFounded(), fromDBCompany.getProfile().getFounded());
-		assertEquals(company.getProfile().getLogo(), fromDBCompany.getProfile().getLogo());
-		
+		assertEquals(company, fromDBCompany);
 		manager.deleteAccount(account);
 	}
 	
@@ -103,20 +94,7 @@ class DBManagerTests {
 				"Major", "Minor", "email@email.com", "579101010", "Tbilisi", "Desc",  "logo.jpg", false));
 		manager.updateEmployee(employee);
 		Employee fromDBEmployee = manager.getEmployee(account.getID());
-		assertEquals(account.getUsername(), fromDBEmployee.getAccount().getUsername());
-		assertEquals(account.getPassHash(), fromDBEmployee.getAccount().getPassHash());
-		assertEquals(account.getAccountType(), fromDBEmployee.getAccount().getAccountType());
-		assertEquals(employee.getProfile().getName(), fromDBEmployee.getProfile().getName());
-		assertEquals(employee.getProfile().getSurname(), fromDBEmployee.getProfile().getSurname());
-		assertEquals(employee.getProfile().getGender(), fromDBEmployee.getProfile().getGender());
-		assertEquals(employee.getProfile().getMajorProfession(), fromDBEmployee.getProfile().getMajorProfession());
-		assertEquals(employee.getProfile().getMinorProfession(), fromDBEmployee.getProfile().getMinorProfession());
-		assertEquals(employee.getProfile().getEmail(), fromDBEmployee.getProfile().getEmail());
-		assertEquals(employee.getProfile().getPhoneNumber(), fromDBEmployee.getProfile().getPhoneNumber());
-		assertEquals(employee.getProfile().getAddress(), fromDBEmployee.getProfile().getAddress());
-		assertEquals(employee.getProfile().getDescription(), fromDBEmployee.getProfile().getDescription());
-		assertEquals(employee.getProfile().getProfilePicture(), fromDBEmployee.getProfile().getProfilePicture());
-//		assertEquals(employee.getProfile().getBirthDate(), fromDBEmployee.getProfile().getBirthDate());
+		assertEquals(employee, fromDBEmployee);
 		
 		manager.deleteAccount(account);
 	}
@@ -124,11 +102,18 @@ class DBManagerTests {
 	@Test
 	void vacancyTest() {
 		Requirement requirement = new Requirement("Tbilisi", 0, "Bachelor");
-		Vacancy vacancy = new Vacancy(0, "Heading", "pos", "Desc", "Part Time", 7, "intership",
+		Vacancy vacancy = new Vacancy(7, "Heading", "Pos", "Desc", "Part-time", 7,
 				requirement, null, new Date(System.currentTimeMillis() + 5000000));
 		manager.addVacancy(vacancy);
 		
-		Vacancy fromDBVacancy = manager.getVacancy(7);
+		Vacancy fromDBVacancy = null;
+		int id = 7;
+		while (true) {
+			fromDBVacancy = manager.getVacancy(id);
+			if (fromDBVacancy != null) 
+				break;
+			id++;
+		}
 		assertEquals(vacancy.getCompanyId(), fromDBVacancy.getCompanyId());
 		assertEquals(vacancy.getHeading(), fromDBVacancy.getHeading());
 		assertEquals(vacancy.getDescription(), fromDBVacancy.getDescription());
@@ -136,14 +121,15 @@ class DBManagerTests {
 //		assertEquals(vacancy.getEndDate(), fromDBVacancy.getEndDate());
 		assertEquals(vacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
 		assertEquals(vacancy.getPosition(), fromDBVacancy.getPosition());
-		assertEquals(vacancy.getJobType(), fromDBVacancy.getJobType());
+//		assertEquals(vacancy, fromDBVacancy);
 		
 		Requirement updatedRequirement = new Requirement("Batumi", 5, "Bachelor");
-		Vacancy updatedVacancy = new Vacancy(7, "UpdatedHeading", "Salesperson",  "UpdatedDesc", "Part Time", 
-				7, "intership", updatedRequirement, null, new Date(System.currentTimeMillis() + 10000));
+		Vacancy updatedVacancy = new Vacancy(id, "UpdatedHeading", "Salesperson", "UpdatedDesc", "Full-time", 
+				7, updatedRequirement, null, new Date(System.currentTimeMillis() + 10000));
 		manager.updateVacancy(updatedVacancy);
 		
-		fromDBVacancy = manager.getVacancy(7);
+		
+		fromDBVacancy = manager.getVacancy(id);
 		assertEquals(updatedVacancy.getCompanyId(), fromDBVacancy.getCompanyId());
 		assertEquals(updatedVacancy.getHeading(), fromDBVacancy.getHeading());
 		assertEquals(updatedVacancy.getDescription(), fromDBVacancy.getDescription());
@@ -151,7 +137,7 @@ class DBManagerTests {
 //		assertEquals(updatedVacancy.getEndDate(), fromDBVacancy.getEndDate());
 		assertEquals(updatedVacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
 		assertEquals(updatedVacancy.getPosition(), fromDBVacancy.getPosition());
-		assertEquals(updatedVacancy.getJobType(), fromDBVacancy.getJobType());
+//		assertEquals(updatedVacancy, fromDBVacancy);
 		
 		manager.deleteVacancy(fromDBVacancy.getId());
 	}
