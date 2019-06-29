@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -59,7 +60,11 @@
 	
 	<% 
 		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
-		List<String> locations = manager.getLocation();
+		List<Tag> tags = manager.getLocations();
+		List<String> locations = new ArrayList<String>();
+		for(int i = 0 ; i < tags.size(); i++){
+			locations.add(tags.get(i).getTagName());
+		}
 		locations.add("opa");
 		%>
 		<label for="Locations"><b>Locations</b></label>
@@ -74,8 +79,11 @@
 		</select><br>
 	<%
 		for(int j = 1 ; j <= 3 ; j++){
-
-			List<String> languages = manager.getLanguages();
+			tags = manager.getLanguages();
+			List<String> languages = new ArrayList<String>();
+			for(int i = 0 ; i < tags.size(); i++){
+				languages.add(tags.get(i).getTagName());
+			}
 			languages.add("opa");
 			out.print("<label for = \" language" + j + " \"><b>language</b></label>");
 	%>
