@@ -17,7 +17,7 @@ import classes.Hash;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -60,7 +60,4 @@ public class LoginServlet extends HttpServlet {
 			}
 		}	
 	}
-	
-	
-	
 }
