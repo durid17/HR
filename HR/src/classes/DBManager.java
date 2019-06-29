@@ -641,8 +641,7 @@ public class DBManager {
 				int id = resultSet.getInt("id");
 				String language = resultSet.getString("language_name");
 				String quality = resultSet.getString("quality");
-				String certificate = resultSet.getString("certificate");
-				Language lan = new Language(id, language, quality, certificate);
+				Language lan = new Language(id, language, quality, "");
 				res.add(lan);
 			}
 		
@@ -652,5 +651,266 @@ public class DBManager {
 		
 		return res;
 	}
+	
+	public List<Tag> getEmployeeTags(int employeeId){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM EmployeeTags join tag_types on "
+							+ "EmployeeTags.tag_type_id = tag_types.id WHERE employee_id = ?";
+
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, employeeId);
+				
+			ResultSet resultSet = stmt.executeQuery();
 		
+			while(resultSet.next()) {
+				String tag = resultSet.getString("name");
+				Tag empTag = new Tag(tag);
+				res.add(empTag);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public List<Tag> getLocations(){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM Locations";
+
+		try {
+			stmt = con.prepareStatement(query);
+				
+			ResultSet resultSet = stmt.executeQuery();
+		
+			while(resultSet.next()) {
+				String location = resultSet.getString("city");
+				Tag loc = new Tag(location);
+				
+				res.add(loc);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public List<Tag> getVacancyTags(int vacancyId){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM VacancyTags join tag_types on "
+							+ "VacancyTags.tag_type_id = tag_types.id WHERE vacancy_id = ?";
+
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, vacancyId);
+				
+			ResultSet resultSet = stmt.executeQuery();
+		
+			while(resultSet.next()) {
+				String tag = resultSet.getString("name");
+				Tag vacTag = new Tag(tag);
+				res.add(vacTag);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public List<Tag> getLanguages(){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM DefaultLanguages";
+
+		try {
+			stmt = con.prepareStatement(query);
+				
+			ResultSet resultSet = stmt.executeQuery();
+		
+			while(resultSet.next()) {
+				String language = resultSet.getString("language_name");
+				Tag lan = new Tag(language);
+				
+				res.add(lan);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public List<Tag> getInterestingFields(){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM Fields";
+
+		try {
+			stmt = con.prepareStatement(query);
+				
+			ResultSet resultSet = stmt.executeQuery();
+		
+			while(resultSet.next()) {
+				String field = resultSet.getString("industry");
+				Tag fieldTag = new Tag(field);
+				
+				res.add(fieldTag);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public List<Tag> getQualities(){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM DefaultQuality";
+
+		try {
+			stmt = con.prepareStatement(query);
+			
+			ResultSet resultSet = stmt.executeQuery();
+		
+			while(resultSet.next()) {
+				String quality = resultSet.getString("quality");
+				Tag qualityTag = new Tag(quality);
+				
+				res.add(qualityTag);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public List<Tag> getDegrees(){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM degrees";
+
+		try {
+			stmt = con.prepareStatement(query);
+			
+			ResultSet resultSet = stmt.executeQuery();
+		
+			while(resultSet.next()) {
+				String deg = resultSet.getString("degree_title");
+				Tag degreeTag = new Tag(deg);
+				
+				res.add(degreeTag);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public List<Tag> getInstitutionTypes(){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM InstitutionTypes";
+
+		try {
+			stmt = con.prepareStatement(query);
+			
+			ResultSet resultSet = stmt.executeQuery();
+		
+			while(resultSet.next()) {
+				String type = resultSet.getString("institutionTypes");
+				Tag typeTag = new Tag(type);
+				
+				res.add(typeTag);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public List<Tag> getProfessions(){
+		List<Tag> res = new ArrayList<Tag>();
+
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM professions";
+
+		try {
+			stmt = con.prepareStatement(query);
+			
+			ResultSet resultSet = stmt.executeQuery();
+		
+			while(resultSet.next()) {
+				String prof = resultSet.getString("profession");
+				Tag profTag = new Tag(prof);
+				
+				res.add(profTag);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public void addWorkExp(int employeeId, WorkExperience workExp) {
+
+	}
+	
+	
+	public void addEducation(int employeeId, EmployeeEducation empEdu) {
+		
+	}
+	
+	public void addLanguage(int employeeId, Language lan) {
+		
+	}
+	
+	public void addReqLanguage(int vacancyId, Language lan) {
+		
+	}
+	
+	public void removeWorkExp(int employeeId, int workExpId) {
+		
+	}
+	
+	public void removeEducation(int employeeId, int empEduId) {
+		
+	}
+	
+	public void removeLanguage(int employeeId, int lanId) {
+		
+	}
+	
+	public void removeReqLanguage(int vacancyId, int lanId) {
+		
+	}
+	
+	
 }
