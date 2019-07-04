@@ -50,11 +50,12 @@ public class LoginServlet extends HttpServlet {
 		Account acc = manager.getAccount(userName);
 		
 		if(acc == null || !acc.getPassHash().equals(passHash)) {
+			System.out.println("Wrong Username or password");
 			request.getRequestDispatcher("/JSP/LogInPage.jsp").forward(request, response);
 		} else {
 			request.getSession().setAttribute("account", acc);
 			if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)) {
-//				request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);
+				request.getRequestDispatcher("/JSP/CompanyProfile.jsp").forward(request, response);
 			} else if(acc.getAccountType().equals(Account.EMPLOYEE_ACCOUNT_TYPE)){
 				request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);	
 			}

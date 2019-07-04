@@ -13,36 +13,56 @@
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/UserProfileStyle.css">
 
+<style>
+body {
+	
+}
+div{
+	border: none;
+	border-radius: 2px;
+}
+
+.container {
+	max-width: 80%;
+	max-height: 70%;
+	padding: 10px;
+	background-color: green;
+}
+
+.card {
+	max-width: 30%;
+	max-height: 30%;
+	padding: 15px;
+	background-color: red;
+	
+}
+
+#profileImage {
+	
+}
+</style>
+
 <body>	
 	<div id = "header"> </div>
 	
-	<div id="container"></div>
 	
-	<script>
-		
-		function createItem(logo, name, description){
-			var div = document.createElement("div");
-			div.innerHTML = "Hello";
-			div.innerHTML = "asd";
+	<div class = "container">
+		<div class = "card">
+			<div class = "imgAvatar">
+				<img id = "profileImage" src="${pageContext.request.contextPath}/Images/fb.png" alt="Avatar">
+			</div>
 			
-			var i = document.createElement('img');
-			var p = document.createElement('p');
-			var l = document.createElement('label');
-			
-			p.textContent = name;
-			return p;
-		}
+			<label> Facebook </label>
+			<label> Social Network </label>
+		    
+		   
+		</div>
 		
-		function appendChildren(parent, children){
-			children.forEach(function (child){
-				parent.appendChild(child);
-			});
-		}
 		
-		var container = document.getElementById('container');
-		var items = [createItem('Dom','asd','asd'), createItem('ALex')];
-		appendChildren(container, items);
-	</script>
+	
+	</div>
+	
+	
 	
 	
 

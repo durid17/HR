@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="classes.Account, classes.DBManager, classes.Employee, classes.EmployeeProfile" %>
+<%@ page import="classes.Account, classes.DBManager, classes.Company, classes.CompanyProfile" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>User profile</title>
+<title>Company profile</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
@@ -14,10 +14,10 @@
 <% 
 	Account acc = (Account)request.getSession().getAttribute("account");
 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
-	Employee employee = manager.getEmployee(acc.getID());
+	Company company = manager.getCompany(acc.getID());
 	
 	//education
-	EmployeeProfile profile = employee.getProfile();
+	CompanyProfile profile = company.getProfile();
 %>
 
 </head>
@@ -29,12 +29,12 @@
 	<div class = "container">
 		<div class = "profileInfoLeft">
 			<div class = "imgAvatar">
-				<img id = "profileImage" src="${pageContext.request.contextPath}/Images/avatar.png" alt="Avatar">
+				<img id = "profileImage" src="${pageContext.request.contextPath}/Images/compImage.png" alt="Avatar">
 			</div>
 		    
 		    <div class="mainInfo">
 		    	<h4><b></b></h4>  
-		    	<p> <%= profile.getName() + " " + profile.getSurname()%></p> 
+		    	<p> <%= profile.getName()%></p> 
 		  	</div>
 		  	<hr>
 		  	<div class = "other"> 

@@ -59,21 +59,18 @@ public class CompanyRegister extends HttpServlet {
 		
 		//Update personal info
 		String email = request.getParameter("email");
-		String phoneNumber = request.getParameter("phoneNumber");
-		String address = request.getParameter("address");
 		String companyName = request.getParameter("companyName");
-		String description = request.getParameter("description");
 		
-		CompanyProfile cmpPrf = new CompanyProfile(companyName, description , null, null,  email, phoneNumber, address); 
+		CompanyProfile cmpPrf = new CompanyProfile(companyName, null , null, null,  email, null, null); 
 		Company newCompany = new  Company(newAccount, cmpPrf);
 		
 		//Add info in base
 		manager.updateCompany(newCompany);
 		request.getSession().setAttribute("account", newAccount);
 		
-		// company profiles unda aq
-		request.getRequestDispatcher("JSP/MainPage.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("JSP/CompanyProfile.jsp").forward(request, response);
 		//doGet(request, response);
-		System.out.println(123);
+
 	}
 }

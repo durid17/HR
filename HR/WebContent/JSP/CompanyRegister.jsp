@@ -16,31 +16,19 @@
     <p>Please fill in this form to create an account. Required fields are marked with an asterisk (*).</p>
     <hr>
     
-    <label for="username"><b>Username *</b></label>
-    <input type="text" placeholder="Username" name="username" required>
+    <label for="username"><b>Username </b></label>
+    <input type="text"  name="username" required>
 
-    <label for="psw"><b>Password *</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="psw"><b>Password </b></label>
+    <input type="password"  name="psw" required>
    
-    <label for="psw-repeat"><b>Repeat Password *</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-    
     <label for="email"><b>Email *</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-    
-    <label for="phoneNumber"><b>Phone Number *</b></label>
-    <input type="text" placeholder="Enter Phone Number" name="phoneNumber" required>
-    
-    <label for="companyName"><b>Company Name *</b></label>
-    <input type="text" placeholder="Enter Company Name" name="companyName" required>
-    
-    <label for="address"><b>Address *</b></label>
-    <input type="text" placeholder="Enter Address" name="address" required>
+    <input type="text" name="email" required>
+        
+    <label for="companyName"><b>Company Name</b></label>
+    <input type="text" name="companyName" required>
    
-    <label for="description"><b>Company Description *</b></label>
-    <input type="text" placeholder="Enter Company Description" name="description" required>
-    
-    
+
     <hr>
     <button type="submit" class="registerbtn">Register</button>
   </div>

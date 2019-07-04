@@ -63,21 +63,18 @@ public class ClientRegister extends HttpServlet {
 
 		newAccount = manager.addAccount(newAccount);
 		
-		System.out.println(newAccount.getID());
+		
 		String firstname = request.getParameter("firstName");
 		String lastname = request.getParameter("lastName");
-		String about = request.getParameter("comments");
 		String email = request.getParameter("email");
-		String gender = request.getParameter("gender");
+
 		
-		EmployeeProfile profile = new EmployeeProfile(firstname, lastname, gender, null, null, null, email, null, null, about, null, false);	
+		EmployeeProfile profile = new EmployeeProfile(firstname, lastname, null, null, null, null, email, null, null, null, null, false);	
 		Employee employee = new Employee(newAccount, profile);
 		
 		manager.updateEmployee(employee);
 		request.getSession().setAttribute("account", newAccount);
 		request.getRequestDispatcher("JSP/UserProfile.jsp").forward(request, response);
-		System.out.println(1213515);
-		
 	}
 
 }
