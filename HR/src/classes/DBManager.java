@@ -339,7 +339,7 @@ public class DBManager {
 											+ "position, "
 											+ "years_of_experience, "
 											+ "location, "
-											+ "degree) VALUES (?,?,?,?,?,?,?,?,?)";
+											+ "degree) VALUES (?,?,?,?,?,?,?,?,?,?)";
 //	
 //		PreparedStatement stmt2 = null;
 //		String query2 = "insert into ReqLanguages "
@@ -380,7 +380,7 @@ public class DBManager {
 												+ "description = ?, "
 												+ "expiry_date = ?, "
 												+ "emp_type = ?, "
-												+ "profession = ?"
+												+ "profession = ?, "
 												+ "position = ?, "
 												+ "years_of_experience = ?, "
 												+ "location = ?, "
