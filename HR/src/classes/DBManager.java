@@ -1020,7 +1020,7 @@ public class DBManager {
 		
 	}
 	
-	public void addLanguage(int employeeId, Language lan) {
+	public void addEmployeeLanguage(int employeeId, Language lan) {
 		
 		String languageName = lan.getLanguage();
 		String quality = lan.getQuality();
@@ -1094,14 +1094,15 @@ public class DBManager {
 		}
 	}
 	
-	public void removeLanguage(int lanId) {
+	public void removeEmployeeLanguage(int employeeId, String language) {
 		
 		PreparedStatement stmt = null;
-		String query = "DELETE from languages where id = ?";
+		String query = "DELETE from languages where employee_id = ? and language = ?";
 		
 		try {
 			stmt = con.prepareStatement(query);
-			stmt.setInt(1, lanId);
+			stmt.setInt(1, employeeId);
+			stmt.setString(2, language);
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -1109,14 +1110,15 @@ public class DBManager {
 		}
 	}
 	
-	public void removeReqLanguage(int lanId) {
+	public void removeReqLanguage(int vacancyId, String language) {
 		
 		PreparedStatement stmt = null;
-		String query = "DELETE from requirement_languages where id = ?";
+		String query = "DELETE from requirement_languages where vacancy_id = ? and language = ?";
 		
 		try {
 			stmt = con.prepareStatement(query);
-			stmt.setInt(1, lanId);
+			stmt.setInt(1, vacancyId);
+			stmt.setString(2, language);
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {

@@ -21,6 +21,7 @@ import classes.DBConnection;
 import classes.DBManager;
 import classes.Employee;
 import classes.EmployeeProfile;
+import classes.Language;
 import classes.Requirement;
 import classes.Vacancy;
 
@@ -232,5 +233,43 @@ class DBManagerTests {
 		
 		manager.removeVacancyTag(TEST_VACANCY_ID, "tag1");
 		manager.removeVacancyTag(TEST_VACANCY_ID, "tag2");
+	}
+	
+	@Test
+	void languagesTest() {
+		Language language = new Language(Language.DEFAULT_ID, "Georgian", "Great", "B2");
+		manager.addEmployeeLanguage(TEST_EMPLOYEE_ID, language);
+		manager.removeEmployeeLanguage(TEST_EMPLOYEE_ID, language.getLanguage());
+		
+		manager.addReqLanguage(TEST_VACANCY_ID, language);
+		manager.removeReqLanguage(TEST_VACANCY_ID, language.getLanguage());
+	}
+	
+	@Test
+	void getEmployeeLanguagesTest() {
+		Language language1 = new Language(Language.DEFAULT_ID, "Georgian", "Great", "B2");
+		Language language2 = new Language(Language.DEFAULT_ID, "Arabic", "Good", "C1");
+		manager.addEmployeeLanguage(TEST_EMPLOYEE_ID, language1);
+		manager.addEmployeeLanguage(TEST_EMPLOYEE_ID, language2);
+		
+		List<Language> list = manager.getEmployeeLanguages(TEST_EMPLOYEE_ID);
+		assertEquals(2, list.size());
+		
+		manager.removeEmployeeLanguage(TEST_EMPLOYEE_ID, language1.getLanguage());
+		manager.removeEmployeeLanguage(TEST_EMPLOYEE_ID, language2.getLanguage());
+	}
+	
+	@Test
+	void getVacancyLanguagesTest() {
+		Language language1 = new Language(Language.DEFAULT_ID, "Georgian", "Great", "B2");
+		Language language2 = new Language(Language.DEFAULT_ID, "Arabic", "Good", "C1");
+		manager.addReqLanguage(TEST_VACANCY_ID, language1);
+		manager.addReqLanguage(TEST_VACANCY_ID, language2);
+		
+		List<Language> list = manager.getRequirementLanguages(TEST_VACANCY_ID);
+		assertEquals(2, list.size());
+		
+		manager.removeReqLanguage(TEST_VACANCY_ID, language1.getLanguage());
+		manager.removeReqLanguage(TEST_VACANCY_ID, language2.getLanguage());
 	}
 }
