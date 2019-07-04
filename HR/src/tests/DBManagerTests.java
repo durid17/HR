@@ -7,6 +7,9 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -141,4 +144,93 @@ class DBManagerTests {
 		
 		manager.deleteVacancy(fromDBVacancy.getId());
 	}
-} 
+	
+	private static final int TEST_EMPLOYEE_ID = 3;
+	private static final int TEST_VACANCY_ID = 4;
+	private static final int TEST_COMPANY_ID = 8;
+	@Test
+	void followTest() {
+		manager.addFollower(TEST_COMPANY_ID, TEST_EMPLOYEE_ID);
+		
+		manager.unFollow(TEST_COMPANY_ID, TEST_EMPLOYEE_ID);
+	}
+	
+	@Test
+	void applicationTest() {
+		manager.addApplication(TEST_EMPLOYEE_ID, TEST_VACANCY_ID);
+		
+		manager.removeApplication(TEST_EMPLOYEE_ID, TEST_VACANCY_ID);
+	}
+	
+	@Test
+	void tagsTest() {
+		manager.addVacancyTag(TEST_VACANCY_ID, "tag");
+		manager.removeVacancyTag(TEST_VACANCY_ID, "tag");
+		
+		manager.addEmployeeTag(TEST_EMPLOYEE_ID, "tag");
+		manager.removeEmployeeTag(TEST_EMPLOYEE_ID, "tag");
+	}
+	
+	@Test
+	void getDefaultsTest() {
+		assertEquals(66, manager.getLocations().size());
+		assertEquals(67, manager.getProfessions().size());
+		assertEquals(6, manager.getEducationalInstitutionTypes().size());
+		assertEquals(6, manager.getDegrees().size());
+		assertEquals(4, manager.getQualities().size());
+		assertEquals(33, manager.getTags().size());
+		assertEquals(15, manager.getLanguages().size());
+	}
+	
+	@Test
+	void getEmployeeFollowingTest() {
+		int otherCompanyId = 9;
+		
+		manager.addFollower(TEST_COMPANY_ID, TEST_EMPLOYEE_ID);
+		manager.addFollower(otherCompanyId, TEST_EMPLOYEE_ID);
+		
+		Company company1 = manager.getCompany(TEST_COMPANY_ID);
+		Company company2 = manager.getCompany(otherCompanyId);
+		List<Company> list = manager.getEmployeeFollowing(TEST_EMPLOYEE_ID);
+		assertEquals(2, list.size());
+		assertEquals(company1, list.get(0));
+		assertEquals(company2, list.get(1));
+		
+		manager.unFollow(TEST_COMPANY_ID, TEST_EMPLOYEE_ID);
+		manager.unFollow(otherCompanyId, TEST_EMPLOYEE_ID);
+	}
+	
+	@Test
+	void getEmployeeTagsTest() {
+		manager.addEmployeeTag(TEST_EMPLOYEE_ID, "tag1");
+		manager.addEmployeeTag(TEST_EMPLOYEE_ID, "tag2");
+		
+		List<String> myList = new ArrayList<String>();
+		myList.add("tag1");
+		myList.add("tag2");
+		
+		List<String> list = manager.getEmployeeTags(TEST_EMPLOYEE_ID);
+		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+		assertEquals(myList, list);
+		
+		manager.removeEmployeeTag(TEST_EMPLOYEE_ID, "tag1");
+		manager.removeEmployeeTag(TEST_EMPLOYEE_ID, "tag2");
+	}
+	
+	@Test
+	void getVacancyTagsTest() {
+		manager.addVacancyTag(TEST_VACANCY_ID, "tag1");
+		manager.addVacancyTag(TEST_VACANCY_ID, "tag2");
+		
+		List<String> myList = new ArrayList<String>();
+		myList.add("tag1");
+		myList.add("tag2");
+		
+		List<String> list = manager.getVacancyTags(TEST_VACANCY_ID);
+		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+		assertEquals(myList, list);
+		
+		manager.removeVacancyTag(TEST_VACANCY_ID, "tag1");
+		manager.removeVacancyTag(TEST_VACANCY_ID, "tag2");
+	}
+}

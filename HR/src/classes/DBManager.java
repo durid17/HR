@@ -126,7 +126,7 @@ public class DBManager {
 												 + "founded_date = ?, "
 												 + "email = ?, "
 												 + "phone = ?, "
-												 + "address = ? WHERE id = ?";
+												 + "location = ? WHERE id = ?";
 
 		try {
 			updateCompany = con.prepareStatement(updateString);
@@ -166,7 +166,7 @@ public class DBManager {
 				Date foundedDate = resultSet.getDate("founded_date");
 				String email = resultSet.getString("email");
 				String phone = resultSet.getString("phone");
-				String address = resultSet.getString("address");
+				String address = resultSet.getString("location");
 
 				profile = new CompanyProfile(name, description, foundedDate, logo, email, phone, address);
 				company = new Company(getAccount(companyId), profile);
@@ -183,7 +183,7 @@ public class DBManager {
 		List<Vacancy> res = new ArrayList<Vacancy>();
 
 		PreparedStatement stmt = null;
-		String query = "SELECT * FROM vacancise WHERE company_id = ?";
+		String query = "SELECT * FROM vacancies WHERE company_id = ?";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -233,7 +233,7 @@ public class DBManager {
 															  resultSet.getString("minor_profession"),
 															  resultSet.getString("email"),
 															  resultSet.getString("phone"),
-															  resultSet.getString("address"),
+															  resultSet.getString("location"),
 															  resultSet.getString("description"),
 															  resultSet.getString("profile_picture"),
 															  resultSet.getBoolean("isWorking"));
@@ -256,7 +256,7 @@ public class DBManager {
 																			  + "minor_profession = ?, " 
 																			  + "email = ?, " 
 																			  + "phone = ?, "
-																			  + "address = ?, "
+																			  + "location = ?, "
 																			  + "profile_picture = ?, "
 																			  + "description = ?, "
 																			  + "isWorking = ? "
@@ -341,7 +341,7 @@ public class DBManager {
 //	
 //		PreparedStatement stmt2 = null;
 //		String query2 = "insert into ReqLanguages "
-//							+ "(requirements_id, language_name, quality) "
+//							+ "(requirements_id, language, quality) "
 //								+ "VALUES (?, ?, ?)";
 //		
 		try {
@@ -383,7 +383,7 @@ public class DBManager {
 												+ "degree = ? WHERE id = ?";
 		
 //		PreparedStatement updateLanguage = null;
-//		String updateQuery2 = "update ReqLanguages " + "set language_name = ?, quality = ? "
+//		String updateQuery2 = "update ReqLanguages " + "set language = ?, quality = ? "
 //								+ "where requirements_id = ?";
 		
 		try {
@@ -498,7 +498,7 @@ public class DBManager {
 
 	public void addApplication(int employeeId, int vacancyId) {
 		PreparedStatement stmt = null;
-		String query = "insert into followers (vacancy_id, employee_id) " + "VALUES (?,?)";
+		String query = "insert into applicants (vacancy_id, employee_id) " + "VALUES (?,?)";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -513,12 +513,12 @@ public class DBManager {
 
 	public void removeApplication(int employeeId, int vacancyId) {
 		PreparedStatement stmt = null;
-		String query = "delete from followers where employee_id = ? and company_id = ?";
+		String query = "delete from applicants where employee_id = ? and vacancy_id = ?";
 
 		try {
 			stmt = con.prepareStatement(query);
-			stmt.setInt(1, vacancyId);
-			stmt.setInt(2, employeeId);
+			stmt.setInt(1, employeeId);
+			stmt.setInt(2, vacancyId);
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -526,6 +526,86 @@ public class DBManager {
 		}
 	}
 	
+
+	private int getTagTypeId(String tagName) {
+		int tagTypeId = 0;
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT id FROM tag_types WHERE name = ?");
+			stmt.setString(1, tagName);
+			ResultSet resultSet = stmt.executeQuery();
+			if (resultSet.next()) {
+				tagTypeId = resultSet.getInt("id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tagTypeId;
+	}
+	
+	public void addVacancyTag(int vacancyId, String tag) {
+		try {
+			
+			PreparedStatement stmt = null;
+			String query = "INSERT INTO vacancy_tags (vacancy_id, tag) " + "VALUES (?,?)";
+
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, vacancyId);
+			stmt.setString(2, tag);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeVacancyTag(int vacancyId, String tag) {
+		try {
+			
+			PreparedStatement stmt = null;
+			String query = "DELETE FROM vacancy_tags WHERE vacancy_id = ? and tag = ?";
+
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, vacancyId);
+			stmt.setString(2, tag);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addEmployeeTag(int employeeId, String tag) {
+		try {
+			
+			PreparedStatement stmt = null;
+			String query = "INSERT INTO employee_tags (employee_id, tag) " + "VALUES (?,?)";
+
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, employeeId);
+			stmt.setString(2, tag);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeEmployeeTag(int employeeId, String tag) {
+		try {
+			
+			PreparedStatement stmt = null;
+			String query = "DELETE FROM employee_tags WHERE employee_id = ? and tag = ?";
+
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, employeeId);
+			stmt.setString(2, tag);
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public List<WorkExperience> getWorkExps(int employeeId) {
 		List<WorkExperience> res = new ArrayList<WorkExperience>();
@@ -598,7 +678,7 @@ public class DBManager {
 	}
 	
 	
-	public List<Language> getLanguages(int employeeId){
+	public List<Language> getEmployeeLanguages(int employeeId){
 		List<Language> res = new ArrayList<Language>();
 
 		PreparedStatement stmt = null;
@@ -640,7 +720,7 @@ public class DBManager {
 		
 			while(resultSet.next()) {
 				int id = resultSet.getInt("id");
-				String language = resultSet.getString("language_name");
+				String language = resultSet.getString("language");
 				String quality = resultSet.getString("quality");
 				Language lan = new Language(id, language, quality, "");
 				res.add(lan);
@@ -653,12 +733,11 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getEmployeeTags(int employeeId){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getEmployeeTags(int employeeId){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
-		String query = "SELECT * FROM EmployeeTags join tag_types on "
-							+ "EmployeeTags.tag_type_id = tag_types.id WHERE employee_id = ?";
+		String query = "SELECT * FROM employee_tags WHERE employee_id = ?";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -667,9 +746,8 @@ public class DBManager {
 			ResultSet resultSet = stmt.executeQuery();
 		
 			while(resultSet.next()) {
-				String tag = resultSet.getString("name");
-				Tag empTag = new Tag(tag);
-				res.add(empTag);
+				String tag = resultSet.getString("tag");
+				res.add(tag);
 			}
 		
 		} catch (SQLException e) {
@@ -679,11 +757,11 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getLocations(){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getLocations(){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
-		String query = "SELECT * FROM Locations";
+		String query = "SELECT * FROM default_locations";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -692,9 +770,8 @@ public class DBManager {
 		
 			while(resultSet.next()) {
 				String location = resultSet.getString("city");
-				Tag loc = new Tag(location);
 				
-				res.add(loc);
+				res.add(location);
 			}
 		
 		} catch (SQLException e) {
@@ -704,12 +781,11 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getVacancyTags(int vacancyId){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getVacancyTags(int vacancyId){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
-		String query = "SELECT * FROM VacancyTags join tag_types on "
-							+ "VacancyTags.tag_type_id = tag_types.id WHERE vacancy_id = ?";
+		String query = "SELECT * FROM vacancy_tags WHERE vacancy_id = ?";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -718,9 +794,8 @@ public class DBManager {
 			ResultSet resultSet = stmt.executeQuery();
 		
 			while(resultSet.next()) {
-				String tag = resultSet.getString("name");
-				Tag vacTag = new Tag(tag);
-				res.add(vacTag);
+				String tag = resultSet.getString("tag");
+				res.add(tag);
 			}
 		
 		} catch (SQLException e) {
@@ -730,11 +805,11 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getLanguages(){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getLanguages(){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
-		String query = "SELECT * FROM DefaultLanguages";
+		String query = "SELECT * FROM default_languages";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -742,10 +817,9 @@ public class DBManager {
 			ResultSet resultSet = stmt.executeQuery();
 		
 			while(resultSet.next()) {
-				String language = resultSet.getString("language_name");
-				Tag lan = new Tag(language);
+				String language = resultSet.getString("language");
 				
-				res.add(lan);
+				res.add(language);
 			}
 		
 		} catch (SQLException e) {
@@ -755,11 +829,11 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getInterestingFields(){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getTags(){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
-		String query = "SELECT * FROM Fields";
+		String query = "SELECT * FROM default_tags";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -767,10 +841,9 @@ public class DBManager {
 			ResultSet resultSet = stmt.executeQuery();
 		
 			while(resultSet.next()) {
-				String field = resultSet.getString("industry");
-				Tag fieldTag = new Tag(field);
+				String tag = resultSet.getString("tag");
 				
-				res.add(fieldTag);
+				res.add(tag);
 			}
 		
 		} catch (SQLException e) {
@@ -780,11 +853,11 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getQualities(){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getQualities(){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
-		String query = "SELECT * FROM DefaultQuality";
+		String query = "SELECT * FROM default_qualities";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -793,9 +866,8 @@ public class DBManager {
 		
 			while(resultSet.next()) {
 				String quality = resultSet.getString("quality");
-				Tag qualityTag = new Tag(quality);
 				
-				res.add(qualityTag);
+				res.add(quality);
 			}
 		
 		} catch (SQLException e) {
@@ -805,8 +877,8 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getDegrees(){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getDegrees(){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
 		String query = "SELECT * FROM degrees";
@@ -817,10 +889,9 @@ public class DBManager {
 			ResultSet resultSet = stmt.executeQuery();
 		
 			while(resultSet.next()) {
-				String deg = resultSet.getString("degree_title");
-				Tag degreeTag = new Tag(deg);
+				String degree = resultSet.getString("degree");
 				
-				res.add(degreeTag);
+				res.add(degree);
 			}
 		
 		} catch (SQLException e) {
@@ -830,11 +901,11 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getInstitutionTypes(){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getEducationalInstitutionTypes(){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
-		String query = "SELECT * FROM InstitutionTypes";
+		String query = "SELECT * FROM institution_types";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -842,10 +913,9 @@ public class DBManager {
 			ResultSet resultSet = stmt.executeQuery();
 		
 			while(resultSet.next()) {
-				String type = resultSet.getString("institutionTypes");
-				Tag typeTag = new Tag(type);
+				String type = resultSet.getString("institution_type");
 				
-				res.add(typeTag);
+				res.add(type);
 			}
 		
 		} catch (SQLException e) {
@@ -855,8 +925,8 @@ public class DBManager {
 		return res;
 	}
 	
-	public List<Tag> getProfessions(){
-		List<Tag> res = new ArrayList<Tag>();
+	public List<String> getProfessions(){
+		List<String> res = new ArrayList<String>();
 
 		PreparedStatement stmt = null;
 		String query = "SELECT * FROM professions";
@@ -867,10 +937,9 @@ public class DBManager {
 			ResultSet resultSet = stmt.executeQuery();
 		
 			while(resultSet.next()) {
-				String prof = resultSet.getString("profession");
-				Tag profTag = new Tag(prof);
+				String profession = resultSet.getString("profession");
 				
-				res.add(profTag);
+				res.add(profession);
 			}
 		
 		} catch (SQLException e) {
@@ -893,8 +962,8 @@ public class DBManager {
 		
 		PreparedStatement stmt = null;
 		String query = "insert into experiences (employee_id, company_name, start_date, end_date, "
-							+ "position, profession, job_description, emp_type, achievement"
-								+ ") " + "VALUES (?,?,?,?,?,?,?,?,?)";
+							+ "position, profession, job_description, emp_type, achievement) " 
+								+ "VALUES (?,?,?,?,?,?,?,?,?)";
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -1055,7 +1124,12 @@ public class DBManager {
 		}
 	}
 	
-	
+	//	add/removeVacancyTag(int vacancyId, String tagName); int getTagTypeId(String tagName) <-- es metodi miweria da gamoiyene ro rame.
+	//	List <Tag> getEmployeeTags(int employeeId);
+	//	List <Tag> getVacancyTags(int employeeId);
+	//	List <Tag> getLocations();
+	//	List <Tag> getLanguages();
+	//	List <Tag> getTags(); - all Tags
+	//	List <Tag> getEmployeeTags (int employeeId);
+	//	add/remove workExperiences, education, language, requiredLanguage
 }
-
-
