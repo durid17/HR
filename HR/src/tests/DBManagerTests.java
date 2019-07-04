@@ -104,7 +104,7 @@ class DBManagerTests {
 	
 	@Test
 	void vacancyTest() {
-		Requirement requirement = new Requirement("Tbilisi", 0, "Bachelor");
+		Requirement requirement = new Requirement("Tbilisi", 0, "Bachelor", "finansisti");
 		Vacancy vacancy = new Vacancy(7, "Heading", "Pos", "Desc", "Part-time", 7,
 				requirement, null, new Date(System.currentTimeMillis() + 5000000));
 		manager.addVacancy(vacancy);
@@ -126,7 +126,7 @@ class DBManagerTests {
 		assertEquals(vacancy.getPosition(), fromDBVacancy.getPosition());
 //		assertEquals(vacancy, fromDBVacancy);
 		
-		Requirement updatedRequirement = new Requirement("Batumi", 5, "Bachelor");
+		Requirement updatedRequirement = new Requirement("Batumi", 5, "Bachelor", "finansisti");
 		Vacancy updatedVacancy = new Vacancy(id, "UpdatedHeading", "Salesperson", "UpdatedDesc", "Full-time", 
 				7, updatedRequirement, null, new Date(System.currentTimeMillis() + 10000));
 		manager.updateVacancy(updatedVacancy);

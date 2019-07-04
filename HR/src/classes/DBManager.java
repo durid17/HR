@@ -194,6 +194,7 @@ public class DBManager {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				String title = resultSet.getString("heading");
+				String prof = resultSet.getString("profession");
 				String position = resultSet.getString("position");
 				int company_id = resultSet.getInt("company_id");
 				String description = resultSet.getString("description");
@@ -204,7 +205,7 @@ public class DBManager {
 				String degree = resultSet.getString("degree");
 				int yearsOfExp = resultSet.getInt("years_of_experince");
 
-				Requirement req = new Requirement(location, yearsOfExp, degree);
+				Requirement req = new Requirement(location, yearsOfExp, degree, prof);
 				Vacancy vac = new Vacancy(id, title, position, description, empType,
 						company_id, req, creationDate, expiryDate);
 				res.add(vac);
@@ -334,6 +335,7 @@ public class DBManager {
 											+ "description, "
 											+ "expiry_date, "
 											+ "emp_type, "
+											+ "profession, "
 											+ "position, "
 											+ "years_of_experience, "
 											+ "location, "
@@ -351,10 +353,11 @@ public class DBManager {
 			stmt.setString(3, vacancy.getDescription());
 			stmt.setDate(4, vacancy.getEndDate());
 			stmt.setString(5, vacancy.getEmpType());
-			stmt.setString(6, vacancy.getPosition());
-			stmt.setInt(7,  vacancy.getReq().getYearsOfExp());
-			stmt.setString(8,  vacancy.getReq().getLocation());
-			stmt.setString(9,  vacancy.getReq().getDegree());
+			stmt.setString(6, vacancy.getReq().getProfession());
+			stmt.setString(7, vacancy.getPosition());
+			stmt.setInt(8,  vacancy.getReq().getYearsOfExp());
+			stmt.setString(9,  vacancy.getReq().getLocation());
+			stmt.setString(10, vacancy.getReq().getDegree());
 
 			stmt.executeUpdate();
 			
@@ -377,6 +380,7 @@ public class DBManager {
 												+ "description = ?, "
 												+ "expiry_date = ?, "
 												+ "emp_type = ?, "
+												+ "profession = ?"
 												+ "position = ?, "
 												+ "years_of_experience = ?, "
 												+ "location = ?, "
@@ -393,11 +397,12 @@ public class DBManager {
 			updateVacancy.setString(2, vacancy.getDescription());
 			updateVacancy.setDate(3, vacancy.getEndDate());
 			updateVacancy.setString(4, vacancy.getEmpType());
-			updateVacancy.setString(5, vacancy.getPosition());
-			updateVacancy.setInt(6, vacancy.getReq().getYearsOfExp());
-			updateVacancy.setString(7, vacancy.getReq().getLocation());
-			updateVacancy.setString(8, vacancy.getReq().getDegree());
-			updateVacancy.setInt(9, vacancy.getId());
+			updateVacancy.setString(5, vacancy.getReq().getProfession());
+			updateVacancy.setString(6, vacancy.getPosition());
+			updateVacancy.setInt(7, vacancy.getReq().getYearsOfExp());
+			updateVacancy.setString(8, vacancy.getReq().getLocation());
+			updateVacancy.setString(9, vacancy.getReq().getDegree());
+			updateVacancy.setInt(10, vacancy.getId());
 
 			updateVacancy.executeUpdate();
 			
@@ -444,6 +449,7 @@ public class DBManager {
 				int vacId = resultSet.getInt("id");
 				String title = resultSet.getString("heading");
 				String position = resultSet.getString("position");
+				String prof = resultSet.getString("profession");
 				int company_id = resultSet.getInt("company_id");
 				String description = resultSet.getString("description");
 				String empType = resultSet.getString("emp_type");
@@ -453,7 +459,7 @@ public class DBManager {
 				String degree = resultSet.getString("degree");
 				int yearsOfExp = resultSet.getInt("years_of_experience");
 
-				req = new Requirement(location, yearsOfExp, degree);
+				req = new Requirement(location, yearsOfExp, degree, prof);
 				vac = new Vacancy(vacId, title, position, description, empType,
 						 company_id, req, creationDate, expiryDate);
 
