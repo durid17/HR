@@ -126,7 +126,7 @@ public class DBManager {
 												 + "founded_date = ?, "
 												 + "email = ?, "
 												 + "phone = ?, "
-												 + "address = ? WHERE id = ?";
+												 + "location = ? WHERE id = ?";
 
 		try {
 			updateCompany = con.prepareStatement(updateString);
@@ -166,7 +166,7 @@ public class DBManager {
 				Date foundedDate = resultSet.getDate("founded_date");
 				String email = resultSet.getString("email");
 				String phone = resultSet.getString("phone");
-				String address = resultSet.getString("address");
+				String address = resultSet.getString("location");
 
 				profile = new CompanyProfile(name, description, foundedDate, logo, email, phone, address);
 				company = new Company(getAccount(companyId), profile);
@@ -233,7 +233,7 @@ public class DBManager {
 															  resultSet.getString("minor_profession"),
 															  resultSet.getString("email"),
 															  resultSet.getString("phone"),
-															  resultSet.getString("address"),
+															  resultSet.getString("location"),
 															  resultSet.getString("description"),
 															  resultSet.getString("profile_picture"),
 															  resultSet.getBoolean("isWorking"));
@@ -256,7 +256,7 @@ public class DBManager {
 																			  + "minor_profession = ?, " 
 																			  + "email = ?, " 
 																			  + "phone = ?, "
-																			  + "address = ?, "
+																			  + "location = ?, "
 																			  + "profile_picture = ?, "
 																			  + "description = ?, "
 																			  + "isWorking = ? "

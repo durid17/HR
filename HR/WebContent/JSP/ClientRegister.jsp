@@ -5,8 +5,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/CompanyRegisterStyle.css">
+
 <body>
 
 <form action = "${pageContext.request.contextPath}/ClientRegister" method ="post">
