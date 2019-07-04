@@ -126,7 +126,7 @@ public class DBManager {
 												 + "founded_date = ?, "
 												 + "email = ?, "
 												 + "phone = ?, "
-												 + "location = ? WHERE id = ?";
+												 + "address = ? WHERE id = ?";
 
 		try {
 			updateCompany = con.prepareStatement(updateString);
@@ -166,7 +166,7 @@ public class DBManager {
 				Date foundedDate = resultSet.getDate("founded_date");
 				String email = resultSet.getString("email");
 				String phone = resultSet.getString("phone");
-				String address = resultSet.getString("location");
+				String address = resultSet.getString("address");
 
 				profile = new CompanyProfile(name, description, foundedDate, logo, email, phone, address);
 				company = new Company(getAccount(companyId), profile);
@@ -233,7 +233,7 @@ public class DBManager {
 															  resultSet.getString("minor_profession"),
 															  resultSet.getString("email"),
 															  resultSet.getString("phone"),
-															  resultSet.getString("location"),
+															  resultSet.getString("address"),
 															  resultSet.getString("description"),
 															  resultSet.getString("profile_picture"),
 															  resultSet.getBoolean("isWorking"));
@@ -256,7 +256,7 @@ public class DBManager {
 																			  + "minor_profession = ?, " 
 																			  + "email = ?, " 
 																			  + "phone = ?, "
-																			  + "location = ?, "
+																			  + "address = ?, "
 																			  + "profile_picture = ?, "
 																			  + "description = ?, "
 																			  + "isWorking = ? "
@@ -545,11 +545,12 @@ public class DBManager {
 				Date end = resultSet.getDate("end_date");
 				String company = resultSet.getString("company_name");
 				String position = resultSet.getString("position");
+				String prof = resultSet.getString("profession");
 				String empType = resultSet.getString("emp_type");
 				String duty = resultSet.getString("job_description");
 				String award = resultSet.getString("achievement");
 
-				WorkExperience exp = new WorkExperience(id, start, end, company, position, empType, duty, award);
+				WorkExperience exp = new WorkExperience(id, start, end, company, prof, position, empType, duty, award);
 				res.add(exp);
 			}
 
@@ -880,37 +881,181 @@ public class DBManager {
 	}
 	
 	public void addWorkExp(int employeeId, WorkExperience workExp) {
+		
+		Date startDate = workExp.getStartDate();
+		Date endDate = workExp.getEndDate();
+		String companyName = workExp.getCompanyName();
+		String position = workExp.getPostition();
+		String prof = workExp.getProfession();
+		String empType = workExp.getEmploymentType();
+		String jobDescription = workExp.getDuty();
+		String achievement = workExp.getAchievement();
+		
+		PreparedStatement stmt = null;
+		String query = "insert into experiences (employee_id, company_name, start_date, end_date, "
+							+ "position, profession, job_description, emp_type, achievement"
+								+ ") " + "VALUES (?,?,?,?,?,?,?,?,?)";
 
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, employeeId);
+			stmt.setString(2, companyName);
+			stmt.setDate(3, startDate);
+			stmt.setDate(4, endDate);
+			stmt.setString(5, position);
+			stmt.setString(6, prof);
+			stmt.setString(7, jobDescription);
+			stmt.setString(8, empType);
+			stmt.setString(9, achievement);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
 	public void addEducation(int employeeId, EmployeeEducation empEdu) {
 		
+		Date startDate = empEdu.getStartDate();
+		Date endDate = empEdu.getEndDate();
+		String educationalInstitution = empEdu.getEducationalInstitution();
+		String educationalInstitutionName = empEdu.getInstitutionName();
+		String major = empEdu.getMajor();
+		String minor = empEdu.getMinor();
+		String degree = empEdu.getDegree();
+		double grade = empEdu.getGrade();
+		
+		PreparedStatement stmt = null;
+		String query = "insert into education (employee_id, educational_institution, "
+							+ "educational_institution_name, start_date, end_date, major, minor, "
+								+ "degree, grade) " + "VALUES (?,?,?,?,?,?,?,?,?)";
+
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, employeeId);
+			stmt.setString(2, educationalInstitution);
+			stmt.setString(3, educationalInstitutionName);
+			stmt.setDate(4, startDate);
+			stmt.setDate(5, endDate);
+			stmt.setString(6, major);
+			stmt.setString(7, minor);
+			stmt.setString(8, degree);
+			stmt.setDouble(9, grade);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void addLanguage(int employeeId, Language lan) {
 		
+		String languageName = lan.getLanguage();
+		String quality = lan.getQuality();
+		String certificate = lan.getCertificate();
+		
+		PreparedStatement stmt = null;
+		String query = "insert into languages (employee_id, language, quality, "
+							+ "certificate) " + "VALUES (?,?,?,?)";
+
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, employeeId);
+			stmt.setString(2, languageName);
+			stmt.setString(3, quality);
+			stmt.setString(4, certificate);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addReqLanguage(int vacancyId, Language lan) {
 		
+		String languageName = lan.getLanguage();
+		String quality = lan.getQuality();
+		
+		PreparedStatement stmt = null;
+		String query = "insert into requirement_languages (vacancy_id, language, quality)" 
+							+ "VALUES (?,?,?)";
+
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, vacancyId);
+			stmt.setString(2, languageName);
+			stmt.setString(3, quality);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void removeWorkExp(int employeeId, int workExpId) {
+	public void removeWorkExp(int workExpId) {
 		
+		PreparedStatement stmt = null;
+		String query = "DELETE from experiences where id = ?";
+		
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, workExpId);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void removeEducation(int employeeId, int empEduId) {
+	public void removeEducation(int empEduId) {
 		
+		PreparedStatement stmt = null;
+		String query = "DELETE from education where id = ?";
+		
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, empEduId);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void removeLanguage(int employeeId, int lanId) {
+	public void removeLanguage(int lanId) {
 		
+		PreparedStatement stmt = null;
+		String query = "DELETE from languages where id = ?";
+		
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, lanId);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void removeReqLanguage(int vacancyId, int lanId) {
+	public void removeReqLanguage(int lanId) {
 		
+		PreparedStatement stmt = null;
+		String query = "DELETE from requirement_languages where id = ?";
+		
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, lanId);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
 }
+
+

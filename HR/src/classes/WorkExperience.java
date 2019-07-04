@@ -9,17 +9,19 @@ public class WorkExperience {
 	private Date startDate;
 	private Date endDate;
 	private String companyName;
+	private String profession;
 	private String position;
 	private String employmentType; //full-time, part-time, internship
 	private String duty;
 	private String achievement;
 	
-	public WorkExperience(int id, Date start, Date end, String company, String pos, 
+	public WorkExperience(int id, Date start, Date end, String company, String prof, String pos, 
 			String empType, String duty, String award) {
 		this.id = id;
 		this.startDate = MyDateFormatter.truncate(start);
 		this.endDate = MyDateFormatter.truncate(end);
 		this.companyName = company;
+		this.profession = prof;
 		this.position = pos;
 		this.employmentType = empType;
 		this.duty = duty;
@@ -61,29 +63,37 @@ public class WorkExperience {
 	public String getDuty() {
 		return duty;
 	}
-
+	
 	public void setDuty(String duty) {
 		this.duty = duty;
 	}
-
+	
 	public String getAchievement() {
 		return achievement;
 	}
-
+	
 	public void setAchievement(String achievement) {
 		this.achievement = achievement;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
-
+	
 	public String getEmploymentType() {
 		return employmentType;
 	}
 
 	public void setEmploymentType(String employmentType) {
 		this.employmentType = employmentType;
+	}
+	
+	public String getProfession() {
+		return profession;
+	}
+
+	public void setProfession(String profession) {
+		this.profession = profession;
 	}
 
 	@Override
@@ -92,7 +102,7 @@ public class WorkExperience {
 				+ companyName + ", position=" + position + ", employmentType=" + employmentType + ", duty=" + duty
 				+ ", achievement=" + achievement + "]";
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,6 +114,7 @@ public class WorkExperience {
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		result = prime * result + ((profession == null) ? 0 : profession.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
@@ -149,6 +160,11 @@ public class WorkExperience {
 				return false;
 		} else if (!position.equals(other.position))
 			return false;
+		if (profession == null) {
+			if (other.profession != null)
+				return false;
+		} else if (!profession.equals(other.profession))
+			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
 				return false;
@@ -156,4 +172,6 @@ public class WorkExperience {
 			return false;
 		return true;
 	}
+
+	
 }
