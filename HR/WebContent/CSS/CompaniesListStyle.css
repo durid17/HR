@@ -1,0 +1,29 @@
+
+.container {
+	padding: 20px;
+}
+
+.cardClass {
+cursor: pointer;	
+	margin-left: 40px;
+ 	transition: transform .2s;
+	border: none;
+	border-radius: 2px;
+	background-color: #BFBFBF;
+	width: 50%;
+	margin-bottom: 20px;
+}
+
+.cardClass:hover{
+     transform: scale(1.05); 
+}
+
+.labClass{
+	vertical-align: middle;
+	padding: 20px;
+}
+
+#profileImage {
+	width: 50px;
+	height: 50px;
+}

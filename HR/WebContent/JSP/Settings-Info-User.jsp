@@ -42,7 +42,12 @@
 			    
 			    <label for="email"><b>Email</b></label>
 			    <input type="text"  class="inp" name = "email"  value=<%=profile.getEmail()%> required>
-
+			    
+			    <label for="majorProfession"><b>Major Profession</b></label>
+			    <input type="text"  class="inp" name = "majorProfession"  value=<%=profile.getMajorProfession()%> required>
+				
+				 <label for="image"><b>Image</b></label>
+			    <input type="text"  class="inp" name = "image"  value=<%=profile.getProfilePicture()%> required>
 				  				
 			    <hr>
 			   

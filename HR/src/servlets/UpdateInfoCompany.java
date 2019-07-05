@@ -48,6 +48,8 @@ public class UpdateInfoCompany extends HttpServlet {
 		String name =  request.getParameter("name");
 		String description =  request.getParameter("description"); 
 		String email =  request.getParameter("email");
+		String img =  request.getParameter("image");
+		
 //		String phoneNumber =  request.getParameter("phoneNumber");
 //		String address =  request.getParameter("address");
 //		
@@ -77,8 +79,8 @@ public class UpdateInfoCompany extends HttpServlet {
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Company company = manager.getCompany(account.getID());
-		CompanyProfile profile = new CompanyProfile(name, description, null, null, email, null, null);
-		
+		CompanyProfile profile = new CompanyProfile(name, description, null, img, email, null, null);
+
 		company.setProfile(profile);
 		manager.updateCompany(company);	
 		

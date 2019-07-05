@@ -22,7 +22,7 @@
     <label for="psw"><b>Password </b></label>
     <input type="password"  name="psw" required>
    
-    <label for="email"><b>Email *</b></label>
+    <label for="email"><b>Email </b></label>
     <input type="text" name="email" required>
         
     <label for="companyName"><b>Company Name</b></label>

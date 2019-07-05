@@ -48,6 +48,9 @@ public class UpdateInfo extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
+		String img =  request.getParameter("image");
+		String majorProfession =  request.getParameter("majorProfession");
+		
 //		String phoneNumber = request.getParameter("phoneNumber");
 //		String address = request.getParameter("address");
 //		String description = request.getParameter("description");
@@ -84,7 +87,7 @@ public class UpdateInfo extends HttpServlet {
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Employee emp = manager.getEmployee(account.getID());
-		EmployeeProfile profile = new EmployeeProfile(firstName, lastName, null, null, null, null, email, null, null, null, null, false);
+		EmployeeProfile profile = new EmployeeProfile(firstName, lastName, null, null, majorProfession, null, email, null, null, null, img, false);
 			
 		emp.setProfile(profile);
 		manager.updateEmployee(emp);

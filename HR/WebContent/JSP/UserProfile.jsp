@@ -14,10 +14,20 @@
 <% 
 	Account acc = (Account)request.getSession().getAttribute("account");
 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
-	Employee employee = manager.getEmployee(acc.getID());
 	
+	String ida = request.getParameter("id"); //Stalking
+	Employee employee; 
+
+	if(ida != null){ //Another user's page
+		int id = Integer.parseInt(ida);
+		employee = manager.getEmployee(id);
+	} else {
+		employee = manager.getEmployee(acc.getID());
+	}
 	//education
 	EmployeeProfile profile = employee.getProfile();
+	System.out.println(profile.getProfilePicture());
+	
 %>
 
 </head>
@@ -29,7 +39,7 @@
 	<div class = "container">
 		<div class = "profileInfoLeft">
 			<div class = "imgAvatar">
-				<img id = "profileImage" src="${pageContext.request.contextPath}/Images/avatar.png" alt="Avatar">
+				<img id = "profileImage" src=<%= profile.getProfilePicture()%> alt="Avatar">
 			</div>
 		    
 		    <div class="mainInfo">
@@ -38,7 +48,8 @@
 		  	</div>
 		  	<hr>
 		  	<div class = "other"> 
-		  		<p> About <%= profile.getDescription() %></p> 
+		  		<p> About </p>
+		  		<p><%= profile.getMajorProfession() %></p> 
 		  	</div>	  	
 		</div>
 		

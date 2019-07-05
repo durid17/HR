@@ -43,6 +43,9 @@
 			 
 			     <label for="description"><b>Description</b></label>
 			    <textarea name="description"  cols="60"><%=profile.getDescription()%></textarea>
+			    
+			     <label for="image"><b>Image</b></label>
+			    <input type="text"  class="inp" name = "image"  value=<%=profile.getLogo()%> required>
 
 			  
 			    <hr>
