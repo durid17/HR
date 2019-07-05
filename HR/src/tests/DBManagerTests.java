@@ -20,10 +20,12 @@ import classes.CompanyProfile;
 import classes.DBConnection;
 import classes.DBManager;
 import classes.Employee;
+import classes.EmployeeEducation;
 import classes.EmployeeProfile;
 import classes.Language;
 import classes.Requirement;
 import classes.Vacancy;
+import classes.WorkExperience;
 
 class DBManagerTests {
 	DBManager manager = new DBManager(DBConnection.getCon());
@@ -58,6 +60,10 @@ class DBManagerTests {
 //			}
 //		}
 	}
+	
+	private static final int TEST_EMPLOYEE_ID = 3;
+	private static final int TEST_VACANCY_ID = 4;
+	private static final int TEST_COMPANY_ID = 8;
 	
 	@Test
 	void accountTest() {
@@ -106,7 +112,7 @@ class DBManagerTests {
 	@Test
 	void vacancyTest() {
 		Requirement requirement = new Requirement("Tbilisi", 0, "Bachelor", "finansisti");
-		Vacancy vacancy = new Vacancy(7, "Heading", "Pos", "Desc", "Part-time", 7,
+		Vacancy vacancy = new Vacancy(7, "Heading", "Pos", "Desc", "Part-time", TEST_COMPANY_ID,
 				requirement, null, new Date(System.currentTimeMillis() + 5000000));
 		manager.addVacancy(vacancy);
 		
@@ -129,7 +135,7 @@ class DBManagerTests {
 		
 		Requirement updatedRequirement = new Requirement("Batumi", 5, "Bachelor", "finansisti");
 		Vacancy updatedVacancy = new Vacancy(id, "UpdatedHeading", "Salesperson", "UpdatedDesc", "Full-time", 
-				7, updatedRequirement, null, new Date(System.currentTimeMillis() + 10000));
+				TEST_COMPANY_ID, updatedRequirement, null, new Date(System.currentTimeMillis() + 10000));
 		manager.updateVacancy(updatedVacancy);
 		
 		
@@ -143,12 +149,11 @@ class DBManagerTests {
 		assertEquals(updatedVacancy.getPosition(), fromDBVacancy.getPosition());
 //		assertEquals(updatedVacancy, fromDBVacancy);
 		
+		assertEquals(3, manager.getCompanyVacancies(TEST_COMPANY_ID).size());
+		
 		manager.deleteVacancy(fromDBVacancy.getId());
 	}
 	
-	private static final int TEST_EMPLOYEE_ID = 3;
-	private static final int TEST_VACANCY_ID = 4;
-	private static final int TEST_COMPANY_ID = 8;
 	@Test
 	void followTest() {
 		manager.addFollower(TEST_COMPANY_ID, TEST_EMPLOYEE_ID);
@@ -159,7 +164,7 @@ class DBManagerTests {
 	@Test
 	void applicationTest() {
 		manager.addApplication(TEST_EMPLOYEE_ID, TEST_VACANCY_ID);
-		
+		assertEquals(1, manager.getEmployeeApplications(TEST_EMPLOYEE_ID).size());
 		manager.removeApplication(TEST_EMPLOYEE_ID, TEST_VACANCY_ID);
 	}
 	
@@ -173,7 +178,7 @@ class DBManagerTests {
 	}
 	
 	@Test
-	void getDefaultsTest() {
+	void getDefaultListsTest() {
 		assertEquals(66, manager.getLocations().size());
 		assertEquals(67, manager.getProfessions().size());
 		assertEquals(6, manager.getEducationalInstitutionTypes().size());
@@ -278,5 +283,47 @@ class DBManagerTests {
 		assertEquals(6, manager.getCompanies().size());
 		assertEquals(6, manager.getEmployees().size());
 		assertEquals(6, manager.getVacancies().size());
+	}
+	
+	@Test
+	void employeeEducationTest() {
+		EmployeeEducation education = new EmployeeEducation(EmployeeEducation.DEFAULT_ID, new Date(1241415215), new Date(1244415215), 
+					"University", "Free University", "Computer Science", "Philosophy", "Bachelor", 3.5);
+		manager.addEducation(TEST_EMPLOYEE_ID, education);
+		
+		List<EmployeeEducation> list = manager.getEducation(TEST_EMPLOYEE_ID);
+		EmployeeEducation fromDBEducation = list.get(0);
+		assertEquals(1, list.size());
+		assertEquals(education.getInstitutionName(), fromDBEducation.getInstitutionName());
+		assertEquals(education.getDegree(), fromDBEducation.getDegree());
+		assertEquals(education.getMajor(), fromDBEducation.getMajor());
+		assertEquals(education.getMinor(), fromDBEducation.getMinor());
+		assertEquals(education.getEducationalInstitution(), fromDBEducation.getEducationalInstitution());
+		assertEquals(education.getStartDate(), fromDBEducation.getStartDate());
+		assertEquals(education.getEndDate(), fromDBEducation.getEndDate());
+		assertEquals(education.getGrade(), fromDBEducation.getGrade());
+		
+		manager.removeEducation(fromDBEducation.getId());
+	}
+	
+	@Test
+	void employeeWorkExpTest() {
+		WorkExperience experience= new WorkExperience(WorkExperience.DEFAULT_ID, new Date(1241415215), new Date(1244415215), 
+					"Free University", "Data Scientist", "SQL Developer", Vacancy.FULL_TIME_EMP_TYPE, "Scientia, Labor, Libertas", "Medal of Honor");
+		manager.addWorkExp(TEST_EMPLOYEE_ID, experience);
+		
+		List<WorkExperience> list = manager.getWorkExps(TEST_EMPLOYEE_ID);
+		WorkExperience fromDBExperience = list.get(0);
+		assertEquals(1, list.size());
+		assertEquals(experience.getCompanyName(), fromDBExperience.getCompanyName());
+		assertEquals(experience.getStartDate(), fromDBExperience.getStartDate());
+		assertEquals(experience.getEndDate(), fromDBExperience.getEndDate());
+		assertEquals(experience.getEmploymentType(), fromDBExperience.getEmploymentType());
+		assertEquals(experience.getPostition(), fromDBExperience.getPostition());
+		assertEquals(experience.getProfession(), fromDBExperience.getProfession());
+		assertEquals(experience.getDuty(), fromDBExperience.getDuty());
+		assertEquals(experience.getAchievement(), fromDBExperience.getAchievement());
+		
+		manager.removeWorkExp(fromDBExperience.getId());
 	}
 }

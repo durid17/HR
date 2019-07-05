@@ -236,7 +236,7 @@ public class DBManager {
 				Date expiryDate = resultSet.getDate("expiry_date");
 				String location = resultSet.getString("location");
 				String degree = resultSet.getString("degree");
-				int yearsOfExp = resultSet.getInt("years_of_experince");
+				int yearsOfExp = resultSet.getInt("years_of_experience");
 
 				Requirement req = new Requirement(location, yearsOfExp, degree, prof);
 				Vacancy vac = new Vacancy(id, title, position, description, empType,
@@ -338,14 +338,6 @@ public class DBManager {
 			stmt1.setInt(13, employee.getAccount().getID());
 
 			stmt1.executeUpdate();
-
-			/*
-			 * PreparedStatement stmt2 =
-			 * con.prepareStatement("UPDATE employees SET firstname = ?");
-			 * 
-			 * stmt2.setInt(1, employee.getId()); // TODO set?s stmt2.executeUpdate();
-			 */
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -401,12 +393,7 @@ public class DBManager {
 											+ "years_of_experience, "
 											+ "location, "
 											+ "degree) VALUES (?,?,?,?,?,?,?,?,?,?)";
-//	
-//		PreparedStatement stmt2 = null;
-//		String query2 = "insert into ReqLanguages "
-//							+ "(requirements_id, language, quality) "
-//								+ "VALUES (?, ?, ?)";
-//		
+
 		try {
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, vacancy.getCompanyId());
@@ -421,14 +408,6 @@ public class DBManager {
 			stmt.setString(10, vacancy.getReq().getDegree());
 
 			stmt.executeUpdate();
-			
-//			stmt2 = con.prepareStatement(query2);
-//			stmt2.setInt(1, req.getId());
-//			stmt2.setString(2, lan.getLanguage());
-//			stmt2.setString(3, lan.getQuality());
-//			
-//			stmt2.executeUpdate();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -447,10 +426,6 @@ public class DBManager {
 												+ "location = ?, "
 												+ "degree = ? WHERE id = ?";
 		
-//		PreparedStatement updateLanguage = null;
-//		String updateQuery2 = "update ReqLanguages " + "set language = ?, quality = ? "
-//								+ "where requirements_id = ?";
-		
 		try {
 			updateVacancy = con.prepareStatement(updateQuery);
 
@@ -466,15 +441,6 @@ public class DBManager {
 			updateVacancy.setInt(10, vacancy.getId());
 
 			updateVacancy.executeUpdate();
-			
-//			updateLanguage = con.prepareStatement(updateQuery2);
-//			
-//			updateLanguage.setString(1, lan.getLanguage());
-//			updateLanguage.setString(2, lan.getQuality());
-//			updateLanguage.setInt(3, req.getId());
-//			
-//			updateLanguage.executeUpdate();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -764,7 +730,7 @@ public class DBManager {
 				Date start  = resultSet.getDate("start_date");
 				Date end = resultSet.getDate("end_date");
 				String educationalInstitution = resultSet.getString("educational_institution");
-				String institutionName = resultSet.getString("eductional_institution_name");
+				String institutionName = resultSet.getString("educational_institution_name");
 				String major = resultSet.getString("major");
 				String minor = resultSet.getString("minor");
 				String degree = resultSet.getString("degree");
@@ -1230,13 +1196,4 @@ public class DBManager {
 			e.printStackTrace();
 		}
 	}
-	
-	//	add/removeVacancyTag(int vacancyId, String tagName); int getTagTypeId(String tagName) <-- es metodi miweria da gamoiyene ro rame.
-	//	List <Tag> getEmployeeTags(int employeeId);
-	//	List <Tag> getVacancyTags(int employeeId);
-	//	List <Tag> getLocations();
-	//	List <Tag> getLanguages();
-	//	List <Tag> getTags(); - all Tags
-	//	List <Tag> getEmployeeTags (int employeeId);
-	//	add/remove workExperiences, education, language, requiredLanguage
 }

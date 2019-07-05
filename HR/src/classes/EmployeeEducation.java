@@ -18,8 +18,8 @@ public class EmployeeEducation {
 	public EmployeeEducation(int id, Date start, Date end, String educationalInstitution, 
 			String institutionName, String major, String minor, String degree, double grade) {
 		this.id = id;
-		this.startDate = start;
-		this.endDate = end;
+		this.startDate = MyDateFormatter.truncate(start);
+		this.endDate = MyDateFormatter.truncate(start);
 		this.educationalInstitution = educationalInstitution;
 		this.institutionName = institutionName;
 		this.major = major;
