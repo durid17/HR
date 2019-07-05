@@ -178,6 +178,39 @@ public class DBManager {
 
 		return company;
 	}
+	
+	public List<Company> getCompanies() {
+		PreparedStatement getCompany = null;
+		CompanyProfile profile = null;
+
+		String query = "SELECT * FROM companies";
+
+		List<Company> res = new ArrayList<Company>();
+		
+		try {
+			getCompany = con.prepareStatement(query);
+			ResultSet resultSet = getCompany.executeQuery();
+
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				String description = resultSet.getString("description");
+				String logo = resultSet.getString("logo");
+				Date foundedDate = resultSet.getDate("founded_date");
+				String email = resultSet.getString("email");
+				String phone = resultSet.getString("phone");
+				String address = resultSet.getString("location");
+
+				profile = new CompanyProfile(name, description, foundedDate, logo, email, phone, address);
+				res.add(new Company(getAccount(id), profile));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 
 	public List<Vacancy> getCompanyVacancies(int companyId) {
 		List<Vacancy> res = new ArrayList<Vacancy>();
@@ -247,6 +280,34 @@ public class DBManager {
 		return null;
 	}
 
+	public List<Employee> getEmployees() {
+		List<Employee> res = new ArrayList<Employee>();
+		
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM employees");
+			ResultSet resultSet = stmt.executeQuery();
+			
+			while (resultSet.next()) {
+				EmployeeProfile profile = new EmployeeProfile(resultSet.getString("firstname"),
+															  resultSet.getString("lastname"),
+															  resultSet.getString("gender"),
+															  resultSet.getDate("birth_date"),
+															  resultSet.getString("major_profession"),
+															  resultSet.getString("minor_profession"),
+															  resultSet.getString("email"),
+															  resultSet.getString("phone"),
+															  resultSet.getString("location"),
+															  resultSet.getString("description"),
+															  resultSet.getString("profile_picture"),
+															  resultSet.getBoolean("isWorking"));
+				res.add(new Employee(getAccount(resultSet.getInt("id")), profile));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	public void updateEmployee(Employee employee) {
 		try {
 			PreparedStatement stmt1 = con.prepareStatement("UPDATE employees SET firstname = ?, " 
@@ -471,6 +532,44 @@ public class DBManager {
 		return vac;
 	}
 
+	public List<Vacancy> getVacancies() {
+		List<Vacancy> res = new ArrayList<Vacancy>();
+
+		PreparedStatement getCompany = null;
+		Requirement req = null;
+		Vacancy vac = null;
+		String query = "SELECT * FROM vacancies";
+
+		try {
+			getCompany = con.prepareStatement(query);
+			ResultSet resultSet = getCompany.executeQuery();
+
+			while (resultSet.next()) {
+				int vacId = resultSet.getInt("id");
+				String title = resultSet.getString("heading");
+				String position = resultSet.getString("position");
+				String prof = resultSet.getString("profession");
+				int company_id = resultSet.getInt("company_id");
+				String description = resultSet.getString("description");
+				String empType = resultSet.getString("emp_type");
+				Date creationDate = resultSet.getDate("creation_date");
+				Date expiryDate = resultSet.getDate("expiry_date");
+				String location = resultSet.getString("location");
+				String degree = resultSet.getString("degree");
+				int yearsOfExp = resultSet.getInt("years_of_experience");
+
+				req = new Requirement(location, yearsOfExp, degree, prof);
+				vac = new Vacancy(vacId, title, position, description, empType,
+						 company_id, req, creationDate, expiryDate);
+				res.add(vac);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	//
 	public void addFollower(int companyId, int employeeId) {
 		PreparedStatement stmt = null;

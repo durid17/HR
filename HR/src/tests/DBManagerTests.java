@@ -272,4 +272,11 @@ class DBManagerTests {
 		manager.removeReqLanguage(TEST_VACANCY_ID, language1.getLanguage());
 		manager.removeReqLanguage(TEST_VACANCY_ID, language2.getLanguage());
 	}
+	
+	@Test
+	void getListsTest() {
+		assertEquals(6, manager.getCompanies().size());
+		assertEquals(6, manager.getEmployees().size());
+		assertEquals(6, manager.getVacancies().size());
+	}
 }
