@@ -9,7 +9,7 @@
 <jsp:include page="Header.jsp"/>
 </head>
 <body>
-y	<div class = "container">
+	<div class = "container">
 		<div class="subheader">
 	    	<h1>CONTACT US</h1>
 			<h4>We will be happy to assist you with any question</h4>

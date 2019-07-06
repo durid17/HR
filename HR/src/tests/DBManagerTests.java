@@ -246,7 +246,7 @@ class DBManagerTests {
 		manager.addEmployeeLanguage(TEST_EMPLOYEE_ID, language);
 		manager.removeEmployeeLanguage(TEST_EMPLOYEE_ID, language.getLanguage());
 		
-		manager.addReqLanguage(TEST_VACANCY_ID, language);
+		manager.addReqLanguage(TEST_VACANCY_ID, language.getLanguage());
 		manager.removeReqLanguage(TEST_VACANCY_ID, language.getLanguage());
 	}
 	
@@ -268,8 +268,8 @@ class DBManagerTests {
 	void getVacancyLanguagesTest() {
 		Language language1 = new Language(Language.DEFAULT_ID, "Georgian", "Great", "B2");
 		Language language2 = new Language(Language.DEFAULT_ID, "Arabic", "Good", "C1");
-		manager.addReqLanguage(TEST_VACANCY_ID, language1);
-		manager.addReqLanguage(TEST_VACANCY_ID, language2);
+		manager.addReqLanguage(TEST_VACANCY_ID, language1.getLanguage());
+		manager.addReqLanguage(TEST_VACANCY_ID, language2.getLanguage());
 		
 		List<Language> list = manager.getRequirementLanguages(TEST_VACANCY_ID);
 		assertEquals(2, list.size());

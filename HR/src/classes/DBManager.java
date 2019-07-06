@@ -1114,20 +1114,16 @@ public class DBManager {
 		}
 	}
 	
-	public void addReqLanguage(int vacancyId, Language lan) {
-		
-		String languageName = lan.getLanguage();
-		String quality = lan.getQuality();
+	public void addReqLanguage(int vacancyId, String lan) {
 		
 		PreparedStatement stmt = null;
-		String query = "insert into requirement_languages (vacancy_id, language, quality)" 
-							+ "VALUES (?,?,?)";
+		String query = "insert into requirement_languages (vacancy_id, language)" 
+							+ "VALUES (?,?)";
 
 		try {
 			stmt = con.prepareStatement(query);
 			stmt.setInt(1, vacancyId);
-			stmt.setString(2, languageName);
-			stmt.setString(3, quality);
+			stmt.setString(2, lan);
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
