@@ -64,13 +64,13 @@
 		    	languages : toString($('#languages').val()),
 		    	tags : toString($('#tags').val())
 		    }
-			var url = "http://localhost:8080/HR/VacancyAddServlet";
+			var url = "../VacancyAddServlet";
 			$.post(url,data, 
 					function(data, status){
 						var json = JSON.parse(data);
-						//console.log(json);
+						console.log(json);
 						var id = json.vacancyId;
-		                window.location.href= "http://localhost:8080/HR/JSP/VacancyPage.jsp?vacancyId=" + id;
+		                location.href = "VacancyPage.jsp?vacancyId=" + id;
 					}
 			);
 		});

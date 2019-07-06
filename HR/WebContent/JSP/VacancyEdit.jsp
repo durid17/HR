@@ -80,13 +80,13 @@
 		    	tags : toString($('#tags').val()),
 		    	vacancyId : '<%= jobj.toString() %>'
 		    }
-			var url = "http://localhost:8080/HR/VacancyEditServlet";
+			var url = "../VacancyAddServlet";
 			$.post(url,data, 
 					function(data, status){
 						var json = JSON.parse(data);
 						//console.log(json);
 						var id = json.vacancyId;
-		                window.location.href= "http://localhost:8080/HR/JSP/VacancyPage.jsp?vacancyId=" + id;
+		                location.href = "VacancyPage.jsp?vacancyId=" + id;
 					}
 			);
 		});
