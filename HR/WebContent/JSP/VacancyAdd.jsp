@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/VacancyAdd.css">
 
 <script>
-
 	function toString(myStringArray){
 		if(myStringArray == null) return "";
 		var arrayLength = myStringArray.length;
