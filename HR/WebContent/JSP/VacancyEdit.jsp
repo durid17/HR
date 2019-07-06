@@ -4,19 +4,33 @@
     
 <%@ page import="java.util.List" %>
 <%@ page import="classes.*" %>
+<%@ page import="org.json.JSONObject" %>
+
 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Vacancy</title>
+<title>Edit Vacancy</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/VacancyAdd.css">
+
+
+<%
+ 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
+	List<String> professions = manager.getProfessions();
+	//int id = Integer.parseInt(request.getParameter("vacancyId"));
+	int id = 91;
+   	Vacancy vacancy = manager.getVacancy(id);
+   	JSONObject jobj = new JSONObject();
+	jobj.put("vacancyId", vacancy.getId());
+	//System.out.println(jobj.toString());
+%>
 
 <script>
 
@@ -63,9 +77,10 @@
 		   	 	degree : document.getElementById("degree").options[document.getElementById("degree").selectedIndex].value.trim(),
 		   	 	location : document.getElementById("locations").options[document.getElementById("locations").selectedIndex].value.trim(),
 		    	languages : toString($('#languages').val()),
-		    	tags : toString($('#tags').val())
+		    	tags : toString($('#tags').val()),
+		    	vacancyId : '<%= jobj.toString() %>'
 		    }
-			var url = "http://localhost:8080/HR/VacancyAddServlet";
+			var url = "http://localhost:8080/HR/VacancyEditServlet";
 			$.post(url,data, 
 					function(data, status){
 						var json = JSON.parse(data);
@@ -85,21 +100,18 @@
 <!-- 
  <form action="">
  -->
- 
 
 	<div class="container">
-    <h1>Add Vacancy</h1>
-    <p>Please fill in this form to add a vacancy.</p>
+    <h1>Edit Vacancy</h1>
     <hr>
     
     <label for="heading"><b>Heading *</b></label>
-    <input type="text" placeholder="heading" id="heading" required><br>
+    <input type="text" id="heading" value= <%= vacancy.getHeading() %>><br>
     
     <label for="profession"><b>Profession</b></label>
     <select id = "profession">
     <%
-		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
-		List<String> professions = manager.getProfessions();
+		
     	/*
     	professions.add("prof1");
     	professions.add("prof2");
@@ -108,7 +120,10 @@
     	*/
     	for(int i = 0 ; i < professions.size(); i++){
     		out.print("<option value = \" ");
-			out.print(professions.get(i) + "\">");
+			out.print(professions.get(i) + "\"");
+			if(professions.get(i).equals(vacancy.getReq().getProfession())) 
+				out.print("selected = \"selected\"");
+			out.print(">");
 			out.print(professions.get(i) + "</option>");
     	}
     %>
@@ -116,11 +131,11 @@
     
     
     <label for="position"><b>Position *</b></label>
-    <input type="text" placeholder="position" id="position" required><br>
+    <input type="text" id="position" value= <%= vacancy.getPosition() %>><br>
    	
      
     <label for="description"><b>Description</b></label><br>
-    <textarea  id="description" rows="5" ></textarea>
+    <textarea  id="description" rows="5"><%= vacancy.getDescription() %></textarea>
     <p></p>
     
     <label for="jobType"><b>Job Type</b></label>
@@ -132,19 +147,36 @@
 	</select><br>
 	
 	<label for="endDate"><b>End Date</b></label>
-	<input type="date"  id = "endDate" name="endDate" required><br>
+	<input type="date"  id = "endDate" name="endDate" value = <%= vacancy.getEndDate() %>><br>
 	
 	
 	<label for="yearsofExperience"><b>Years of Experience</b></label>
-	<input type="number"  id="yearsOfExperience"><br>
+	<input type="number"  id="yearsOfExperience" value = <%= vacancy.getReq().getYearsOfExp() %>><br>
 	
 	<label for="Degree"><b>Degree</b></label>
+	<% String degree = vacancy.getReq().getDegree(); %>
 	<select id = degree>
-	  <option value="Bachelor's">Bachelor's</option>
-	  <option value="Associate">Associate</option>
-	  <option value="Master's">Master's</option>
-	  <option value="Ph.D">Ph.D</option>
-	  <option value="Pursuing Degree">Pursuing Degree</option>
+	  <option value="Bachelor's"
+	  <% if(degree.equals("Bachelor's"))
+		  	out.print("selected = \"selected\"");
+		  %>
+	  >Bachelor's</option>
+	  <option value="Associate"
+	  <% if(degree.equals("Bachelor's"))
+		  	out.print("selected = \"selected\"");
+		  %>>Associate</option>
+	  <option value="Master's"
+	  <% if(degree.equals("Master's"))
+		  	out.print("selected = \"selected\"");
+		  %>>Master's</option>
+	  <option value="Ph.D"
+	  <% if(degree.equals("Ph.D"))
+		  	out.print("selected = \"selected\"");
+		  %>>Ph.D</option>
+	  <option value="Pursuing Degree"
+	  <% if(degree.equals("Pursuing Degree"))
+		  	out.print("selected = \"selected\"");
+		  %>>Pursuing Degree</option>
 	</select><br>
 	
 	<% 
@@ -155,7 +187,10 @@
 		<%
 			for(int i = 0 ; i < locations.size(); i++){
 				out.print("<option value = \" ");
-				out.print(locations.get(i) + "\">");
+				out.print(locations.get(i) + "\"");
+				if(locations.get(i).equals(vacancy.getReq().getLocation())) 
+					out.print("selected = \"selected\"");
+				out.print(">");
 				out.print(locations.get(i) + "</option>");
 			}		
 		%>
@@ -173,9 +208,18 @@
 		<label for="languages"><b>Languages</b></label>
 		<select id = "languages" class="selectpicker" multiple data-live-search="true">
 	<%
+			List<Language> lan = manager.getRequirementLanguages(id);
+			List<String> myLanguages = new ArrayList<>();
+			for(int i = 0; i < lan.size(); i++){
+				myLanguages.add(lan.get(i).getLanguage());
+			}
+				
 			for(int i = 0 ; i < languages.size(); i++){
 				out.print("<option value = \" ");
-				out.print(languages.get(i) + "\">");
+				out.print(languages.get(i) + "\"");
+				if(myLanguages.contains(languages.get(i))) 
+					out.print("selected = \"selected\"");
+				out.print(">");
 				out.print(languages.get(i) + "</option>");
 			}
 	%>
@@ -185,6 +229,7 @@
 		<select id = "tags" class="selectpicker" multiple data-live-search="true">
 	<%	
 			List<String> tags = manager.getTags();
+			List<String> myTags = manager.getVacancyTags(id);
 			/*
 			tags.add("opa");
 			tags.add("opa1");
@@ -192,8 +237,18 @@
 			*/
 			for(int i = 0 ; i < tags.size(); i++){
 				out.print("<option value = \" ");
-				out.print(tags.get(i) + "\">");
+				out.print(tags.get(i) + "\"");
+				if(myTags.contains(tags.get(i))) 
+					out.print("selected = \"selected\"");
+				out.print(">");
 				out.print(tags.get(i) + "</option>");
+			}
+			
+			for(int i = 0 ; i < myLanguages.size(); i++){
+				manager.removeReqLanguage(id, myLanguages.get(i));
+			}
+			for(int i = 0 ; i < myTags.size(); i++){
+				manager.removeVacancyTag(id, myTags.get(i));
 			}
 	%>
 		</select><br>	

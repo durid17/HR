@@ -1,0 +1,41 @@
+body {
+	background-color: #323F6C;
+	color: #323F6C;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+	margin: 0 auto;
+	border-radius: 5px;
+	padding: 20px;
+	width: 40%;
+	background-color: white;
+}
+
+textarea{
+	width : 100%;
+}
+
+input[type=text], input[type=password] {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+}
+
+
+.bootstrap-select{
+	width: 80% !important;
+}
+
+.selectpicker{
+	width: 80% !important;
+}
