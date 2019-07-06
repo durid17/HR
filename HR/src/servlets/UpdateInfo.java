@@ -46,15 +46,17 @@ public class UpdateInfo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String firstName = request.getParameter("firstName");
+		System.out.println(firstName);
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
 		String img =  request.getParameter("image");
 		String majorProfession =  request.getParameter("majorProfession");
+		String gender = request.getParameter("gender");
+		String phoneNumber = request.getParameter("phoneNumber");
+		String address = request.getParameter("address");
+		String description = request.getParameter("description");
 		
-//		String phoneNumber = request.getParameter("phoneNumber");
-//		String address = request.getParameter("address");
-//		String description = request.getParameter("description");
-//		String gender = request.getParameter("gender");
+		
 //		String dt = request.getParameter("bday");
 //		java.sql.Date sqlDate = null;
 //		String working = request.getParameter("work");
@@ -62,13 +64,6 @@ public class UpdateInfo extends HttpServlet {
 //		if(working != null) {
 //			work = true;
 //		}
-//		
-//		System.out.println("##################################");
-//		System.out.println("description " + description);
-//		System.out.println("Gender " + gender);
-//		System.out.println("dt " + dt);
-//		System.out.println("working" + working + ": boolean - " + work);
-//		System.out.println("*********************************");
 //		
 //		try {
 //			if(dt != null) {
@@ -87,8 +82,8 @@ public class UpdateInfo extends HttpServlet {
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Employee emp = manager.getEmployee(account.getID());
-		EmployeeProfile profile = new EmployeeProfile(firstName, lastName, null, null, majorProfession, null, email, null, null, null, img, false);
-			
+		EmployeeProfile profile = new EmployeeProfile(firstName, lastName, gender, null, majorProfession, null, email, phoneNumber, address, description, img, false);
+		System.out.println(profile.getName());
 		emp.setProfile(profile);
 		manager.updateEmployee(emp);
 		request.getRequestDispatcher("/JSP/Settings-Info-User.jsp").forward(request, response);	

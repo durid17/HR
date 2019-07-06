@@ -9,10 +9,11 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/HeaderStyle.css">
 
+<% 	Account acc = (Account)request.getSession().getAttribute("account");%>
 </head>
 
 
-<body style="margin:0">
+<body style="margin: 0">
 	
 	<div class="header123" >
 		<div class="normButtons123">
@@ -20,13 +21,18 @@
 			<a class="left123" href="${pageContext.request.contextPath}/JSP/MainPage.jsp">Home</a> 
 			<a class="left123" href="${pageContext.request.contextPath}/JSP/Contact.jsp">Contact</a> 
 			<a class="left123" href="${pageContext.request.contextPath}/JSP/About.jsp">About</a>
-			<a class="left123" href="${pageContext.request.contextPath}/JSP/CompaniesListPage.jsp">Companies</a>
-			<a class="left123" href="${pageContext.request.contextPath}/VacanciesServlet">Vacancies</a>
-			<a class="left123" href="${pageContext.request.contextPath}/JSP/UserCardList.jsp">Users</a>
+			<% 	if(request.getSession().getAttribute("account") != null) { %>
+				<a class="left123" href="${pageContext.request.contextPath}/JSP/CompaniesListPage.jsp">Companies</a>
+				 <% if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)) { %>
+					     <a class="left123" href="${pageContext.request.contextPath}/MyVacancies">My Vacancies</a>
+				 <%} else { %>
+					<a class="left123" href="${pageContext.request.contextPath}/VacanciesServlet">Vacancies</a>
+				 <%} %>
+				
+			<% }  %>
 		</div>
 		
-		<% 	Account acc = (Account)request.getSession().getAttribute("account");
-			if(request.getSession().getAttribute("account") != null) { %>
+		<% 	if(request.getSession().getAttribute("account") != null) { %>
 				<div class="dropdown123">
 		   			 <button class="dropbtn123"><%=acc.getUsername()%> <i class="arrowdown123"></i> </button>
 		    			<div class="dropdown-content123" style="right:0">
