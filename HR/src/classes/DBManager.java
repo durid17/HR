@@ -607,6 +607,23 @@ public class DBManager {
 		}
 	}
 	
+	public boolean hasApplied(int employeeId, int vacancyId) {
+		PreparedStatement stmt = null;
+		String query = "SELECT * FROM applicants where employee_id = ? and vacancy_id = ?";
+
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, employeeId);
+			stmt.setInt(2, vacancyId);
+
+			ResultSet resultSet = stmt.executeQuery();
+			return resultSet.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 
 	private int getTagTypeId(String tagName) {
 		int tagTypeId = 0;
