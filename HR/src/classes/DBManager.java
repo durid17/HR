@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -380,7 +381,8 @@ public class DBManager {
 	}
 
 	//
-	public void addVacancy(Vacancy vacancy) {
+	public Vacancy addVacancy(Vacancy vacancy) {
+		int id = 0;
 		Requirement req = vacancy.getReq();
 		PreparedStatement stmt = null;
 		String query = "insert into vacancies (company_id, "
@@ -395,22 +397,29 @@ public class DBManager {
 											+ "degree) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 		try {
-			stmt = con.prepareStatement(query);
+			stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, vacancy.getCompanyId());
 			stmt.setString(2, vacancy.getHeading());
 			stmt.setString(3, vacancy.getDescription());
 			stmt.setDate(4, vacancy.getEndDate());
 			stmt.setString(5, vacancy.getEmpType());
-			stmt.setString(6, vacancy.getReq().getProfession());
+			stmt.setString(6, req.getProfession());
 			stmt.setString(7, vacancy.getPosition());
-			stmt.setInt(8,  vacancy.getReq().getYearsOfExp());
-			stmt.setString(9,  vacancy.getReq().getLocation());
-			stmt.setString(10, vacancy.getReq().getDegree());
+			stmt.setInt(8,  req.getYearsOfExp());
+			stmt.setString(9,  req.getLocation());
+			stmt.setString(10, req.getDegree());
 
 			stmt.executeUpdate();
+			
+			ResultSet rs = stmt.getGeneratedKeys();
+			if(rs.next()) {
+				id = rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return getVacancy(id);
 	}
 
 	public void updateVacancy(Vacancy vacancy) {
@@ -433,14 +442,15 @@ public class DBManager {
 			updateVacancy.setString(2, vacancy.getDescription());
 			updateVacancy.setDate(3, vacancy.getEndDate());
 			updateVacancy.setString(4, vacancy.getEmpType());
-			updateVacancy.setString(5, vacancy.getReq().getProfession());
+			updateVacancy.setString(5, req.getProfession());
 			updateVacancy.setString(6, vacancy.getPosition());
-			updateVacancy.setInt(7, vacancy.getReq().getYearsOfExp());
-			updateVacancy.setString(8, vacancy.getReq().getLocation());
-			updateVacancy.setString(9, vacancy.getReq().getDegree());
+			updateVacancy.setInt(7, req.getYearsOfExp());
+			updateVacancy.setString(8, req.getLocation());
+			updateVacancy.setString(9, req.getDegree());
 			updateVacancy.setInt(10, vacancy.getId());
 
 			updateVacancy.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

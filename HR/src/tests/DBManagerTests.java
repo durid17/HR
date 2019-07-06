@@ -114,16 +114,9 @@ class DBManagerTests {
 		Requirement requirement = new Requirement("Tbilisi", 0, "Bachelor", "finansisti");
 		Vacancy vacancy = new Vacancy(7, "Heading", "Pos", "Desc", "Part-time", TEST_COMPANY_ID,
 				requirement, null, new Date(System.currentTimeMillis() + 5000000));
-		manager.addVacancy(vacancy);
+		int id = manager.addVacancy(vacancy).getId();
+		Vacancy fromDBVacancy = manager.getVacancy(id);
 		
-		Vacancy fromDBVacancy = null;
-		int id = 7;
-		while (true) {
-			fromDBVacancy = manager.getVacancy(id);
-			if (fromDBVacancy != null) 
-				break;
-			id++;
-		}
 		assertEquals(vacancy.getCompanyId(), fromDBVacancy.getCompanyId());
 		assertEquals(vacancy.getHeading(), fromDBVacancy.getHeading());
 		assertEquals(vacancy.getDescription(), fromDBVacancy.getDescription());
