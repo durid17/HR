@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import classes.Account;
 import classes.Company;
 import classes.DBManager;
 import classes.Vacancy;
@@ -33,6 +34,7 @@ public class VacanciesServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
+		Account acc = (Account)request.getSession().getAttribute("account");
 		
 		List<Vacancy> vacancies = manager.getVacancies();
 		List<Company> companies = manager.getCompanies();
@@ -41,12 +43,14 @@ public class VacanciesServlet extends HttpServlet {
 		List<String> tags = manager.getTags();
 		List<String> degrees = manager.getDegrees();
 		
+		
 		request.setAttribute("vacancies", vacancies);
 		request.setAttribute("companies", companies);
 		request.setAttribute("professions", professions);
 		request.setAttribute("locations", locations);
 		request.setAttribute("tags", tags);
 		request.setAttribute("degrees", degrees);
+		request.setAttribute("employeeId", 1);
 		
 		request.getRequestDispatcher("JSP/VacancyCart.jsp").forward(request, response);
 	}
@@ -55,8 +59,7 @@ public class VacanciesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

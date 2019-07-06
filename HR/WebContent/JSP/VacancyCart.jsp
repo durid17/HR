@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<%@ page import="classes.Account, classes.DBManager, classes.Vacancy, classes.Company, classes.EmployeeProfile" %>
+<%@ page import="classes.Account, classes.DBManager,
+ classes.Vacancy, classes.Company, classes.EmployeeProfile, java.util.List, java.util.Set, java.util.HashSet" %>
 <html lang="en" dir="ltr">
 
 <head>
@@ -20,7 +21,7 @@
   
   <% 
 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
-	
+  	Account acc = (Account)request.getSession().getAttribute("account");	
 	%>
 </head>
 
@@ -33,9 +34,9 @@
 
       <div class="filter">
         <div class="filter_header">
-          <a class="clear_filter" href="post.html"> Clear Filters </a>
+          <a class="clear_filter" href="${pageContext.request.contextPath}/VacanciesServlet"> Clear Filters </a>
           <div class="clear"></div>
-          <button type="button" name="recomended_button" class="read_more update"> Recomended Filter</button>
+          <button type="button" name="recomended_button" class="read_more update" id = "recomend"> Recomended Filter</button>
         </div>
 
         <hr>
@@ -48,7 +49,7 @@
               Professions
             </h5>
 
-            <select class="selectpicker" multiple data-live-search="true">
+            <select id = "professions" class="selectpicker" multiple data-live-search="true">
               <c:forEach var="profession" items="${professions}">
 					<option>	
 						${profession}
@@ -65,7 +66,7 @@
               Companies
             </h5>
 
-            <select class="selectpicker" multiple data-live-search="true">
+            <select id = "companies" class="selectpicker" multiple data-live-search="true">
               <c:forEach var="company" items="${companies}">
 					<option>	
 						${company.getProfile().getName()}
@@ -81,7 +82,7 @@
               Locations
             </h5>
 
-            <select class="selectpicker" multiple data-live-search="true">
+            <select id = "locations" class="selectpicker" multiple data-live-search="true">
               <c:forEach var="location" items="${locations}">
 					<option>	
 						${location}
@@ -96,7 +97,7 @@
               Tags
             </h5>
 
-            <select class="selectpicker" multiple data-live-search="true">
+            <select id = "tags" class="selectpicker" multiple data-live-search="true">
               <c:forEach var="tag" items="${tags}">
 					<option>	
 						${tag}
@@ -111,7 +112,7 @@
               Jobs Type
             </h5>
 
-            <select class="selectpicker" multiple data-live-search="true">
+            <select id = "jobs_type" class="selectpicker" multiple data-live-search="true">
               <option>Full-Time</option>
               <option>Part-Time</option>
               <option>Intenship</option>
@@ -125,7 +126,7 @@
 
             </h5>
 
-            <select class="selectpicker" multiple data-live-search="true">
+            <select id = "degree" class="selectpicker" multiple data-live-search="true">
               <c:forEach var="degree" items="${degrees}">
 					<option>	
 						${degree}
@@ -135,7 +136,7 @@
           </div>
 
           <br>
-          <button type="button" name="update" class="read_more update"> UPDATE</button>
+          <button type="button" name="update" class="read_more update" id = "update"> UPDATE</button>
 
 
         </div>
@@ -148,13 +149,22 @@
     <main class="vacancies">
       <h4 class="titles vacancy_tytle">Vacancies</h4>
       <ol class="unstyled-list">
-      	<c:forEach var="vacancy" items="${vacancies}">
+      	<c:forEach var="vacancy" items="${vacancies}" >
 					
-        <li class="vacancy">
+        <li class="vacancy" >
         
-			
           <div class="vacancy_header">
-            <input type="checkbox" class="interest" />
+          
+          	<c:if test="${DBManager.hasApplied(employeeId,vacancy.getId())}">
+	            <input id = "interest" type="checkbox" class="interest" value = "${vacancy.getId()}" checked />          	
+          	</c:if>
+          	
+          	<c:if test="${!DBManager.hasApplied(employeeId,vacancy.getId())}">
+	            <input id = "interest" type="checkbox" class="interest" value = "${vacancy.getId()}"  />          	
+          	</c:if>
+          	
+          	
+          	  	
             <h2> ${vacancy.getHeading()} </h2>
 
             <div>
@@ -199,7 +209,7 @@
             </ul>
 
             <br> <br>
-            <button type="button" name="button" class="read_more"> OPEN</button>
+            <a href="${pageContext.request.contextPath}/JSP/VacancyPage.jsp?id=${vacancy.getId()}" class="button read_more open_vacancy">OPEN</a>
           </div>
 
         </li>
@@ -211,7 +221,7 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="post.js" charset="utf-8"></script>
+  <script src="${pageContext.request.contextPath}/JS/VacancyCartJS.js" charset="utf-8"></script>
 </body>
 
 </html>
