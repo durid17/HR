@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 
 import classes.Account;
 import classes.DBManager;
+import classes.Language;
 import classes.Requirement;
 import classes.Vacancy;
 
@@ -87,6 +89,16 @@ public class VacancyEditServlet extends HttpServlet {
 		Vacancy vacancy = new Vacancy(id, heading, position, description, jobType, companyId, req,
 					new Date(System.currentTimeMillis()) ,  sqlDate);
 		manager.updateVacancy(vacancy);
+		List<String> myTags = manager.getVacancyTags(vacancy.getId());
+		List<Language> myLanguages = manager.getRequirementLanguages(vacancy.getId());
+		
+		for(int i = 0 ; i < myTags.size(); i++) {
+			manager.removeVacancyTag(vacancy.getId(), myTags.get(i));
+		}
+		for(int i = 0 ; i < myLanguages.size(); i++) {
+			manager.removeReqLanguage(vacancy.getId(), myLanguages.get(i).getLanguage());
+		}
+		
 		for(int i = 0 ; i < languages.length; i++) {
 			manager.addReqLanguage(vacancy.getId(), languages[i]);
 		}

@@ -24,8 +24,8 @@
 <%
  	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
 	List<String> professions = manager.getProfessions();
-	//int id = Integer.parseInt(request.getParameter("vacancyId"));
-	int id = 91;
+	int id = Integer.parseInt(request.getParameter("vacancyId"));
+	//int id = 91;
    	Vacancy vacancy = manager.getVacancy(id);
    	JSONObject jobj = new JSONObject();
 	jobj.put("vacancyId", vacancy.getId());
@@ -45,12 +45,15 @@
 		return res;
 	}
 	$(document).ready(function(){
-		$("#add").click(function(){
+		$("#edit").click(function(){
 			var GivenDate = document.getElementById("endDate").value;
 		    var CurrentDate = new Date();
 		    //console.log("op");
 		    //console.log(GivenDate);
-		    if(GivenDate == "") return;
+		    if(GivenDate == ""){
+		        alert('You should choose end date.');
+		        return;
+		    }
 		    GivenDate = new Date(GivenDate);
 		    if(document.getElementById("heading").value == ""){
 		    	alert('Heading can not be empty');
@@ -80,7 +83,7 @@
 		    	tags : toString($('#tags').val()),
 		    	vacancyId : '<%= jobj.toString() %>'
 		    }
-			var url = "../VacancyAddServlet";
+			var url = "../VacancyEditServlet";
 			$.post(url,data, 
 					function(data, status){
 						var json = JSON.parse(data);
@@ -243,16 +246,9 @@
 				out.print(">");
 				out.print(tags.get(i) + "</option>");
 			}
-			
-			for(int i = 0 ; i < myLanguages.size(); i++){
-				manager.removeReqLanguage(id, myLanguages.get(i));
-			}
-			for(int i = 0 ; i < myTags.size(); i++){
-				manager.removeVacancyTag(id, myTags.get(i));
-			}
 	%>
 		</select><br>	
-	<button type="submit" id = "add" class="Add Vacancy">Add Vacancy</button>		
+	<button type="submit" id = "edit" class="Edit Vacancy">Edit Vacancy</button>		
 			
 </div>
 
