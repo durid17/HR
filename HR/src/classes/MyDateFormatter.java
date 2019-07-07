@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class MyDateFormatter {
 	public static final int SINGLE_DAY = 86400000;
@@ -18,5 +20,14 @@ public class MyDateFormatter {
 		}
 		
 		return null;
+	}
+	
+	public static long daysBetween (Date from, Date to) {
+		long diff = to.getTime() - from.getTime();
+		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+	}
+	
+	public static int yearsBetween (Date from, Date to) {
+		return to.getYear() - from.getYear();
 	}
 }
