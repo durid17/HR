@@ -157,7 +157,8 @@ class DBManagerTests {
 	@Test
 	void applicationTest() {
 		manager.addApplication(TEST_EMPLOYEE_ID, TEST_VACANCY_ID);
-		assertEquals(1, manager.getEmployeeApplications(TEST_EMPLOYEE_ID).size());
+		assertEquals(manager.getVacancy(TEST_VACANCY_ID), manager.getEmployeeApplications(TEST_EMPLOYEE_ID).get(0));
+		assertEquals(manager.getEmployee(TEST_EMPLOYEE_ID), manager.getVacancyApplicants(TEST_VACANCY_ID).get(0));
 		assertTrue(manager.hasApplied(TEST_EMPLOYEE_ID, TEST_VACANCY_ID));
 		manager.removeApplication(TEST_EMPLOYEE_ID, TEST_VACANCY_ID);
 		assertFalse(manager.hasApplied(TEST_EMPLOYEE_ID, TEST_VACANCY_ID));

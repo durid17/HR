@@ -507,6 +507,24 @@ public class DBManager {
 		}
 		return vac;
 	}
+	
+	public List<Employee> getVacancyApplicants(int vacancyId) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT employee_id FROM applicants WHERE vacancy_id = ?");
+			stmt.setInt(1, vacancyId);
+			ResultSet resultSet = stmt.executeQuery();
+
+			List<Employee> employees = new ArrayList<Employee>();
+			while (resultSet.next()) {
+				Employee employee = getEmployee(resultSet.getInt("employee_id"));
+				employees.add(employee);
+			}
+			return employees;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public List<Vacancy> getVacancies() {
 		List<Vacancy> res = new ArrayList<Vacancy>();
