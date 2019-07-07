@@ -69,7 +69,7 @@ public class CompanyRegister extends HttpServlet {
 		request.getSession().setAttribute("account", newAccount);
 		
 		
-		//request.getRequestDispatcher("JSP/CompanyProfile.jsp").forward(request, response);
+		request.getRequestDispatcher("JSP/CompanyProfile.jsp").forward(request, response);
 		//doGet(request, response);
 
 	}

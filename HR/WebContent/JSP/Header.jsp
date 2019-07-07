@@ -24,7 +24,7 @@
 			<% 	if(request.getSession().getAttribute("account") != null) { %>
 				<a class="left123" href="${pageContext.request.contextPath}/JSP/CompaniesListPage.jsp">Companies</a>
 				 <% if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)) { %>
-					     <a class="left123" href="${pageContext.request.contextPath}/MyVacancies">My Vacancies</a>
+					     <a class="left123" href="${pageContext.request.contextPath}/JSP/MyVacancies.jsp">My Vacancies</a>
 				 <%} else { %>
 					<a class="left123" href="${pageContext.request.contextPath}/VacanciesServlet">Vacancies</a>
 				 <%} %>

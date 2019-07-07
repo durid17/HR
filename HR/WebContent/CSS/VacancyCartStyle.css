@@ -241,6 +241,21 @@ ul.horizontal-list li {
 
 }
 
+#edit {
+  -webkit-appearance: none;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: right;
+  color: #99a8b4;
+  background: transparent;
+  border: none;
+  position: relative;
+  float: right;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
 .clear_filter {
   margin-top: 20px;
   margin-left: 65px;
