@@ -8,6 +8,7 @@
 
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/CompanyRegisterStyle.css">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 <body>
 
 <form action = "${pageContext.request.contextPath}/CompanyRegister" method ="post">

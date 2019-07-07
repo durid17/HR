@@ -12,6 +12,7 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 <meta charset="ISO-8859-1">
 <title>User profile</title>
 
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <jsp:include page="Header.jsp" />

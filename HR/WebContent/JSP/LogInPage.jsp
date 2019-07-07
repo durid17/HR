@@ -3,6 +3,7 @@
 <head>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Login.css">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 
 
 </head>

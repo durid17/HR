@@ -8,11 +8,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 <jsp:include page="Header.jsp" />
 
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/SettingsStyle.css">
-
 <% 
 	Account acc = (Account)request.getSession().getAttribute("account");
 %>
