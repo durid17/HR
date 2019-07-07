@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<%@ page import="classes.Account, classes.DBManager,
+ classes.Vacancy, classes.Company, classes.EmployeeProfile, java.util.List, java.util.Set, java.util.HashSet" %>
 <html lang="en" dir="ltr">
 
 <head>
@@ -9,6 +11,18 @@
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/VacancyPageStyle.css">
   <jsp:include page="Header.jsp" />
+  <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+  
+  <% 
+  	 DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
+  	 Account acc = (Account)request.getSession().getAttribute("account");
+  	 
+  	 getServletContext().setAttribute("employeeId", acc.getID());
+  	 int id = Integer.parseInt(request.getParameter("id"));
+  	 getServletContext().setAttribute("vacanId", id);
+  	 Vacancy vac = manager.getVacancy(id);
+  	 Company company = manager.getCompany(vac.getCompanyId());
+  %>
 </head>
 
 <body>
@@ -18,8 +32,14 @@
       <li class="vacancy">
 
         <div class="vacancy_header">
-          <input type="checkbox" class="interest" />
-          <h2> Java Developer </h2>
+          <c:if test="${DBManager.hasApplied(employeeId,vacanId)}">
+	            <input id = "interest1" type="checkbox" class="interest" value = "${vacanId}" checked />          	
+          	</c:if>
+          	
+          	<c:if test="${!DBManager.hasApplied(employeeId,vacanId)}">
+	            <input id = "interest1" type="checkbox" class="interest" value = "${vacanId}"  />          	
+          	</c:if>
+          <h2> <%= vac.getHeading() %> </h2>
 
           <div>
             <ul class="horizontal-list">
@@ -30,7 +50,7 @@
                     <path d="M0 0h24v24H0z" fill="none"></path>
                   </g>
                 </svg>
-                Google
+                <%= company.getProfile().getName() %>
               </li>
 
               <li>
@@ -40,7 +60,7 @@
                     <path d="M0 0h24v24H0z" fill="none"></path>
                   </g>
                 </svg>
-                Palo Alto, CA, USA
+                <%= vac.getReq().getLocation() %>
               </li>
             </ul>
 
@@ -58,17 +78,17 @@
 
         <div class="vacancy_details">
           <ul class="vacancy_details_left">
-            <li><strong>Employee Type: </strong> Full-Time </li>
-            <li><strong> Experience: </strong> 3 years</li>
+            <li><strong>Employee Type: </strong> <%= vac.getEmpType() %> </li>
+            <li><strong> Experience: </strong> <%= vac.getReq().getYearsOfExp() %> years</li>
           </ul>
 
           <ul class="vacancy_details_right">
-            <li> <strong>Email: </strong> hr@anywareservices.com </li>
-            <li> <strong>Phone: </strong> +995 599534328 </li>
+            <li> <strong>Email: </strong> <%= company.getProfile().getEmail() %> </li>
+            <li> <strong>Phone: </strong> <%= company.getProfile().getPhoneNumber() %> </li>
           </ul>
 
           <ul class="vacancy_details_right">
-            <li> <strong>Degree: </strong> Bachelor </li>
+            <li> <strong>Degree: </strong> <%= vac.getReq().getDegree() %> </li>
             <li> <strong>Salary </strong> 1000$ </li>
           </ul>
 
@@ -80,16 +100,13 @@
         <hr>
 
         <div class="vacancy_content">
-          <p> We are looking for <strong>Java Developer</strong> </p>
+          <p> We are looking for <strong><%=vac.getPosition() %></strong> </p>
           <h4> About Vacancy: </h4>
-          <p> As a developer you will participate in agile processes implementation, everyday meetings and unit testing;
-            Add new features to software and fix bugs;
-            Write clean, stable and optimized code;
-            Working closely with Automation QA team;</p>
+          <p> <%= vac.getCompanyId() %></p>
 
 
           <p> <strong> If you are interested, do not hesitate to click Interest Button </strong> </p>
-          <p> <strong> Deadline: </strong> 12 July </p>
+          <p> <strong> Deadline: </strong> <%=vac.getEndDate() %> </p>
         </div>
 
       </li>
@@ -99,7 +116,7 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="post.js" charset="utf-8"></script>
+  <script src="${pageContext.request.contextPath}/JS/VacancyCartJS.js" charset="utf-8"></script>
 </body>
 
 </html>

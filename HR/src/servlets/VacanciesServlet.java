@@ -50,7 +50,7 @@ public class VacanciesServlet extends HttpServlet {
 		request.setAttribute("locations", locations);
 		request.setAttribute("tags", tags);
 		request.setAttribute("degrees", degrees);
-		request.setAttribute("employeeId", 1);
+		request.setAttribute("employeeId", acc.getID());
 		
 		request.getRequestDispatcher("JSP/VacancyCart.jsp").forward(request, response);
 	}
@@ -59,7 +59,7 @@ public class VacanciesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println(request.getParameter("jobs_type"));
 	}
 
 }

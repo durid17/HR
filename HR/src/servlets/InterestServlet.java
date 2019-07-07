@@ -38,13 +38,13 @@ public class InterestServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(1313515);
 		Account acc = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
 		
-		//int employeeId = acc.getID();
-	  	// ES QVEDA XAZI UNDA WAISHALOS
-		int employeeId = 1;
+		int employeeId = acc.getID();
 	  	int vacancyId = Integer.parseInt(request.getParameter("vacancyId"));
+	  	
 	  	
 	  	if(manager.hasApplied(employeeId, vacancyId)) {
 	  		manager.removeApplication(employeeId, vacancyId);
