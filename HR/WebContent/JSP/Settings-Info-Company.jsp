@@ -9,6 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Settings-Info_Company</title>
 
+
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 <jsp:include page="Header.jsp" />
 </head>

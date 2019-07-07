@@ -7,6 +7,7 @@
 <head>
   <meta charset="utf-8">
   <title> MyVacancies </title>
+  
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/VacancyCartStyle.css">
   <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>

@@ -7,6 +7,7 @@
 <title>Register Page</title>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/RegisterPageStyle.css">
+
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 
 

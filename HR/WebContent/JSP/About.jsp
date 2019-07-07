@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>About</title>
+
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 <jsp:include page="Header.jsp"/>
 

@@ -7,6 +7,7 @@
 <title>Main Page</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 <jsp:include page="Header.jsp"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/MainPageStyle.css">

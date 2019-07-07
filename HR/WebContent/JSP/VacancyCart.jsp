@@ -8,6 +8,7 @@
 <head>
   <meta charset="utf-8">
   <title> Vacancies </title>
+  
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />

@@ -8,6 +8,7 @@
 <head>
   <meta charset="utf-8">
   <title> Vacancies </title>
+ 
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/VacancyPageStyle.css">
   <jsp:include page="Header.jsp" />

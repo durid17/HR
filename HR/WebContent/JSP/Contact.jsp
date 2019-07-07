@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Contact</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/ContactPageStyle.css">
+
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 <jsp:include page="Header.jsp"/>
 </head>
