@@ -18,7 +18,7 @@
   	
   	List<Vacancy> vacancies = manager.getCompanyVacancies(acc.getID());
   	getServletContext().setAttribute("vacancies", vacancies);
-  	getServletContext().setAttribute("id", acc.getID());
+
 	%>
 </head>
 
@@ -34,7 +34,7 @@
         <li class="vacancy" >
         
           <div class="vacancy_header">
-          	<a href="VacancyEdit.jsp?=${vacancy.getId()}" id = "edit"> Edit </a>
+          	<a href="VacancyEdit.jsp?vacancyId=${vacancy.getId()}" id = "edit"> Edit </a>
           	
           	  	
             <h2> ${vacancy.getHeading()} </h2>
