@@ -81,7 +81,7 @@
             </ul>
 
             <br> <br>
-            <a href="${pageContext.request.contextPath}/JSP/VacancyPage.jsp?id=${vacancy.getId()}" class="button read_more open_vacancy">OPEN</a>
+            <a href="${pageContext.request.contextPath}/JSP/MyVacancy.jsp?id=${vacancy.getId()}" class="button read_more open_vacancy">OPEN</a>
           </div>
 
         </li>

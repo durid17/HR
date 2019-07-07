@@ -37,13 +37,8 @@
       <li class="vacancy">
 
         <div class="vacancy_header">
-          <c:if test="${DBManager.hasApplied(employeeId,vacanId)}">
-	            <input id = "interest1" type="checkbox" class="interest" value = "${vacanId}" checked />          	
-          	</c:if>
-          	
-          	<c:if test="${!DBManager.hasApplied(employeeId,vacanId)}">
-	            <input id = "interest1" type="checkbox" class="interest" value = "${vacanId}"  />          	
-          	</c:if>
+          <a href="VacancyEdit.jsp?vacancyId=${vacanId}" id = "edit"> Edit </a>
+          
           <h2> <%= vac.getHeading() %> </h2>
 
           <div>
@@ -106,7 +101,7 @@
 
         <div class="vacancy_content">
           <p> We are looking for <strong><%=vac.getPosition() %></strong> </p>
-          
+   
           <h4> Qualifications: </h4>
           <ul class="point">
               <li> 1 </li>

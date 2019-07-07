@@ -91,7 +91,7 @@
 						var json = JSON.parse(data);
 						//console.log(json);
 						var id = json.vacancyId;
-		                location.href = "VacancyPage.jsp?vacancyId=" + id;
+		                location.href = "MyVacancy.jsp?id=" + id;
 					}
 			);
 		});
