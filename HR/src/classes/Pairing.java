@@ -9,8 +9,6 @@ public class Pairing {
 		this.manager = manager;
 	}
 	
-	
-	
 	public List<Vacancy> getVacancies(int employeeId){
 		Employee employee = manager.getEmployee(employeeId);
 		EmployeeProfile prof = employee.getProfile();
@@ -18,9 +16,9 @@ public class Pairing {
 		List<Language> lan = manager.getEmployeeLanguages(employeeId);
 		List<Vacancy> all = manager.getVacancies();
 		List<Vacancy> res = new ArrayList<>();
-		int years = getYearsOfExp(employee.getId());
 		for(Vacancy vacancy : all) {
 			Requirement req = vacancy.getReq();
+			int years = getYearsOfExp(employee.getId() , req.getProfession());
 			if(years < req.getYearsOfExp()) continue;
 			if(!prof.getAddress().equals(req.getLocation())) continue;
 			if(!Qualified(employee.getId() , req.getProfession() , req.getDegree())) continue;
@@ -33,12 +31,12 @@ public class Pairing {
 				Requirement req0 = arg0.getReq();
 				Requirement req1 = arg1.getReq();
 
-				boolean firstMajor = hasMajor(employee.getId(), req0.getProfession(), req1.getDegree());
+				boolean firstMajor = hasMajor(employee.getId(), req0.getProfession(), req0.getDegree());
 				boolean secondMajor = hasMajor(employee.getId(), req1.getProfession(), req1.getDegree());
 				if(firstMajor && ! secondMajor) return 1;
 				if(!firstMajor && secondMajor) return -1;
 				
-				boolean firstMinor = hasMajor(employee.getId(), req0.getProfession(), req1.getDegree());
+				boolean firstMinor = hasMajor(employee.getId(), req0.getProfession(), req0.getDegree());
 				boolean secondMinor = hasMajor(employee.getId(), req1.getProfession(), req1.getDegree());
 				if(firstMinor && !secondMinor) return 1;
 				if(!firstMinor && secondMinor) return -1;
@@ -68,7 +66,7 @@ public class Pairing {
 		List<Employee> applicants =  manager.getVacancyApplicants(vacancyId);
 		List<Employee> res = new ArrayList<>();
 		for(Employee employee : applicants) {
-			int years = getYearsOfExp(employee.getId());
+			int years = getYearsOfExp(employee.getId() , req.getProfession());
 			EmployeeProfile prof = employee.getProfile();
 			if(years < req.getYearsOfExp()) continue;
 			if(!prof.getAddress().equals(req.getLocation())) continue;
@@ -142,11 +140,12 @@ public class Pairing {
 		return hasMajor(employeeId, profession, degree) || hasMinor(employeeId, profession, degree);
 	}
 
-	private int getYearsOfExp(int employeeId) {
+	private int getYearsOfExp(int employeeId , String proff) {
 		List<WorkExperience> exp = manager.getWorkExps(employeeId);
 		int sum = 0;
 		for(WorkExperience e : exp) {
-			sum += MyDateFormatter.yearsBetween(e.getStartDate() , e.getEndDate());
+			if(proff.equals(e.getProfession()))
+					sum += MyDateFormatter.yearsBetween(e.getStartDate() , e.getEndDate());
 		}
 		return sum;
 	}
