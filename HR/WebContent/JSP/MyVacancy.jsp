@@ -2,8 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%@ page import="classes.Account, classes.DBManager,
- classes.Vacancy, classes.Company, classes.EmployeeProfile, 
- java.util.List, java.util.Set, java.util.HashSet, classes.MyDateFormatter, java.util.Date" %>
+ classes.Vacancy, classes.Company, classes.EmployeeProfile, classes.Employee, 
+ java.util.List, java.util.ArrayList, java.util.Set, java.util.HashSet, classes.MyDateFormatter, java.util.Date" %>
 <html lang="en" dir="ltr">
 
 <head>
@@ -29,6 +29,41 @@
     java.sql.Date date=new java.sql.Date(millis); 
   %>
 </head>
+	<style>
+
+.container {
+	background-color: white;
+	padding: 15px; 
+}
+
+.cardClass {
+border: none;
+border-radius: 2px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+ 	 transition: 0.3s;
+	margin-left: 15px;
+	margin-bottom: 15px;
+	display: inline-block;
+	background-color: white;
+	cursor: pointer;	
+	width: 20%;
+}
+
+.cardClass:hover{
+     transform: scale(1.05); 
+}
+
+.info {
+  padding: 2px 16px;
+}
+
+#profileImage{
+	width:100%;
+}
+
+
+
+</style>
 
 <body>
 
@@ -122,7 +157,35 @@
 
     </ol>
   </div>
+	
+	<!-- Kalaaaaaaaaaaaaaa ###################3 Useeeeeeeeeeeeeeeeeeeeeeersssssssssssssssssssssssss -->
+	<%	
+	//First
+		List<Employee> list = manager.getVacancyApplicants(vac.getId());	
+		request.setAttribute("employees", list);
+	%>
+	
+	<div id="container" class = "container"> 
+	
+	<c:forEach var="employe" items="${employees}">
+		<a href="${pageContext.request.contextPath}/JSP/UserProfile.jsp?id=${employe.getId()}">
+		<div class="cardClass">	
+			<img  id = "profileImage" src="${employe.getProfile().getProfilePicture()}" alt="Avatar" >
+			<div class="info">
+				<h4 > ${employe.getProfile().getName()} </h4>
+				<p > ${employe.getProfile().getMajorProfession()} </p>			
+		 	</div>
+		</div>
+		
+		</a>
+	</c:forEach>
+	
+	</div>
+	
 
+	
+	
+	<!-- #########################################################################################3 -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/JS/VacancyCartJS.js" charset="utf-8"></script>

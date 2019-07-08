@@ -27,6 +27,8 @@
 			<br>
 			
 			Not registered? <a href="${pageContext.request.contextPath}/JSP/RegisterPage.jsp">Create an account</a> 
+			<br><br>
+			<label class="hidden">Wrong Username Or Password</label>
 	</form>
 	
 	

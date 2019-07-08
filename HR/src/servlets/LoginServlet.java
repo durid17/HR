@@ -55,9 +55,11 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			request.getSession().setAttribute("account", acc);
 			if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)) {
-				request.getRequestDispatcher("/JSP/CompanyProfile.jsp").forward(request, response);
+				//request.getRequestDispatcher("/JSP/CompanyProfile.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/JSP/CompanyProfile.jsp");
 			} else if(acc.getAccountType().equals(Account.EMPLOYEE_ACCOUNT_TYPE)){
-				request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);	
+				//request.getRequestDispatcher("/JSP/UserProfile.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/JSP/UserProfile.jsp");
 			}
 		}	
 	}

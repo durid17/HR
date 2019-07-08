@@ -46,7 +46,7 @@ public class UpdateInfo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String firstName = request.getParameter("firstName");
-		System.out.println(firstName);
+		
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
 		String img =  request.getParameter("image");
@@ -55,35 +55,29 @@ public class UpdateInfo extends HttpServlet {
 		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
 		String description = request.getParameter("description");
-		
-		
-//		String dt = request.getParameter("bday");
-//		java.sql.Date sqlDate = null;
-//		String working = request.getParameter("work");
-//		boolean work = false;
-//		if(working != null) {
-//			work = true;
-//		}
-//		
-//		try {
-//			if(dt != null) {
-//				java.util.Date utilDate=new java.util.Date();
-//				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
-//				sqlDate = new java.sql.Date(utilDate.getTime());
-//			
-//			} else {
-//				System.out.println("Date carielia!");
-//			}
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}  
+
+		String dt = request.getParameter("bday");
+		java.sql.Date sqlDate = null;
+	
+		try {
+			if(dt != null) {
+				java.util.Date utilDate=new java.util.Date();
+				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
+				sqlDate = new java.sql.Date(utilDate.getTime());
+			
+			} else {
+				System.out.println("Date carielia!");
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 		
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Employee emp = manager.getEmployee(account.getID());
-		EmployeeProfile profile = new EmployeeProfile(firstName, lastName, gender, null, majorProfession, null, email, phoneNumber, address, description, img, false);
-		System.out.println(profile.getName());
+		EmployeeProfile profile = new EmployeeProfile(firstName, lastName, gender, sqlDate, majorProfession, "", email, phoneNumber, address, description, img, false);
+		
 		emp.setProfile(profile);
 		manager.updateEmployee(emp);
 		request.getRequestDispatcher("/JSP/Settings-Info-User.jsp").forward(request, response);	

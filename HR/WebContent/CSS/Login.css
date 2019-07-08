@@ -44,3 +44,6 @@ button {
 	width: 200px;
 	height: 40px;
 }
+.hidden{
+   visibility:hidden;
+}

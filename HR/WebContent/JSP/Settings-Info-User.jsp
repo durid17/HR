@@ -1,5 +1,5 @@
 <%@page import="classes.Employee"%>
-<%@ page import="classes.Account, classes.DBManager, classes.Employee, classes.EmployeeProfile, classes.Hash, classes.CompanyProfile"
+<%@ page import="classes.Account, classes.DBManager, java.util.List, classes.Employee, classes.EmployeeProfile, classes.Hash, classes.CompanyProfile"
 	language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -70,6 +70,8 @@
 				  				
 			    <hr>
 			   
+		
+				
 			    <button type="submit" class="submitButton">Save Changes</button>
 	  		</form>
   		 </div>
