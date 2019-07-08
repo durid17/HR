@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -73,14 +74,27 @@ public class UpdateInfo extends HttpServlet {
 			e.printStackTrace();
 		}  
 		
+		int id = Integer.parseInt(request.getParameter("id"));
+		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
+		List<String> myTags = manager.getEmployeeTags(id);
+		
+		for(int i = 0 ; i < myTags.size(); i++) {
+			manager.removeEmployeeTag(id, myTags.get(i));
+		}
+		
+		String t = request.getParameter("tags");
+		String [] tags = t.split(","); 
+		for(int i = 0 ; i < tags.length; i++) {
+			manager.addEmployeeTag(id, tags[i]);
+		}
+		
 		Account account = (Account)request.getSession().getAttribute("account");
-		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Employee emp = manager.getEmployee(account.getID());
 		EmployeeProfile profile = new EmployeeProfile(firstName, lastName, gender, sqlDate, majorProfession, "", email, phoneNumber, address, description, img, false);
 		
 		emp.setProfile(profile);
 		manager.updateEmployee(emp);
-		request.getRequestDispatcher("/JSP/Settings-Info-User.jsp").forward(request, response);	
+		//request.getRequestDispatcher("/JSP/Settings-Info-User.jsp").forward(request, response);	
 		//doGet(request, response);
 	}
 

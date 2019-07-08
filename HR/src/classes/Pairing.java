@@ -34,12 +34,12 @@ public class Pairing {
 				Requirement req1 = arg1.getReq();
 
 				boolean firstMajor = hasMajor(employee.getId(), req0.getProfession(), req1.getDegree());
-				boolean secondMajor = hasMajor(employee.getId(), req0.getProfession(), req1.getDegree());
+				boolean secondMajor = hasMajor(employee.getId(), req1.getProfession(), req1.getDegree());
 				if(firstMajor && ! secondMajor) return 1;
 				if(!firstMajor && secondMajor) return -1;
 				
 				boolean firstMinor = hasMajor(employee.getId(), req0.getProfession(), req1.getDegree());
-				boolean secondMinor = hasMajor(employee.getId(), req0.getProfession(), req1.getDegree());
+				boolean secondMinor = hasMajor(employee.getId(), req1.getProfession(), req1.getDegree());
 				if(firstMinor && !secondMinor) return 1;
 				if(!firstMinor && secondMinor) return -1;
 				
