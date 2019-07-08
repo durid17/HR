@@ -9,6 +9,7 @@ public class Pairing {
 		this.manager = manager;
 	}
 	
+	
 	public List<Vacancy> getVacancies(int employeeId){
 		Employee employee = manager.getEmployee(employeeId);
 		EmployeeProfile prof = employee.getProfile();
