@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="utf-8">
+  
   <title> Vacancies </title>
   
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
@@ -36,7 +37,11 @@
         <div class="filter_header">
           <a class="clear_filter" href="${pageContext.request.contextPath}/VacanciesServlet"> Clear Filters </a>
           <div class="clear"></div>
-          <button type="button" name="recomended_button" class="read_more update" id = "recomend"> Recomended Filter</button>
+          
+          <form action="${pageContext.request.contextPath}/PairingServlet" method="get">
+			  <input type="submit" value="Recomended Filter" name="recomended_button" class="read_more update" id = "recomend">
+		  </form>
+		  
         </div>
 
         <hr>
@@ -115,7 +120,7 @@
             <select id = "jobs_type" class="selectpicker" multiple data-live-search="true">
               <option>Full-Time</option>
               <option>Part-Time</option>
-              <option>Intenship</option>
+              <option>Intership</option>
             </select>
           </div>
 

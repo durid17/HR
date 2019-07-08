@@ -13,40 +13,35 @@ $('.interest').on('click', function() {
 
 
 
-
 $("#update").click(function(){
 	
-	var data = {
-		professions : toString($('#professions').val()),
-		companies : toString($('#companies').val()),
-		locations : toString($('#locations').val()),
-		tags : toString($('#tags').val()),
-		jobs_type : toString($('#jobs_type').val()),
-		degree : toString($('#degree').val())
-    }
+	var url = "FilterServlet?";
+	url += "professions=" +  toString($('#professions').val()) + "&";
+	url += "companies=" + toString($('#companies').val()) + "&";
+	url += "locations=" + toString($('#locations').val()) + "&";
+	url += "tags=" + toString($('#tags').val()) + "&";
+	url += "jobs_type=" + toString($('#jobs_type').val()) + "&";
+	url += "degree=" + toString($('#degree').val());
 	
-	var url = "VacanciesServlet";
-	
-	$.post(url,data, 
-			function(data, status){
-//				var json = JSON.parse(data);
-//				console.log(json);
-//				var id = json.vacancyId;
-               location.href = "http://localhost:8082/HR/FilterServlet";
-			}
-	);
+	location.href = "http://localhost:8082/HR/" + url;
 });
 
 function toString(myStringArray){
 	if(myStringArray == null) return "";
+	
 	var arrayLength = myStringArray.length;
 	var res = "";
-	for (var i = 0; i < arrayLength; i++) {
-		res = res + myStringArray[i].trim() + ",";
-		//console.log(myStringArray[i]);
+	for (var i = 0; i < arrayLength - 1; i++) {
+		res += "'" + myStringArray[i].trim() + "',";
 	}
-	return res;
+	
+	if(arrayLength > 0) {
+		res += "'" + myStringArray[arrayLength - 1].trim() + "'";		
+	}
+	
+	return "(" + res + ")";
 }
+
 
 
 

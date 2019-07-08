@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,16 +15,16 @@ import classes.DBManager;
 import classes.Vacancy;
 
 /**
- * Servlet implementation class VacanciesServlet
+ * Servlet implementation class FilterServlet
  */
-@WebServlet("/VacanciesServlet")
-public class VacanciesServlet extends HttpServlet {
+@WebServlet("/FilterServlet")
+public class FilterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VacanciesServlet() {
+    public FilterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,9 +36,19 @@ public class VacanciesServlet extends HttpServlet {
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Account acc = (Account)request.getSession().getAttribute("account");
 		
-		List<Vacancy> vacancies = manager.getVacancies();
+		String chosenProfessions = request.getParameter("professions");
+		String chosenCompanies = request.getParameter("companies");
+		String chosenLocations = request.getParameter("locations");
+		String chosenTags = request.getParameter("tags");
+		String chosen_jobs_type = request.getParameter("jobs_type");
+		String chosenDegree = request.getParameter("degree");
+			
+		
+		List<Vacancy> vacancies = manager.getFilterVacancies(chosenProfessions, chosenCompanies, 
+				chosenLocations, chosenTags, chosen_jobs_type, chosenDegree);
 		List<Company> companies = manager.getCompanies();
 		List<String> professions = manager.getProfessions();
+		System.out.println(professions.get(0));
 		List<String> locations = manager.getLocations();
 		List<String> tags = manager.getTags();
 		List<String> degrees = manager.getDegrees();
@@ -54,13 +63,15 @@ public class VacanciesServlet extends HttpServlet {
 		request.setAttribute("employeeId", acc.getID());
 		
 		request.getRequestDispatcher("JSP/VacancyCart.jsp").forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("jobs_type"));
+		// TODO Auto-generated method stub
+		System.out.println(5555);
 	}
 
 }

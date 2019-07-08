@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,19 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import classes.Account;
 import classes.Company;
 import classes.DBManager;
+import classes.Pairing;
 import classes.Vacancy;
 
 /**
- * Servlet implementation class VacanciesServlet
+ * Servlet implementation class PairingServlet
  */
-@WebServlet("/VacanciesServlet")
-public class VacanciesServlet extends HttpServlet {
+@WebServlet("/PairingServlet")
+public class PairingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VacanciesServlet() {
+    public PairingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +36,14 @@ public class VacanciesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Account acc = (Account)request.getSession().getAttribute("account");
+		Pairing pair = new Pairing(manager);
 		
-		List<Vacancy> vacancies = manager.getVacancies();
+		List<Vacancy> vacancies = pair.getVacancies(acc.getID());
 		List<Company> companies = manager.getCompanies();
 		List<String> professions = manager.getProfessions();
 		List<String> locations = manager.getLocations();
 		List<String> tags = manager.getTags();
 		List<String> degrees = manager.getDegrees();
-		
 		
 		request.setAttribute("vacancies", vacancies);
 		request.setAttribute("companies", companies);
@@ -60,7 +60,8 @@ public class VacanciesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("jobs_type"));
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

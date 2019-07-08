@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DBManager {
 
@@ -1236,5 +1238,82 @@ public class DBManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Vacancy> getFilterVacancies(String prof, String comp, String loc, String tags, String jobs_type, String degrees) {
+		
+		Set<Vacancy> currSet = new HashSet<Vacancy>();
+
+		PreparedStatement getCompany = null;
+		Requirement req = null;
+		Vacancy vac = null;
+		
+		String query = "SELECT * FROM vacancies v " + 
+				"left join companies c " + 
+				"on v.company_id = c.id " + 
+				"left join vacancy_tags tg " + 
+				"on v.id = tg.vacancy_id " +  
+				"where 1 = 1";
+		
+		if(prof.length() > 2) {
+			query += (" and v.profession in " + prof); 
+		}
+		
+		if(comp.length() > 2) {
+			query += (" and c.name in " + comp);
+		}
+		
+		if(loc.length() > 2) {
+			query += (" and v.location in " + loc);
+		}
+		
+		if(tags.length() > 2) {
+			query += (" and tg.tag in " + tags);
+		}
+		
+		
+		if(jobs_type.length() > 2) {
+			query += (" and v.emp_type in " + jobs_type);
+		}
+		
+		if(degrees.length() > 2) {
+			query += (" and v.degree in " + degrees);
+		}
+		
+		try {
+			getCompany = con.prepareStatement(query);
+			ResultSet resultSet = getCompany.executeQuery();
+
+			while (resultSet.next()) {
+				int vacId = resultSet.getInt("id");
+				String title = resultSet.getString("heading");
+				String position = resultSet.getString("position");
+				String profes = resultSet.getString("profession");
+				int company_id = resultSet.getInt("company_id");
+				String description = resultSet.getString("description");
+				String empType = resultSet.getString("emp_type");
+				Date creationDate = resultSet.getDate("creation_date");
+				Date expiryDate = resultSet.getDate("expiry_date");
+				String location = resultSet.getString("location");
+				String degree = resultSet.getString("degree");
+				int yearsOfExp = resultSet.getInt("years_of_experience");
+
+				req = new Requirement(location, yearsOfExp, degree, profes);
+				vac = new Vacancy(vacId, title, position, description, empType,
+						 company_id, req, creationDate, expiryDate);
+				currSet.add(vac);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		List<Vacancy> res = new ArrayList<>();
+		
+		for(Vacancy v : currSet) {
+			res.add(v);
+		}
+		
+		return res;
 	}
 }
