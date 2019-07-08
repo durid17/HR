@@ -28,7 +28,6 @@
 	}
 	
 	CompanyProfile profile = company.getProfile();
-	System.out.println(profile.getLogo());
 %>
 
 </head>
@@ -43,16 +42,28 @@
 					<img id = "profileImage" src=<%= profile.getLogo()%> alt="Avatar">
 				</div>
 		    
-		    <div class="mainInfo">
-		    	<p> <%= profile.getName()%></p> 
-		  	</div>
-		  	<hr>
-		  	<div class = "other"> 
-		  		<p> About <p>
-		  	</div>	  	
-		</div>	
-	</div>
-	
+			    <div class="mainInfo">
+			    	<p> <%= profile.getName()%></p> 
+			  	</div>
+			  			
+			</div>	
+			 
+			
+			<div class = "rightSide">
+				<div class = "about">
+					<h4 id="title">About</h4>
+						<ul>
+							<li><p>Name - <%=profile.getName() %></p></li>
+							<li>  <p>Founded - <%=profile.getFounded() %> </p></li>
+							<li>  <p>Email - <%=profile.getEmail() %></p></li>
+							<li>  <p>Phone Number - <%=profile.getPhoneNumber() %></p></li>
+							<li>  <p>Address - <%=profile.getAddress() %></p></li>
+							<li><p>Description - <%=profile.getDescription() %></p></li>
+						</ul>	
+				</div>
+			</div>>		
+		</div>
+		
 	
 	
 	

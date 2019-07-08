@@ -41,6 +41,7 @@
 					       <a class="right123"  href="${pageContext.request.contextPath}/JSP/UserProfile.jsp">Profile</a>
 					      <%} else { %>
 					      	   <a class="right123" href="${pageContext.request.contextPath}/JSP/CompanyProfile.jsp">Profile</a>
+					      	   <a class="right123" href="${pageContext.request.contextPath}/JSP/VacancyAdd.jsp">Add Vacancy</a>
 					      <%} %>
 					      
 					     

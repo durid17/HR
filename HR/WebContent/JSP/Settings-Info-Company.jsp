@@ -37,14 +37,22 @@
 		  	<form action = "${pageContext.request.contextPath}/UpdateInfoCompany" method ="post">
 	    
 			   	 <label for="name"><b>Name</b></label>
-			    <input type="text"  class="inp" name = "name" value=<%=profile.getName()%> required>
+			    <textarea class="area" name="name"><%=profile.getName()%></textarea>
 			    
-			    <label for="email"><b>Email</b></label>
-			    <input type="text"  class="inp" name = "email"  value=<%=profile.getEmail()%> required>
+			    <br>
+  				Founded: <input type="date" class="inp" name="date" value=<%=profile.getFounded() %>> <br>
+  				
+			     <label for="email"><b>Email</b></label>
+			     <textarea class="area" name="email"><%=profile.getEmail()%></textarea>
 			   		    
+			   	    <label for="phoneNumber"><b>Phone Number</b></label>
+			    <input type="number"  class="inp" name = "phoneNumber"  value=<%=profile.getPhoneNumber()%> required>
 			 
-			     <label for="description"><b>Description</b></label>
-			    <textarea name="description"  cols="60"><%=profile.getDescription()%></textarea>
+			   <label for="address"><b>Address</b></label>
+			    <textarea class="area" name="address"><%=profile.getAddress()%></textarea>
+			    
+			      <label >About</label>
+			    <textarea  class="area"style=" resize: none;" name="description"><%=profile.getDescription()%></textarea>
 			    
 			     <label for="image"><b>Image</b></label>
 			    <input type="text"  class="inp" name = "image"  value=<%=profile.getLogo()%> required>

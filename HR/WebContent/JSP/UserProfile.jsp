@@ -23,7 +23,7 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
 	
 	String ida = request.getParameter("id"); //Stalking
-	Employee employee; 
+	Employee employee = manager.getEmployee(acc.getID()); 
 	/*
 	if(ida != null){ //Another user's page
 		int id = Integer.parseInt(ida);
@@ -34,30 +34,16 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 	//education
 	EmployeeProfile profile = employee.getProfile();
 	*/
-	employee = manager.getEmployee(13);
-	EmployeeProfile profile = employee.getProfile();
-	System.out.println("Image " + profile.getProfilePicture());
-	//Educ1
-	EmployeeEducation educ = new EmployeeEducation(13, null,  null, "School", "Tbilisi I. Vekua Physics-Mathematical School 42",
-			"Math", null, "Medium", 97);
-	//Educ2
-	EmployeeEducation educ2 = new EmployeeEducation(13, null, null, "University", "Free University of Tbilisi", "Computer Science", null, "Bachelor", 98);
 
+	EmployeeProfile profile = employee.getProfile();
 	
-	List<EmployeeEducation> educationList = new ArrayList<>();
-	educationList.add(educ);
-	educationList.add(educ2);
-	request.setAttribute("educations", educationList);
-	
-	
-	//Work1
-	WorkExperience work = new WorkExperience(13, null, null, "Google", null, "Software Engineer", null, null, null);
-	//Work2
-	WorkExperience work2 = new WorkExperience(13, null, null, "Buckswood", null, "Leader", null, null, null);
-	List<WorkExperience> workList = new ArrayList<>();
-	workList.add(work);
-	workList.add(work2);
+
+	List<WorkExperience> workList = manager.getWorkExps(acc.getID());
 	request.setAttribute("works", workList);
+	
+	List<EmployeeEducation> educList = manager.getEducation(acc.getID());
+	request.setAttribute("educations", educList);
+	
 	
 %> 
 
@@ -88,14 +74,14 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 			<div class = "about">
 				<h4 id="title">About</h4>
 				<ul>
-					<li>  <p>Gender - <%=profile.getGender()%> </p></li>
-					<li>  <p>Age - 20 </p></li>
+					<li><p>First Name - <%=profile.getName() %></p></li>
+					<li><p>Last Name - <%=profile.getSurname() %></p></li>
+					<li>  <p>Birth Date - <%=profile.getBirthDate() %> </p></li>
 					<li>  <p>Major Profession - <%=profile.getMajorProfession() %></p></li>
-					<li>  <p>Minor Profession - <%=profile.getMinorProfession() %></p></li>
 					<li>  <p>Email - <%=profile.getEmail() %></p></li>
 					<li>  <p>Phone Number - <%=profile.getPhoneNumber() %></p></li>
 					<li>  <p>Address - <%=profile.getAddress() %></p></li>
-					<li><p> Other - <%=profile.getDescription() %><p></li>
+					<li><p> About - <%=profile.getDescription() %><p></li>
 				</ul>	
 			</div>
 		
@@ -107,7 +93,7 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 							<c:forEach var="work" items="${works}">
 								<li >  
 									<h4> ${work.getPostition()} </h4>
-									<p> ${work.getCompanyName()} |  </p>
+									<p> ${work.getCompanyName()} |  ${work.getStartDate()} - ${work.getEndDate()} </p>
 								</li>
 								
 							</c:forEach>
@@ -119,9 +105,10 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 					<h4 id="title">Education</h4>
 						<ul>
 							<c:forEach var="education" items="${educations}">
-								<li>  
+								<li >  
+									
 									<h4> ${education.getInstitutionName()} </h4>
-									<p> ${education.getMajor()} | ${education.getStartDate()} - ${education.getEndDate().getYear()} </p>
+									<p> ${education.getMajor()} |  ${education.getStartDate()} - ${education.getEndDate()} </p>
 								</li>
 								
 							</c:forEach>

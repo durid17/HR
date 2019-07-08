@@ -30,7 +30,8 @@
 			<label for="account">Account</label>
 			<a href="${pageContext.request.contextPath}/JSP/Settings.jsp">Username and Password</a>
 		    <a class ="active"   href="${pageContext.request.contextPath}/JSP/Settings-Info-User.jsp" id="link">Personal Info</a>
-		   
+		    <a href="${pageContext.request.contextPath}/JSP/AddWorkExperience.jsp" id="link">Add Work Experience</a>
+		    <a href="${pageContext.request.contextPath}/JSP/AddEducation.jsp" id="link">Add Education</a>
 		</div>
 		
 		  <div class="right">
@@ -45,10 +46,9 @@
 			    <label for="email"><b>Email</b></label>
 			     <textarea class="area" name="email"><%=profile.getEmail()%></textarea>
 			    
-			    <input type="radio" name="gender" class="inp" id="male"> Male </input>
-  				<input type="radio" name="gender" class="inp" id="female"> Female</input><br>
-  				
-  				Birthday: <input type="date" class="inp" name="bday"> <br>
+			  
+  				<br>
+  				Birthday: <input type="date" class="inp" name="bday" value=<%=profile.getBirthDate() %>> <br>
   				
 			    <label for="majorProfession"><b>Major Profession</b></label>
 			     <textarea class="area" name="majorProfession"><%=profile.getMajorProfession()%></textarea>
@@ -59,13 +59,14 @@
 			     <label for="address"><b>Address</b></label>
 			    <textarea class="area" name="address"><%=profile.getAddress()%></textarea>
 			    
-			    <input type="checkbox" name="working" checked>Working<br>
-			    
+			  
+			   
 			    <label >About</label>
 			    <textarea  class="area"style=" resize: none;" name="description"><%=profile.getDescription()%></textarea>
 				
 				 <label for="image"><b>Image</b></label>
 			    <input type="text"  class="inp" name = "image"  value=<%=profile.getProfilePicture()%> required>
+			    
 				  				
 			    <hr>
 			   

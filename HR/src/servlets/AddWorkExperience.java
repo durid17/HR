@@ -1,7 +1,6 @@
-package servlets;
+	package servlets;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -13,21 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.Account;
 import classes.DBManager;
-import classes.Company;
-import classes.CompanyProfile;
-import classes.Hash;
+import classes.Employee;
+import classes.EmployeeProfile;
+import classes.WorkExperience;
 
 /**
- * Servlet implementation class UpdateInfo
+ * Servlet implementation class AddWorkExperience
  */
-@WebServlet("/UpdateInfoCompany")
-public class UpdateInfoCompany extends HttpServlet {
+@WebServlet("/AddWorkExperience")
+public class AddWorkExperience extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateInfoCompany() {
+    public AddWorkExperience() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,25 +43,29 @@ public class UpdateInfoCompany extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String name =  request.getParameter("name");
-		String description =  request.getParameter("description"); 
-		String email =  request.getParameter("email");
-		String img =  request.getParameter("image");
-		String phoneNumber =  request.getParameter("phoneNumber");
-		String address =  request.getParameter("address");
-		
-		String dt =request.getParameter("date");
-		java.sql.Date sqlDate = null;
+		String company = request.getParameter("company");
+		String position = request.getParameter("position");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		java.sql.Date sqlStart = null;
+		java.sql.Date sqlEnd = null;
 		
 		try {
-			if(dt != null) {
+			if(start != null) {
 				java.util.Date utilDate=new java.util.Date();
-				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
-				sqlDate = new java.sql.Date(utilDate.getTime());
+				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+				sqlStart = new java.sql.Date(utilDate.getTime());
 			
 			} else {
-				System.out.println("Date carielia!");
+				System.out.println("Date start carielia!");
+			}
+			if(end != null) {
+				java.util.Date utilDate=new java.util.Date();
+				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+				sqlEnd = new java.sql.Date(utilDate.getTime());
+			
+			} else {
+				System.out.println("Date end carielia!");
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -71,13 +74,9 @@ public class UpdateInfoCompany extends HttpServlet {
 		
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
-		Company company = manager.getCompany(account.getID());
-		CompanyProfile profile = new CompanyProfile(name, description, sqlDate, img, email, phoneNumber, address);
-
-		company.setProfile(profile);
-		manager.updateCompany(company);	
-		
-		request.getRequestDispatcher("/JSP/Settings-Info-Company.jsp").forward(request, response);	
+		WorkExperience workExperience = new WorkExperience(account.getID(), sqlStart, sqlEnd, company, "", position, "", "", "");
+		manager.addWorkExp(account.getID(), workExperience);
+		request.getRequestDispatcher("/JSP/AddWorkExperience.jsp").forward(request, response);	
 		//doGet(request, response);
 	}
 

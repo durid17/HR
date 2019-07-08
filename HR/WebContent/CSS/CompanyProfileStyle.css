@@ -1,5 +1,5 @@
 body {
-	
+	background-color: #FEFEFE;
 }
 div{
 	border: none;
@@ -7,6 +7,7 @@ div{
 }
 
 .container {
+	padding: 5px;
 	position: relative;
 	top: 15px;
 }
@@ -15,14 +16,37 @@ div{
 	position: relative;
 	background-color: #E5E7E9;
 	left: 20px;
-	width: 200px;
-	height: 350px;
+	max-width: 15%;
+	max-height: 20%;
 	float: left;
 }
 
 #profileImage {
-	height: 100%;
 	width: 100%;
+	height: 60%;
 }
+.mainInfo{
+	padding: 5px;
+}
+
+.rightSide{
+	background-color: #E5E7E9;
+	position: relative;
+	float: right;
+	margin-right: 100px;
+	padding: 10px;
+	width: 50%;
+}
+
+#title{
+	margin-left: 5px;
+	
+}
+
+.about{
+	background-color: white;
+	padding: 5px;
+}
+
 
 

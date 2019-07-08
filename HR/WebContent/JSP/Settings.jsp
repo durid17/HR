@@ -24,12 +24,13 @@
 		<div class = "leftMenu"> 
 			<label for="account">Account</label>
 			<a class ="active" href="#">Username and Password</a>
-		    <a id="link" href="${pageContext.request.contextPath}/JSP/Settings-Info-User.jsp">Personal Info</a>
 		    
 		    <% if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)) { %>
-		    	<script>
-		    	 	document.getElementById("link").href = "Settings-Info-Company.jsp";
-		    	</script>
+		    		<a id="link" href="${pageContext.request.contextPath}/JSP/Settings-Info-Company.jsp">Personal Info</a>
+		    <%} else { %>
+		      		<a id="link" href="${pageContext.request.contextPath}/JSP/Settings-Info-User.jsp">Personal Info</a>
+		    		 <a href="${pageContext.request.contextPath}/JSP/AddWorkExperience.jsp" id="link">Add Work Experience</a>
+		    		  <a href="${pageContext.request.contextPath}/JSP/AddEducation.jsp" id="link">Add Education</a>
 		    <%} %>
 		     
 		     
@@ -37,38 +38,12 @@
 		
 		<div class="right">
 		  	<form  action="${pageContext.request.contextPath}/UpdatePassword" method="post" >
-	
 			    <label for="username">Username - <%=acc.getUsername()%></label>
-			   
-			  
 			    <input type="password"  class="inp" name = "newPassword" placeholder="Enter new Password" required>
-
-				  				
 			    <hr>
-			   
 			    <button onclick	="update()" type="submit" id="btn" class="submitButton">Save Changes</button>
 	  		</form>
-	  		
-	  		
-	  		
-	  		<!-- 
-	  		<script>
-	  		console.log("Mevei javascriptshi");
-				function update() {
-					document.getElementById("label").style.visibility = "visible";
-				}
-				
-				$.post("././UpdatePassword", 
-						{
-						newPassword: $('.inp').val(),
-						},
-						function(response){
-							
-						}
-				);
-			</script>
-  		  -->
-  		 </div>
+  		</div>
 		
 		
 </body>
