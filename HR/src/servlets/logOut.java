@@ -24,7 +24,7 @@ public class logOut extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("account" , null);
-		request.getRequestDispatcher("/JSP/MainPage.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/JSP/MainPage.jsp");
 	}
 	
 	/**
