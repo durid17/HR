@@ -3,6 +3,9 @@
 	language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
+<%@ page import="java.util.*" %>
+<%@ page import="classes.*" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +56,9 @@
 				description : document.getElementById("description").value.trim() ,
 				image : document.getElementById("image").value.trim() ,	
 				id : <%= employee.getId() %>,	
-		    	tags : toString($('#tags').val())
+		    	tags : toString($('#tags').val()),
+		    	languages : toString($('#languages').val())
+
 		    }
 			var url = "../UpdateInfo";
 			$.post(url,data, 
@@ -102,8 +107,7 @@
 			    <input type="number"  class="inp" id = "phoneNumber" name = "phoneNumber"  value=<%=profile.getPhoneNumber()%> required>
 			    
 			     <label for="address"><b>Address</b></label>
-			    <textarea class="area" id = "address" name="address"><%=profile.getAddress()%></textarea>
-			    
+			    <textarea class="area" id = "address" name="address"><%=profile.getAddress()%></textarea>  
 			  
 			   
 			    <label >About</label>
@@ -113,6 +117,29 @@
 			    <input type="text"  id = "image" class="inp" name = "image"  value=<%=profile.getProfilePicture()%> required>
 			    
 			 <br>
+			 
+			 <label for="languages"><b>Languages</b></label>
+			<select id = "languages" class="selectpicker" multiple data-live-search="true">
+			<%
+					List<String> languages = manager.getLanguages();
+					List<Language> lan = manager.getEmployeeLanguages(employee.getId());
+					List<String> myLanguages = new ArrayList<>();
+					for(int i = 0; i < lan.size(); i++){
+						myLanguages.add(lan.get(i).getLanguage());
+					}
+						
+					for(int i = 0 ; i < languages.size(); i++){
+						out.print("<option value = \" ");
+						out.print(languages.get(i) + "\"");
+						if(myLanguages.contains(languages.get(i))) 
+							out.print("selected = \"selected\"");
+						out.print(">");
+						out.print(languages.get(i) + "</option>");
+					}
+			%>
+			</select><br>
+		
+		
 			<label for="tags"><b>Tags</b></label>
 			<select id = "tags" class="selectpicker" multiple data-live-search="true">
 			<%	

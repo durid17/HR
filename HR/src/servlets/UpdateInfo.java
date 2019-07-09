@@ -17,6 +17,7 @@ import classes.DBManager;
 import classes.Employee;
 import classes.EmployeeProfile;
 import classes.Hash;
+import classes.Language;
 
 /**
  * Servlet implementation class UpdateInfo
@@ -81,11 +82,22 @@ public class UpdateInfo extends HttpServlet {
 		for(int i = 0 ; i < myTags.size(); i++) {
 			manager.removeEmployeeTag(id, myTags.get(i));
 		}
-		
 		String t = request.getParameter("tags");
 		String [] tags = t.split(","); 
 		for(int i = 0 ; i < tags.length; i++) {
 			manager.addEmployeeTag(id, tags[i]);
+		}
+		
+		String l = request.getParameter("languages");
+		String [] languages = l.split(","); 
+		List<Language> myLanguages = manager.getEmployeeLanguages(id);
+
+		for(int i = 0 ; i < myLanguages.size(); i++) {
+			manager.removeEmployeeLanguage(id, myLanguages.get(i).getLanguage());
+		}
+		
+		for(int i = 0 ; i < languages.length; i++) {
+			manager.addEmployeeLanguage(id, new Language(0, languages[i], "", ""));
 		}
 		
 		Account account = (Account)request.getSession().getAttribute("account");
