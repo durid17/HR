@@ -112,6 +112,7 @@ class LoginServletTest extends Mockito {
         serv.doPost(request, response);
         verify(dispatcher).forward(request,response);
         verify(request).setAttribute("wrong", true);   
+        
 	}
 	
 	@Test
