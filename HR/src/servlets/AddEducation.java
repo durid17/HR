@@ -47,6 +47,9 @@ public class AddEducation extends HttpServlet {
 		String subject = request.getParameter("subject");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
+		String major = request.getParameter("major");
+		String minor = request.getParameter("minor");
+		String degree = request.getParameter("degree");
 		java.sql.Date sqlStart = null;
 		java.sql.Date sqlEnd = null;
 		
@@ -75,9 +78,10 @@ public class AddEducation extends HttpServlet {
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		System.out.println("Me vamateb1 " + institution + " - " + subject);
-		EmployeeEducation education = new EmployeeEducation(account.getID(), sqlStart, sqlEnd, "School",institution, subject, "", "", 0);
+		EmployeeEducation education = new EmployeeEducation(account.getID(), sqlStart, sqlEnd, "",institution, major,minor, degree, 0);
 		System.out.println("Me vamateb2 " + institution + " - " + subject);
 		System.out.println("Chaemata " + education.getInstitutionName() + " - " + education.getMajor());
+		System.out.println("Chaemata " + education.getDegree());
 		manager.addEducation(account.getID(), education);
 		request.getRequestDispatcher("/JSP/AddEducation.jsp").forward(request, response);	
 		//doGet(request, response);

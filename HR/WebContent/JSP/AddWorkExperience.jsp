@@ -1,5 +1,5 @@
 <%@page import="classes.Employee"%>
-<%@ page import="classes.Account, classes.DBManager, classes.Employee, classes.EmployeeProfile, classes.Hash, classes.CompanyProfile"
+<%@ page import="classes.Account, classes.DBManager, classes.Employee, classes.EmployeeProfile, classes.Hash, classes.CompanyProfile, java.util.List"
 	language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -14,6 +14,8 @@
 <jsp:include page="Header.jsp" />
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/SettingsStyle.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 
 <% 
 	Account acc = (Account)request.getSession().getAttribute("account");
@@ -40,6 +42,24 @@
 	
 			    <label for="company"><b>Company *</b></label>
 			    <textarea class="area" name="company"></textarea>
+			    
+			     <label for="profession"><b>Profession</b></label>
+			    <select id = "profession" name="profession">
+			    <%
+					List<String> professions = manager.getProfessions();
+			    	/*
+			    	professions.add("prof1");
+			    	professions.add("prof2");
+			    	professions.add("prof3");
+			    	professions.add("prof4");
+			    	*/
+			    	for(int i = 0 ; i < professions.size(); i++){
+			    		out.print("<option value = \" ");
+						out.print(professions.get(i) + "\">");
+						out.print(professions.get(i) + "</option>");
+			    	}
+			    %>
+			    </select><br>
 			    
 			     <label for="position"><b>Position *</b></label>
 			    <textarea class="area" name="position"></textarea>

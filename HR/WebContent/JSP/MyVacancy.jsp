@@ -46,7 +46,7 @@ border-radius: 2px;
 	display: inline-block;
 	background-color: white;
 	cursor: pointer;	
-	width: 20%;
+	width: 15%;
 }
 
 .cardClass:hover{
@@ -55,12 +55,18 @@ border-radius: 2px;
 
 .info {
   padding: 2px 16px;
+  width: 100%;
+height: 100%;
 }
 
 #profileImage{
-	width:100%;
-}
+display:inline-block;
+  width:100%;
+  height:200px;
+  background-position:center;
+  background-size:cover;
 
+}
 
 
 </style>
@@ -173,7 +179,7 @@ border-radius: 2px;
 			<img  id = "profileImage" src="${employe.getProfile().getProfilePicture()}" alt="Avatar" >
 			<div class="info">
 				<h4 > ${employe.getProfile().getName()} </h4>
-				<p > ${employe.getProfile().getMajorProfession()} </p>			
+				<p > ${employe.getProfile().getMajorProfession()}  </p>			
 		 	</div>
 		</div>
 		

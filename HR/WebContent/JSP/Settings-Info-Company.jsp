@@ -14,6 +14,8 @@
 <jsp:include page="Header.jsp" />
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/SettingsStyle.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 
 <% 
 	Account acc = (Account)request.getSession().getAttribute("account");

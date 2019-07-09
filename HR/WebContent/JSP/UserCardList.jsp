@@ -36,7 +36,7 @@ border-radius: 2px;
 	display: inline-block;
 	background-color: white;
 	cursor: pointer;	
-	width: 20%;
+	width: 15%;
 }
 
 .cardClass:hover{
@@ -44,11 +44,18 @@ border-radius: 2px;
 }
 
 .info {
+width: 100%;
+height: 100%;
   padding: 2px 16px;
 }
 
 img{
-	width:100%;
+display:inline-block;
+  width:100%;
+  height:200px;
+  background-position:center;
+  background-size:cover;
+
 }
 
 
@@ -61,46 +68,47 @@ img{
 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
 	
 	//First
-	Employee one = manager.getEmployee(17);
+	Employee one = manager.getEmployee(13);
 	EmployeeProfile oneP = one.getProfile();
 	oneP.setProfilePicture("../Images/avatar.png");
 	oneP.setMajorProfession("Student");
 	//Second
-	Employee two = manager.getEmployee(18);
+	Employee two = manager.getEmployee(13);
 	EmployeeProfile twoP = two.getProfile();
-	twoP.setProfilePicture("../Images/avatar.png");
+	twoP.setProfilePicture("../Images/woman.png");
 	twoP.setMajorProfession("Software Engineer");
 	//Third
-	Employee three = manager.getEmployee(19);
+	Employee three = manager.getEmployee(13);
 	EmployeeProfile threeP = three.getProfile();
-	threeP.setProfilePicture("../Images/avatar.png");
+	threeP.setProfilePicture("../Images/ChatBubble.png");
 	threeP.setMajorProfession("Data Base Manager");
 	//
-	Employee four = manager.getEmployee(17);
+	Employee four = manager.getEmployee(15);
 	EmployeeProfile fourP = four.getProfile();
-	fourP.setProfilePicture("../Images/woman.png");
+	fourP.setProfilePicture("../Images/Location.png");
 	fourP.setMajorProfession("Web Developer");
-	//
-	Employee five = manager.getEmployee(18);
-	EmployeeProfile fiveP = five.getProfile();
-	fiveP.setProfilePicture("../Images/woman.png");
-	fiveP.setMajorProfession("Doctor");
-	//
-	Employee six = manager.getEmployee(19);
-	EmployeeProfile sixP = six.getProfile();
-	sixP.setProfilePicture("../Images/avatar.png");
-	sixP.setMajorProfession("Teacher");
-	//
-	Employee sev = manager.getEmployee(17);
-	EmployeeProfile sevP = sev.getProfile();
-	sevP.setProfilePicture("../Images/woman.png");
-	sevP.setMajorProfession("Lecturer");
-	//
-	Employee eig = manager.getEmployee(18);
-	EmployeeProfile eigP = eig.getProfile();
-	eigP.setProfilePicture("../Images/avatar.png");
-	eigP.setMajorProfession("Programmer");
 	
+	//
+	//First
+	Employee five = manager.getEmployee(13);
+	EmployeeProfile fiveP = five.getProfile();
+	fiveP.setProfilePicture("../Images/compImage.png");
+	fiveP.setMajorProfession("Student");
+	//Second
+	Employee six = manager.getEmployee(13);
+	EmployeeProfile sixP = six.getProfile();
+	sixP.setProfilePicture("../Images/freeuni.png");
+	sixP.setMajorProfession("Software Engineer");
+	//Third
+	Employee sev = manager.getEmployee(13);
+	EmployeeProfile sevP = sev.getProfile();
+	sevP.setProfilePicture("../Images/Phone.png");
+	sevP.setMajorProfession("Data Base Manager");
+	//
+	Employee eig = manager.getEmployee(15);
+	EmployeeProfile eigP = eig.getProfile();
+	eigP.setProfilePicture("../Images/tbc.png");
+	eigP.setMajorProfession("Web Developer");
 	
 	
 	
@@ -117,12 +125,11 @@ img{
 	request.setAttribute("employees", list);
 %>
 
-
 <body>	
 	<div id = "header"> </div>
 	
 
-	<div id="container" class = "container"> 
+	<div id="container"  class = "container"> 
 	
 	<c:forEach var="employe" items="${employees}">
 		<a href="${pageContext.request.contextPath}/JSP/UserProfile.jsp?id=${employe.getId()}">
@@ -130,7 +137,7 @@ img{
 			<img  id = "profileImage" src="${employe.getProfile().getProfilePicture()}" alt="Avatar" >
 			<div class="info">
 				<h4 > ${employe.getProfile().getName()} </h4>
-				<p > ${employe.getProfile().getMajorProfession()} </p>			
+				<p> ${employe.getProfile().getMajorProfession()} </p>			
 		 	</div>
 		</div>
 		

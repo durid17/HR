@@ -116,7 +116,7 @@
 				 <label for="image"><b>Image</b></label>
 			    <input type="text"  id = "image" class="inp" name = "image"  value=<%=profile.getProfilePicture()%> required>
 			    
-			 <br>
+			 
 			 
 			 <label for="languages"><b>Languages</b></label>
 			<select id = "languages" class="selectpicker" multiple data-live-search="true">

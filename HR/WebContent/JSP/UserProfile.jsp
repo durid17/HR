@@ -24,16 +24,14 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 	
 	String ida = request.getParameter("id"); //Stalking
 	Employee employee = manager.getEmployee(acc.getID()); 
-	/*
+	
 	if(ida != null){ //Another user's page
 		int id = Integer.parseInt(ida);
 		employee = manager.getEmployee(id);
 	} else {
 		employee = manager.getEmployee(acc.getID());
 	}
-	//education
-	EmployeeProfile profile = employee.getProfile();
-	*/
+	
 
 	EmployeeProfile profile = employee.getProfile();
 	
@@ -63,7 +61,7 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 		    	<h3> <%= profile.getName() + " " + profile.getSurname()%></h3> 
 		    	<p> @<%= acc.getUsername()%></p> 
 		 	 	<hr>
-		   		<p><%= profile.getMajorProfession() %></p> 
+		   		<p><%=profile.getMajorProfession()%></p> 
 			</div>
 		 
 		</div>
