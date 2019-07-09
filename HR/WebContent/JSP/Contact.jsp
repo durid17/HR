@@ -11,25 +11,61 @@
 <jsp:include page="Header.jsp"/>
 </head>
 <body>
-	<div class = "container">
-		<div class="subheader">
-	    	<h1>CONTACT US</h1>
-			<h4>We will be happy to assist you with any question</h4>
+	<!-- Slideshow container -->
+	<div class="slideshow-container">
+	
+	  	<!-- Full-width images with number and caption text -->
+	  	<div class="mySlides fade">
+		    <img src="../Images/main05.jpg" style="width:100%">
+		</div>
+	
+	  	<div class="mySlides fade">
+	    	<img src="../Images/main04.jpg" style="width:100%">
 	  	</div>
-	  	<div class="contacts-features">
-	  		<div class="contact-type">
-	  			<img src="../Images/ChatBubble.png">
-	  			<p>Online Support</p>
-	  		</div>
-	  		<div class="contact-type">
-	  			<img src="../Images/Phone.png">
-	  			<p>2 131 131</p>
-	  		</div>
-	  		<div class="contact-type">
-	  			<img src="../Images/Location.png">
-	  			<p>Kakha Bendukidze Campus</p>
-	  		</div>
+	
+	  	<div class="mySlides fade">
+	    	<img src="../Images/main03.jpg" style="width:100%">
 	  	</div>
+		
+		<div class = "container">
+			<div class="subheader">
+		    	<h1>CONTACT US</h1>
+				<h4>We will be happy to assist you with any question</h4>
+		  	</div>
+		  	<div class="contacts-features">
+		  		<div class="contact-type">
+		  			<img src="../Images/ChatBubble.png">
+		  			<p>info@hr.lenini.ge</p>
+		  		</div>
+		  		<div class="contact-type">
+		  			<img src="../Images/Phone.png">
+		  			<p>+995 322 13 11 31</p>
+		  		</div>
+		  		<div class="contact-type">
+		  			<img src="../Images/Location.png">
+		  			<p>Kakha Bendukidze Campus</p>
+		  		</div>
+		  	</div>
+		</div>
 	</div>
 </body>
+
+
+<script>	
+	var slideIndex = 0;
+	showSlides();
+
+	function showSlides() {
+	  	var i;
+	  	var slides = document.getElementsByClassName("mySlides");
+	  	for (i = 0; i < slides.length; i++) {
+	    	slides[i].style.display = "none"; 
+	  	}
+	  	slideIndex++;
+	  	if (slideIndex > slides.length) {slideIndex = 1} 
+	 	slides[slideIndex-1].style.display = "block"; 
+	  	setTimeout(showSlides, 4500);
+	}
+</script>
+
 </html>
