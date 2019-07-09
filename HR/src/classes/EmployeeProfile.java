@@ -36,6 +36,7 @@ public class EmployeeProfile {
 	}
 	
 	public String getName() {
+		if(name == null) return "";
 		return name;
 	}
 	
@@ -44,6 +45,7 @@ public class EmployeeProfile {
 	}
 	
 	public String getSurname() {
+		if(surname == null) return "";
 		return surname;
 	}
 	
@@ -52,6 +54,7 @@ public class EmployeeProfile {
 	}
 
 	public String getMajorProfession() {
+		if(majorProfession == null) return "";
 		return majorProfession;
 	}
 
@@ -60,6 +63,7 @@ public class EmployeeProfile {
 	}
 
 	public String getMinorProfession() {
+		if(minorProfession == null) return "";
 		return minorProfession;
 	}
 
@@ -68,6 +72,7 @@ public class EmployeeProfile {
 	}
 
 	public String getEmail() {
+		if(email == null) return "";
 		return email;
 	}
 
@@ -76,6 +81,7 @@ public class EmployeeProfile {
 	}
 
 	public String getPhoneNumber() {
+		if(phoneNumber == null) return "";
 		return phoneNumber;
 	}
 
@@ -84,6 +90,7 @@ public class EmployeeProfile {
 	}
 
 	public String getDescription() {
+		if(description == null) return "";
 		return description;
 	}
 
@@ -92,6 +99,7 @@ public class EmployeeProfile {
 	}
 
 	public String getGender() {
+		if(gender == null) return "";
 		return gender;
 	}
 
@@ -100,6 +108,7 @@ public class EmployeeProfile {
 	}
 
 	public String getAddress() {
+		if(address == null) return "";
 		return address;
 	}
 
@@ -116,6 +125,7 @@ public class EmployeeProfile {
 	}
 
 	public String getProfilePicture() {
+		if(profilePicture == null) return "";
 		return profilePicture;
 	}
 
@@ -124,6 +134,7 @@ public class EmployeeProfile {
 	}
 
 	public boolean isWorking() {
+		if(majorProfession == null) return false;
 		return isWorking;
 	}
 

@@ -52,9 +52,11 @@ public class ClientRegister extends HttpServlet {
 		
 		String username = request.getParameter("userName");
 		String password = request.getParameter("psw");
+		String confpassword = request.getParameter("confpsw");
 		String passHash = Hash.getHash(password);
-		
+		String img = "../Images/avatar.png";
 		if(manager.getAccount(username) != null) {
+			request.setAttribute("used", true);
 			request.getRequestDispatcher("JSP/ClientRegister.jsp").forward(request, response);
 			return;
 		} 	
@@ -69,12 +71,13 @@ public class ClientRegister extends HttpServlet {
 		String email = request.getParameter("email");
 
 		
-		EmployeeProfile profile = new EmployeeProfile(firstname, lastname, null, null, null, null, email, null, null, null, null, false);	
+		EmployeeProfile profile = new EmployeeProfile(firstname, lastname, null, null, null, null, email, null, null, null, img, false);	
 		Employee employee = new Employee(newAccount, profile);
 		
 		manager.updateEmployee(employee);
 		request.getSession().setAttribute("account", newAccount);
-		request.getRequestDispatcher("JSP/UserProfile.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/JSP/UserProfile.jsp");
+		//request.getRequestDispatcher("JSP/UserProfile.jsp").forward(request, response);
 	}
 
 }

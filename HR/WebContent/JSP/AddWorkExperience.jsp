@@ -38,15 +38,26 @@
 		  <div class="right">
 		  	<form action = "${pageContext.request.contextPath}/AddWorkExperience" method ="post">
 	
-			    <label for="company"><b>Company</b></label>
+			    <label for="company"><b>Company *</b></label>
 			    <textarea class="area" name="company"></textarea>
 			    
-			     <label for="position"><b>Position</b></label>
+			     <label for="position"><b>Position *</b></label>
 			    <textarea class="area" name="position"></textarea>
 			  
+			  	<p>Please select employement type:</p>
+ 				 	<input type="radio" name="emptype" value="Full-Time" checked> Full-Time <br>
+		 			<input type="radio" name="emptype" value="Part-Time"> Part-Time<br>
+		 			<input type="radio" name="emptype" value="Internship"> Internship<br>  
   				<br>
-  				Start Date: <input type="date" class="inp" name="start" > <br><br>
-  				End Date: <input type="date" class="inp" name="end" > <br><br>
+  				
+  				 <label for="duty"><b>Duty</b></label>
+			    <textarea class="area" name="duty"></textarea><br><br>
+			    
+			    <label for="achievement" ><b>Achievement</b></label>
+			    <textarea class="area" name="achievement"></textarea><br><br>
+			    
+  				Start Date *: <input type="date" class="inp" name="start" > <br><br>
+  				End Date *: <input type="date" class="inp" name="end" > <br><br>
   			
 			    <hr>
 			   

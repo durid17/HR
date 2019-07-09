@@ -23,6 +23,7 @@ public class CompanyProfile {
 	}
 
 	public String getName() {
+		if(name == null) return "";
 		return name;
 	}
 
@@ -31,6 +32,7 @@ public class CompanyProfile {
 	}
 
 	public String getDescription() {
+		if(description == null) return "";
 		return description;
 	}
 
@@ -49,6 +51,7 @@ public class CompanyProfile {
 
 	
 	public String getLogo() {
+		if(logo == null) return "";
 		return logo;
 	}
 
@@ -58,6 +61,7 @@ public class CompanyProfile {
 	}
 
 	public String getEmail() {
+		if(email == null) return "";
 		return email;
 	}
 
@@ -66,6 +70,7 @@ public class CompanyProfile {
 	}
 
 	public String getPhoneNumber() {
+		if(phoneNumber == null) return "";
 		return phoneNumber;
 	}
 
@@ -74,6 +79,7 @@ public class CompanyProfile {
 	}
 
 	public String getAddress() {
+		if(address == null) return "";
 		return address;
 	}
 

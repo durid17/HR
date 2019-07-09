@@ -47,6 +47,10 @@ public class AddWorkExperience extends HttpServlet {
 		String position = request.getParameter("position");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
+		String empType = request.getParameter("emptype");
+		String achievement = request.getParameter("achievement");
+		String duty = request.getParameter("duty");
+		System.out.println("Type " + empType);
 		java.sql.Date sqlStart = null;
 		java.sql.Date sqlEnd = null;
 		
@@ -74,7 +78,10 @@ public class AddWorkExperience extends HttpServlet {
 		
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
-		WorkExperience workExperience = new WorkExperience(account.getID(), sqlStart, sqlEnd, company, "", position, "", "", "");
+		WorkExperience workExperience = new WorkExperience(account.getID(), sqlStart, sqlEnd, company, "", position, empType, duty, achievement);
+		System.out.println("Added " + workExperience.getEmploymentType());
+		System.out.println("Added " + workExperience.getDuty());
+		System.out.println("Added " + workExperience.getAchievement());
 		manager.addWorkExp(account.getID(), workExperience);
 		request.getRequestDispatcher("/JSP/AddWorkExperience.jsp").forward(request, response);	
 		//doGet(request, response);

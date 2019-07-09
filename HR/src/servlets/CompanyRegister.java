@@ -43,7 +43,7 @@ public class CompanyRegister extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("psw");
 		String passHash = Hash.getHash(password);
-		
+		String img = "../Images/compImage.png";
 		
 		//Check account
 		if(manager.getAccount(username) != null) {
@@ -61,15 +61,15 @@ public class CompanyRegister extends HttpServlet {
 		String email = request.getParameter("email");
 		String companyName = request.getParameter("companyName");
 		
-		CompanyProfile cmpPrf = new CompanyProfile(companyName, null , null, null,  email, null, null); 
+		CompanyProfile cmpPrf = new CompanyProfile(companyName, null , null, img,  email, null, null); 
 		Company newCompany = new  Company(newAccount, cmpPrf);
 		
 		//Add info in base
 		manager.updateCompany(newCompany);
 		request.getSession().setAttribute("account", newAccount);
 		
-		
-		request.getRequestDispatcher("JSP/CompanyProfile.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/JSP/CompanyProfile.jsp");
+		//request.getRequestDispatcher("JSP/CompanyProfile.jsp").forward(request, response);
 		//doGet(request, response);
 
 	}

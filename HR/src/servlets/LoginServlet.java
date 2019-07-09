@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(acc == null || !acc.getPassHash().equals(passHash)) {
 			System.out.println("Wrong Username or password");
+			request.setAttribute("wrong", true);
 			request.getRequestDispatcher("/JSP/LogInPage.jsp").forward(request, response);
 		} else {
 			request.getSession().setAttribute("account", acc);
