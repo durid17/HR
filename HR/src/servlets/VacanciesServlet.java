@@ -33,7 +33,7 @@ public class VacanciesServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Account acc = (Account)request.getSession().getAttribute("account");
 		
@@ -60,7 +60,7 @@ public class VacanciesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("jobs_type"));
+		
 	}
 
 }
