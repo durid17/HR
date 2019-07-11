@@ -17,6 +17,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
 <% 
 	Account acc = (Account)request.getSession().getAttribute("account");
 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
@@ -43,8 +47,8 @@
 			    <label for="company"><b>Company *</b></label>
 			    <textarea class="area" name="company" required></textarea>
 			    
-			     <label for="profession"><b>Profession</b></label>
-			    <select id = "profession" name="profession" >
+			    <label for="profession"><b>Profession</b></label>
+			    <select id = "profession" name="profession" class="selectpicker">
 			    <%
 					List<String> professions = manager.getProfessions();
 			    	/*
@@ -61,34 +65,33 @@
 			    %>
 			    </select><br>
 			    
-			     <label for="position"><b>Position *</b></label>
+			    <label for="position"><b>Position *</b></label>
 			    <textarea class="area" name="position" required></textarea>
 			  
-			  	<p>Please select employement type:</p>
-			  	<select id = "emptype" name = "emptype">
+			  	<label for="emptype"><b>Employment Type</b></label>
+			  	<select id = "emptype" name = "emptype" class="selectpicker">
 				  <option value="Full-time">Full-time</option>
 				  <option value="Part-time">Part-time</option>
-				  <option value="Intern"> Intern </option>
+				  <option value="Intern">Internship</option>
 				  <option value="Temporary">Temporary</option>
 				</select><br>
   				
-  				 <label for="duty"><b>Duty</b></label>
-			    <textarea class="area" name="duty" required></textarea><br><br>
+  				<label for="duty"><b>Duty</b></label>
+			    <textarea class="area" name="duty" required></textarea>
 			    
 			    <label for="achievement" ><b>Achievement</b></label>
-			    <textarea class="area" name="achievement" required></textarea><br><br>
+			    <textarea class="area" name="achievement" required></textarea>
 			    
-  				Start Date *: <input type="date" class="inp" name="start" required > <br><br>
-  				End Date *: <input type="date" class="inp" name="end" required> <br><br>
+  				<label for="start" ><b>Start Date *</b></label>
+  				<input type="date" class="inp" name="start" required >
+  				
+  				<label for="end" ><b>End Date *</b></label>
+  				<input type="date" class="inp" name="end" required> <br><br>
   			
 			    <hr>
 			   
-			    <button type="submit" class="submitButton">Save Changes</button>
+			    <button type="submit" class="submitButton">Add Work Experience</button> <br><br>
 	  		</form>
   		 </div>
-		
-	
-		
-		
 </body>
 </html>

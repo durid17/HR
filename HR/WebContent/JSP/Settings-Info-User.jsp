@@ -87,26 +87,26 @@
 		  	<form action = "${pageContext.request.contextPath}/UpdateInfo" method ="post">
 		   -->
 	
-			    <label for="firstName"><b>First Name</b></label>
+			    <label for="firstName"><b>First Name *</b></label>
 			    <textarea class="area" id="firstName" name="firstName"><%=profile.getName()%></textarea>
 			  
-			    <label for="lastName"><b>Last Name</b></label>
+			    <label for="lastName"><b>Last Name *</b></label>
 			    <textarea class="area" id = "lastName" name="lastName"><%=profile.getSurname()%></textarea>
 			    
-			    <label for="email"><b>Email</b></label>
-			     <textarea class="area" id = "email" name="email"><%=profile.getEmail()%></textarea>
+			    <label for="email"><b>Email *</b></label>
+			    <textarea class="area" id = "email" name="email"><%=profile.getEmail()%></textarea>
 			    
 			  
-  				<br>
-  				Birthday: <input type="date" id= "bday" class="inp" name="bday" value=<%=profile.getBirthDate() %>> <br>
+  				<label for="date"><b>Date of Birth *</b></label>
+  				<input type="date" id= "bday" class="inp" name="bday" value=<%=profile.getBirthDate() %>>
   				
 			    <label for="majorProfession"><b>Major Profession</b></label>
-			     <textarea class="area" id = "majorProfession" name="majorProfession"><%=profile.getMajorProfession()%></textarea>
+			    <textarea class="area" id = "majorProfession" name="majorProfession"><%=profile.getMajorProfession()%></textarea>
 			    
-			    <label for="phoneNumber"><b>Phone Number</b></label>
+			    <label for="phoneNumber"><b>Phone Number *</b></label>
 			    <input type="number"  class="inp" id = "phoneNumber" name = "phoneNumber"  value=<%=profile.getPhoneNumber()%> required>
 			    
-			     <label for="locations"><b>Locations</b></label>
+			    <label for="locations"><b>Locations</b></label>
 				<select id = "address" class="selectpicker">
 				<%
 						List<String> locations = manager.getLocations();
@@ -127,16 +127,16 @@
 				%>
 				</select><br>
 			   
-			    <label >About</label>
+			    <label ><b>About</b></label>
 			    <textarea  class="area"style=" resize: none;" id = "description" name="description"><%=profile.getDescription()%></textarea>
 				
-				 <label for="image"><b>Image</b></label>
+				<label for="image"><b>Image</b></label>
 			    <input type="text"  id = "image" class="inp" name = "image"  value=<%=profile.getProfilePicture()%> required>
 			    
 			 
 			 
-			 <label for="languages"><b>Languages</b></label>
-			<select id = "languages" class="selectpicker" multiple data-live-search="true">
+			 	<label for="languages"><b>Languages</b></label>
+				<select id = "languages" class="selectpicker" multiple data-live-search="true">
 			<%
 					List<String> languages = manager.getLanguages();
 					List<Language> lan = manager.getEmployeeLanguages(employee.getId());
@@ -154,7 +154,7 @@
 						out.print(languages.get(i) + "</option>");
 					}
 			%>
-			</select><br>
+			</select>
 		
 		
 			<label for="tags"><b>Tags</b></label>
@@ -171,10 +171,11 @@
 						out.print(tags.get(i) + "</option>");
 					}
 			%> 
-			</select>  
-			    <hr>
+			</select> <br><br>
+				
+			<hr>
 			  
-			    <button type="submit" id = "save" class="submitButton">Save Changes</button>
+			    <button type="submit" id = "save" class="submitButton">Save Changes</button> <br><br>
 	  		<!-- 
 	  		</form>
 	  		 -->

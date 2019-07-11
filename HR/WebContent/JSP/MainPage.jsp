@@ -32,6 +32,11 @@
 	  	</div>
 		
 		<div class="container">
+			<div class="subheader">
+		    	<h1>JOIN US</h1>
+				<h4>Our recruiting platform is made to meet the needs of any business. Powerful software that makes hiring easy.</h4>
+		  	</div>
+			
 			<div class="button-container">
 				<button class="my-button" id="company">I want to hire</button> <br>
 				<button class="my-button" id=worker>I want to work</button>

@@ -121,10 +121,9 @@ class DBManagerTests {
 		assertEquals(vacancy.getHeading(), fromDBVacancy.getHeading());
 		assertEquals(vacancy.getDescription(), fromDBVacancy.getDescription());
 //		assertEquals(vacancy.getStartDate(), fromDBVacancy.getStartDate());
-//		assertEquals(vacancy.getEndDate(), fromDBVacancy.getEndDate());
+		assertEquals(vacancy.getEndDate(), fromDBVacancy.getEndDate());
 		assertEquals(vacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
 		assertEquals(vacancy.getPosition(), fromDBVacancy.getPosition());
-//		assertEquals(vacancy, fromDBVacancy);
 		
 		Requirement updatedRequirement = new Requirement("Batumi", 5, "Bachelor", "finansisti");
 		Vacancy updatedVacancy = new Vacancy(id, "UpdatedHeading", "Salesperson", "UpdatedDesc", "Full-time", 
@@ -137,10 +136,9 @@ class DBManagerTests {
 		assertEquals(updatedVacancy.getHeading(), fromDBVacancy.getHeading());
 		assertEquals(updatedVacancy.getDescription(), fromDBVacancy.getDescription());
 //		assertEquals(updatedVacancy.getStartDate(), fromDBVacancy.getStartDate());
-//		assertEquals(updatedVacancy.getEndDate(), fromDBVacancy.getEndDate());
+		assertEquals(updatedVacancy.getEndDate(), fromDBVacancy.getEndDate());
 		assertEquals(updatedVacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
 		assertEquals(updatedVacancy.getPosition(), fromDBVacancy.getPosition());
-//		assertEquals(updatedVacancy, fromDBVacancy);
 		
 		assertEquals(3, manager.getCompanyVacancies(TEST_COMPANY_ID).size());
 		

@@ -16,6 +16,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/SettingsStyle.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
 <% 
 	Account acc = (Account)request.getSession().getAttribute("account");
 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
@@ -39,11 +44,11 @@
 		  <div class="right">
 		  	<form action = "${pageContext.request.contextPath}/AddEducation" method ="post">
 	
-			    <label for="institution"><b>Institution</b></label>
+			    <label for="institution"><b>Educational Institution Name</b></label>
 			    <textarea class="area" name="institution" required></textarea>
 			    
-			     <label for="major"><b>Major</b></label>
-			    <select id = "major" name="major"	>
+			    <label for="major"><b>Major</b></label>
+			    <select id = "major" name="major" class="selectpicker">
 			    <%
 					List<String> majors = manager.getProfessions();
 			    	/*
@@ -60,8 +65,8 @@
 			    %>
 			    </select><br>
 			    
-			     <label for="minor"><b>Minor</b></label>
-			    <select id = "minor" name="minor">
+			    <label for="minor"><b>Minor</b></label>
+			    <select id = "minor" name="minor" class="selectpicker">
 			    <%
 					List<String> minors = manager.getProfessions();
 			    	/*
@@ -77,30 +82,28 @@
 			    	}
 			    %>
 			    </select><br>
-			     <label for="subject"><b>Subject</b></label>
+			    <label for="subject"><b>Subject</b></label>
 			    <textarea class="area" name="subject" required></textarea>
 			  
 			  	<label for="Degree"><b>Degree</b></label>
-				<select id = degree name="degree">
+				<select id = degree name="degree" class="selectpicker">
 				  <option value="Bachelor's">Bachelor's</option>
 				  <option value="Associate">Associate</option>
 				  <option value="Master's">Master's</option>
 				  <option value="Ph.D">Ph.D</option>
 				  <option value="Pursuing Degree">Pursuing Degree</option>
-				</select><br>
+				</select>
   				
-  				<br>
-  				Start Date: <input type="date" class="inp" name="start" required> <br><br>
-  				End Date: <input type="date" class="inp" name="end" required> <br><br>
+  				<label for="start" ><b>Start Date *</b></label>
+  				<input type="date" class="inp" name="start" required>
+  				
+  				<label for="end" ><b>End Date *</b></label>
+  				<input type="date" class="inp" name="end" required> <br><br>
   			
 			    <hr>
 			   
-			    <button type="submit" class="submitButton">Save Changes</button>
+			    <button type="submit" class="submitButton">Add Education</button>  <br><br>
 	  		</form>
   		 </div>
-		
-	
-		
-		
 </body>
 </html>

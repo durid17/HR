@@ -40,7 +40,7 @@
 		
 		<div class="right">
 		  	<form  action="${pageContext.request.contextPath}/UpdatePassword" method="post" >
-			    <label for="username">Username - <%=acc.getUsername()%></label>
+			    <label for="username"><b>Username: <%=acc.getUsername()%></b></label>
 			    <input type="password"  class="inp" name = "newPassword" placeholder="Enter new Password" required>
 			    <hr>
 			    <button onclick	="update()" type="submit" id="btn" class="submitButton">Save Changes</button>

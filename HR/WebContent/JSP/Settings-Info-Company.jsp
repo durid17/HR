@@ -38,31 +38,30 @@
 		  <div class="right">
 		  	<form action = "${pageContext.request.contextPath}/UpdateInfoCompany" method ="post">
 	    
-			   	 <label for="name"><b>Name</b></label>
-			    <textarea class="area" name="name"><%=profile.getName()%></textarea>
+			   	<label for="name"><b>Name *</b></label>
+			    <textarea class="area" name="name" required><%=profile.getName()%></textarea>
 			    
-			    <br>
-  				Founded: <input type="date" class="inp" name="date" value=<%=profile.getFounded() %>> <br>
+  				<label for="date"><b>Founded</b></label>
+  				<input type="date" class="inp" name="date" value=<%=profile.getFounded() %>> <br>
   				
-			     <label for="email"><b>Email</b></label>
-			     <textarea class="area" name="email"><%=profile.getEmail()%></textarea>
+			    <label for="email"><b>Email *</b></label>
+			    <textarea class="area" name="email" required><%=profile.getEmail()%></textarea>
 			   		    
-			   	    <label for="phoneNumber"><b>Phone Number</b></label>
+			   	<label for="phoneNumber"><b>Phone Number *</b></label>
 			    <input type="number"  class="inp" name = "phoneNumber"  value=<%=profile.getPhoneNumber()%> required>
 			 
-			   <label for="address"><b>Address</b></label>
+			   	<label for="address"><b>Address</b></label>
 			    <textarea class="area" name="address"><%=profile.getAddress()%></textarea>
 			    
-			      <label >About</label>
+			    <label><b>About</b></label>
 			    <textarea  class="area"style=" resize: none;" name="description"><%=profile.getDescription()%></textarea>
 			    
-			     <label for="image"><b>Image</b></label>
+			    <label for="image"><b>Image *</b></label>
 			    <input type="text"  class="inp" name = "image"  value=<%=profile.getLogo()%> required>
-
 			  
 			    <hr>
 			   
-			    <button type="submit" class="submitButton">Save Changes</button>
+			    <button type="submit" class="submitButton">Save Changes</button> <br><br>
 	  		</form>
   		 </div>
 		

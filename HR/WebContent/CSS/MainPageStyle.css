@@ -9,31 +9,41 @@
 }
 
 .container {
-	width: 24%;
-	height: 33%;
+	width: 30%;
+	height: 60%;
 	background: white;
 	opacity: 0.97;
   	position: absolute;
-  	top: 33%;
-  	left: 17%;
+  	top: 20%;
+  	left: 35%;
   	text-align: center;
   	border-radius: 20px;
   	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
 }
 
+.subheader {
+	text-align: center;
+	font-family: "Roboto";
+	font-size: 1.1vw;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+}
+
 .button-container {
-	padding: 13%;
+	padding: auto;
 }
 
 .my-button {
 	opacity: 1;
-	width: 70%;
+	width: 60%;
 	font-family: "Roboto";
 	font-style: italic;
 	color: white;
-	font-size: 24px;
+	font-size: 1.3vw;
 	border: none;
-	padding: 15px 30px;
+	padding: 5% 10%;
 	background-color: #323F6C;
 	cursor: pointer;
 	margin: 4px 2px;
