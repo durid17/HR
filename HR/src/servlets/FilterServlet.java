@@ -42,13 +42,11 @@ public class FilterServlet extends HttpServlet {
 		String chosenTags = request.getParameter("tags");
 		String chosen_jobs_type = request.getParameter("jobs_type");
 		String chosenDegree = request.getParameter("degree");
-			
-		
+				
 		List<Vacancy> vacancies = manager.getFilterVacancies(chosenProfessions, chosenCompanies, 
 				chosenLocations, chosenTags, chosen_jobs_type, chosenDegree);
 		List<Company> companies = manager.getCompanies();
 		List<String> professions = manager.getProfessions();
-		System.out.println(professions.get(0));
 		List<String> locations = manager.getLocations();
 		List<String> tags = manager.getTags();
 		List<String> degrees = manager.getDegrees();
@@ -61,9 +59,7 @@ public class FilterServlet extends HttpServlet {
 		request.setAttribute("tags", tags);
 		request.setAttribute("degrees", degrees);
 		request.setAttribute("employeeId", acc.getID());
-		
-		request.getRequestDispatcher("JSP/VacancyCart.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("JSP/VacancyCart.jsp").forward(request, response);	
 	}
 
 	/**
@@ -71,7 +67,7 @@ public class FilterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(5555);
+	
 	}
 
 }

@@ -118,9 +118,10 @@
             </h5>
 
             <select id = "jobs_type" class="selectpicker" multiple data-live-search="true">
-              <option>Full-Time</option>
-              <option>Part-Time</option>
-              <option>Intership</option>
+              <option value="Full-time">Full-time</option>
+			  <option value="Part-time">Part-time</option>
+			  <option value="Intern"> Intern </option>
+			  <option value="Temporary">Temporary</option>
             </select>
           </div>
 
