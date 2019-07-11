@@ -4,6 +4,9 @@ import java.util.*;
 
 public class Pairing {
 	private DBManager manager;
+	private final int MAX_NUMBER_OF_APPLICANTS = 18;
+	private final int MAX_NUMBER_OF_VACANCYS = 30;
+
 	
 	public Pairing(DBManager manager) {
 		this.manager = manager;
@@ -11,35 +14,32 @@ public class Pairing {
 	
 	public List<Vacancy> getVacancies(int employeeId){
 		Employee employee = manager.getEmployee(employeeId);
-		EmployeeProfile prof = employee.getProfile();
 		List<String> tags = manager.getEmployeeTags(employeeId);
 		List<Language> lan = manager.getEmployeeLanguages(employeeId);
 		List<Vacancy> all = manager.getVacancies();
-		List<Vacancy> res = new ArrayList<>();
-		for(Vacancy vacancy : all) {
-			Requirement req = vacancy.getReq();
-			int years = getYearsOfExp(employee.getId() , req.getProfession());
-			if(years < req.getYearsOfExp()) continue;
-			if(!prof.getAddress().equals(req.getLocation())) continue;
-			if(!Qualified(employee.getId() , req.getProfession() , req.getDegree())) continue;
-			res.add(vacancy);
-		}	
+//		System.out.println(all.size());
 		
-		res.sort(new Comparator<Vacancy>() {
+		all.sort(new Comparator<Vacancy>() {
 			@Override
 			public int compare(Vacancy arg0, Vacancy arg1) {
 				Requirement req0 = arg0.getReq();
 				Requirement req1 = arg1.getReq();
-
+				
 				boolean firstMajor = hasMajor(employee.getId(), req0.getProfession(), req0.getDegree());
 				boolean secondMajor = hasMajor(employee.getId(), req1.getProfession(), req1.getDegree());
-				if(firstMajor && ! secondMajor) return 1;
+				if(firstMajor && !secondMajor) return 1;
 				if(!firstMajor && secondMajor) return -1;
 				
-				boolean firstMinor = hasMajor(employee.getId(), req0.getProfession(), req0.getDegree());
-				boolean secondMinor = hasMajor(employee.getId(), req1.getProfession(), req1.getDegree());
+				boolean firstMinor = hasMinor(employee.getId(), req0.getProfession(), req0.getDegree());
+				boolean secondMinor = hasMinor(employee.getId(), req1.getProfession(), req1.getDegree());
+				
 				if(firstMinor && !secondMinor) return 1;
 				if(!firstMinor && secondMinor) return -1;
+				
+				int firstExp = getYearsOfExp(employee.getId(), req0.getProfession());
+				int seconfExp = getYearsOfExp(employee.getId(), req1.getProfession());
+				if(firstExp > seconfExp) return 1;
+				if(firstExp < seconfExp) return -1;
 				
 				int firstCommon = getCommon(tags , manager.getVacancyTags(arg0.getId()));
 				int secondCommon = getCommon(tags , manager.getVacancyTags(arg1.getId()));
@@ -55,7 +55,7 @@ public class Pairing {
 			}		
 		});
 		
-		return res;
+		return all.subList(0, Math.min(all.size(), MAX_NUMBER_OF_VACANCYS));
 	}
 	
 	public List<Employee> getEmoloyees(int vacancyId){
@@ -64,28 +64,24 @@ public class Pairing {
 		List<Language> lan = manager.getRequirementLanguages(vacancyId);
 		List<String> tags = manager.getVacancyTags(vacancyId);
 		List<Employee> applicants =  manager.getVacancyApplicants(vacancyId);
-		List<Employee> res = new ArrayList<>();
-		for(Employee employee : applicants) {
-			int years = getYearsOfExp(employee.getId() , req.getProfession());
-			EmployeeProfile prof = employee.getProfile();
-			if(years < req.getYearsOfExp()) continue;
-			if(!prof.getAddress().equals(req.getLocation())) continue;
-			if(!Qualified(employee.getId() , req.getProfession() , req.getDegree())) continue;
-			res.add(employee);
-		}	
 		
-		res.sort(new Comparator<Employee>() {
+		applicants.sort(new Comparator<Employee>() {
 			@Override
 			public int compare(Employee arg0, Employee arg1) {
 				boolean firstMajor = hasMajor(arg0.getId(), req.getProfession(), req.getDegree());
 				boolean secondMajor = hasMajor(arg1.getId(), req.getProfession(), req.getDegree());
-				if(firstMajor && ! secondMajor) return 1;
+				if(firstMajor && !secondMajor) return 1;
 				if(!firstMajor && secondMajor) return -1;
 				
-				boolean firstMinor = hasMajor(arg0.getId(), req.getProfession(), req.getDegree());
-				boolean secondMinor = hasMajor(arg1.getId(), req.getProfession(), req.getDegree());
+				boolean firstMinor = hasMinor(arg0.getId(), req.getProfession(), req.getDegree());
+				boolean secondMinor = hasMinor(arg1.getId(), req.getProfession(), req.getDegree());
 				if(firstMinor && !secondMinor) return 1;
 				if(!firstMinor && secondMinor) return -1;
+				
+				int firstExp = getYearsOfExp(arg0.getId(), req.getProfession());
+				int seconfExp = getYearsOfExp(arg1.getId(), req.getProfession());
+				if(firstExp > seconfExp) return 1;
+				if(firstExp < seconfExp) return -1;
 				
 				int firstCommon = getCommon(tags , manager.getEmployeeTags(arg0.getId()));
 				int secondCommon = getCommon(tags , manager.getEmployeeTags(arg1.getId()));
@@ -96,12 +92,12 @@ public class Pairing {
 				int secondLanCommon = getCommon(values(lan), values(manager.getEmployeeLanguages(arg1.getId())));
 				if(firstLanCommon > secondLanCommon) return 1;
 				if(firstLanCommon < secondLanCommon) return -1;
-
+				
 				return 0;
 			}		
 		});
 		
-		return res;
+		return applicants.subList(0, Math.min(applicants.size(), MAX_NUMBER_OF_APPLICANTS));
 	}
 	
 	private List<String> values(List<Language> lan){
@@ -136,10 +132,6 @@ public class Pairing {
 		return false;
 	}
 
-	private boolean Qualified(int employeeId, String profession, String degree) {
-		return hasMajor(employeeId, profession, degree) || hasMinor(employeeId, profession, degree);
-	}
-
 	private int getYearsOfExp(int employeeId , String proff) {
 		List<WorkExperience> exp = manager.getWorkExps(employeeId);
 		int sum = 0;
@@ -151,3 +143,26 @@ public class Pairing {
 	}
 }
 
+
+//private boolean Qualified(int employeeId, String profession, String degree) {
+//	return hasMajor(employeeId, profession, degree) || hasMinor(employeeId, profession, degree);
+//}
+//		for(Vacancy vacancy : all) {
+//			Requirement req = vacancy.getReq();
+//			int years = getYearsOfExp(employee.getId() , req.getProfession());
+//			if(years < req.getYearsOfExp()) continue;
+//			if(!prof.getAddress().equals(req.getLocation())) continue;
+//			if(!Qualified(employee.getId() , req.getProfession() , req.getDegree())) continue;
+//			res.add(vacancy);
+//		}	
+
+
+
+//		for(Employee employee : applicants) {
+//			int years = getYearsOfExp(employee.getId() , req.getProfession());
+//			EmployeeProfile prof = employee.getProfile();
+//			if(years < req.getYearsOfExp()) continue;
+//			if(!prof.getAddress().equals(req.getLocation())) continue;
+//			if(!Qualified(employee.getId() , req.getProfession() , req.getDegree())) continue;
+//			res.add(employee);
+//		}	
