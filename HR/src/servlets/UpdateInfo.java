@@ -60,9 +60,9 @@ public class UpdateInfo extends HttpServlet {
 
 		String dt = request.getParameter("bday");
 		java.sql.Date sqlDate = null;
-	
+		System.out.println("date - " + dt);
 		try {
-			if(dt != null) {
+			if(!dt.equals("")) {
 				java.util.Date utilDate=new java.util.Date();
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
 				sqlDate = new java.sql.Date(utilDate.getTime());
@@ -77,6 +77,7 @@ public class UpdateInfo extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
+		//Tags
 		List<String> myTags = manager.getEmployeeTags(id);
 		
 		for(int i = 0 ; i < myTags.size(); i++) {
@@ -87,7 +88,7 @@ public class UpdateInfo extends HttpServlet {
 		for(int i = 0 ; i < tags.length; i++) {
 			manager.addEmployeeTag(id, tags[i]);
 		}
-		
+		//Languages
 		String l = request.getParameter("languages");
 		String [] languages = l.split(","); 
 		List<Language> myLanguages = manager.getEmployeeLanguages(id);

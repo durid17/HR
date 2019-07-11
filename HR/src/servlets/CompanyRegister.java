@@ -47,6 +47,7 @@ public class CompanyRegister extends HttpServlet {
 		
 		//Check account
 		if(manager.getAccount(username) != null) {
+			request.setAttribute("used", true);
 			request.getRequestDispatcher("JSP/CompanyRegister.jsp").forward(request, response);
 			return;
 		}

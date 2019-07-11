@@ -54,7 +54,12 @@
 					<h4 id="title">About</h4>
 						<ul>
 							<li><p>Name - <%=profile.getName() %></p></li>
-							<li>  <p>Founded - <%=profile.getFounded() %> </p></li>
+							<%if(profile.getFounded() == null){ %>
+								<li>  <p>Founded - </p></li>
+							<%}else { %>
+								<li>  <p>Founded - <%=profile.getFounded() %> </p></li>>
+							<%} %>
+							
 							<li>  <p>Email - <%=profile.getEmail() %></p></li>
 							<li>  <p>Phone Number - <%=profile.getPhoneNumber() %></p></li>
 							<li>  <p>Address - <%=profile.getAddress() %></p></li>

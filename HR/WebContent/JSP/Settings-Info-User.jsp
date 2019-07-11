@@ -106,6 +106,27 @@
 			    <label for="phoneNumber"><b>Phone Number</b></label>
 			    <input type="number"  class="inp" id = "phoneNumber" name = "phoneNumber"  value=<%=profile.getPhoneNumber()%> required>
 			    
+			     <label for="locations"><b>Locations</b></label>
+				<select id = "locations" class="selectpicker" multiple data-live-search="true">
+				<%
+						List<String> locations = manager.getLocations();
+						List<Language> loc = manager.getEmployeeLanguages(employee.getId());
+						List<String> mylocations = new ArrayList<>();
+						for(int i = 0; i < loc.size(); i++){
+							mylocations.add(loc.get(i).getLanguage());
+						}
+							
+						for(int i = 0 ; i < locations.size(); i++){
+							out.print("<option value = \" ");
+							out.print(locations.get(i) + "\"");
+							if(mylocations.contains(locations.get(i))) 
+								out.print("selected = \"selected\"");
+							out.print(">");
+							out.print(locations.get(i) + "</option>");
+						}
+				%>
+				</select><br>
+			
 			     <label for="address"><b>Address</b></label>
 			    <textarea class="area" id = "address" name="address"><%=profile.getAddress()%></textarea>  
 			  

@@ -14,7 +14,11 @@
 
 <form action = "${pageContext.request.contextPath}/CompanyRegister" method ="post">
   <div class="container">
-    <h1>Register</h1>
+    <h1>Register
+     <%if(request.getAttribute("used") != null){ %>
+		<h3 style="color: red"> User name is already taken </h3>
+	<%} %>
+	</h1>
     <p>Please fill in this form to create an account. Required fields are marked with an asterisk (*).</p>
     <hr>
     

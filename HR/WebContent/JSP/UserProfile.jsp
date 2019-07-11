@@ -59,7 +59,7 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 		    <div class="mainInfo">
 		    	<h4><b></b></h4>  
 		    	<h3> <%= profile.getName() + " " + profile.getSurname()%></h3> 
-		    	<p> @<%= acc.getUsername()%></p> 
+		    	<p> @<%= employee.getAccount().getUsername()%></p> 
 		 	 	<hr>
 		   		<p><%=profile.getMajorProfession()%></p> 
 			</div>
@@ -74,7 +74,11 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 				<ul>
 					<li><p>First Name - <%=profile.getName() %></p></li>
 					<li><p>Last Name - <%=profile.getSurname() %></p></li>
-					<li>  <p>Birth Date - <%=profile.getBirthDate() %> </p></li>
+					<%if(profile.getBirthDate() == null){ %>
+						<li>  <p>Birth Date - </p></li>
+					<%}else { %>
+						<li>  <p>Birth Date - <%=profile.getBirthDate() %> </p></li>
+					<%} %>
 					<li>  <p>Major Profession - <%=profile.getMajorProfession() %></p></li>
 					<li>  <p>Email - <%=profile.getEmail() %></p></li>
 					<li>  <p>Phone Number - <%=profile.getPhoneNumber() %></p></li>
