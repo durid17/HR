@@ -37,7 +37,7 @@ public class InterestServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(1313515);
 		Account acc = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
