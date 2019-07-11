@@ -107,7 +107,7 @@
 			    <input type="number"  class="inp" id = "phoneNumber" name = "phoneNumber"  value=<%=profile.getPhoneNumber()%> required>
 			    
 			     <label for="locations"><b>Locations</b></label>
-				<select id = "locations" class="selectpicker" multiple data-live-search="true">
+				<select id = "address" class="selectpicker">
 				<%
 						List<String> locations = manager.getLocations();
 						List<Language> loc = manager.getEmployeeLanguages(employee.getId());
@@ -126,10 +126,6 @@
 						}
 				%>
 				</select><br>
-			
-			     <label for="address"><b>Address</b></label>
-			    <textarea class="area" id = "address" name="address"><%=profile.getAddress()%></textarea>  
-			  
 			   
 			    <label >About</label>
 			    <textarea  class="area"style=" resize: none;" id = "description" name="description"><%=profile.getDescription()%></textarea>
