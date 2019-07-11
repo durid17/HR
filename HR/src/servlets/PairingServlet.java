@@ -30,13 +30,18 @@ public class PairingServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+    public Pairing factor(DBManager manager) {
+    	return new Pairing(manager);
+    }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Account acc = (Account)request.getSession().getAttribute("account");
-		Pairing pair = new Pairing(manager);
+		Pairing pair = factor(manager);;
 		
 		List<Vacancy> vacancies = pair.getVacancies(acc.getID());
 		List<Company> companies = manager.getCompanies();
