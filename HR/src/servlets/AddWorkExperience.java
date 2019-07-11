@@ -42,7 +42,7 @@ public class AddWorkExperience extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String company = request.getParameter("company");
 		String position = request.getParameter("position");
 		String start = request.getParameter("start");

@@ -42,7 +42,7 @@ public class AddEducation extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String institution = request.getParameter("institution");
 		String subject = request.getParameter("subject");
 		String start = request.getParameter("start");
