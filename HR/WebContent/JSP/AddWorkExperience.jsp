@@ -41,10 +41,10 @@
 		  	<form action = "${pageContext.request.contextPath}/AddWorkExperience" method ="post">
 	
 			    <label for="company"><b>Company *</b></label>
-			    <textarea class="area" name="company"></textarea>
+			    <textarea class="area" name="company" required></textarea>
 			    
 			     <label for="profession"><b>Profession</b></label>
-			    <select id = "profession" name="profession">
+			    <select id = "profession" name="profession" >
 			    <%
 					List<String> professions = manager.getProfessions();
 			    	/*
@@ -62,22 +62,24 @@
 			    </select><br>
 			    
 			     <label for="position"><b>Position *</b></label>
-			    <textarea class="area" name="position"></textarea>
+			    <textarea class="area" name="position" required></textarea>
 			  
 			  	<p>Please select employement type:</p>
- 				 	<input type="radio" name="emptype" value="Full-Time" checked> Full-Time <br>
-		 			<input type="radio" name="emptype" value="Part-Time"> Part-Time<br>
-		 			<input type="radio" name="emptype" value="Internship"> Internship<br>  
-  				<br>
+			  	<select id = "emptype" name = "emptype">
+				  <option value="Full-time">Full-time</option>
+				  <option value="Part-time">Part-time</option>
+				  <option value="Intern"> Intern </option>
+				  <option value="Temporary">Temporary</option>
+				</select><br>
   				
   				 <label for="duty"><b>Duty</b></label>
-			    <textarea class="area" name="duty"></textarea><br><br>
+			    <textarea class="area" name="duty" required></textarea><br><br>
 			    
 			    <label for="achievement" ><b>Achievement</b></label>
-			    <textarea class="area" name="achievement"></textarea><br><br>
+			    <textarea class="area" name="achievement" required></textarea><br><br>
 			    
-  				Start Date *: <input type="date" class="inp" name="start" > <br><br>
-  				End Date *: <input type="date" class="inp" name="end" > <br><br>
+  				Start Date *: <input type="date" class="inp" name="start" required > <br><br>
+  				End Date *: <input type="date" class="inp" name="end" required> <br><br>
   			
 			    <hr>
 			   

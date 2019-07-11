@@ -40,10 +40,10 @@
 		  	<form action = "${pageContext.request.contextPath}/AddEducation" method ="post">
 	
 			    <label for="institution"><b>Institution</b></label>
-			    <textarea class="area" name="institution"></textarea>
+			    <textarea class="area" name="institution" required></textarea>
 			    
 			     <label for="major"><b>Major</b></label>
-			    <select id = "major" name="major">
+			    <select id = "major" name="major"	>
 			    <%
 					List<String> majors = manager.getProfessions();
 			    	/*
@@ -78,7 +78,7 @@
 			    %>
 			    </select><br>
 			     <label for="subject"><b>Subject</b></label>
-			    <textarea class="area" name="subject"></textarea>
+			    <textarea class="area" name="subject" required></textarea>
 			  
 			  	<label for="Degree"><b>Degree</b></label>
 				<select id = degree name="degree">
@@ -90,8 +90,8 @@
 				</select><br>
   				
   				<br>
-  				Start Date: <input type="date" class="inp" name="start" > <br><br>
-  				End Date: <input type="date" class="inp" name="end" > <br><br>
+  				Start Date: <input type="date" class="inp" name="start" required> <br><br>
+  				End Date: <input type="date" class="inp" name="end" required> <br><br>
   			
 			    <hr>
 			   

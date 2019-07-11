@@ -56,7 +56,7 @@ public class UpdateInfoCompany extends HttpServlet {
 		java.sql.Date sqlDate = null;
 		
 		try {
-			if(dt != null) {
+			if(! dt.equals("")) {
 				java.util.Date utilDate=new java.util.Date();
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
 				sqlDate = new java.sql.Date(utilDate.getTime());
