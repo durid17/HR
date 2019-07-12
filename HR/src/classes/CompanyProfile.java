@@ -47,6 +47,7 @@ public class CompanyProfile {
 	public CompanyProfile(String name, String description, String essence, Date founded, String logo, String email, String phoneNumber, String address) {
 		this.setName(name);
 		this.setDescription(description);
+		this.setEssence(essence);
 		this.setFounded(MyDateFormatter.truncate(founded));
 		this.setLogo(logo);
 		this.setEmail(email);
@@ -195,6 +196,7 @@ public class CompanyProfile {
 	 * @return the essence
 	 */
 	public String getEssence() {
+		if(essence == null) return "";
 		return essence;
 	}
 

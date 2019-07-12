@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Login.css">
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
@@ -17,7 +17,8 @@
 			<br>
 			<br>
 			
-			<input type="password" name="password" class="input-field" placeholder=" Password"  required>
+			<input type="password" id="myInput" name="password" class="input-field" placeholder=" Password"  required>
+	
 			<br> 
 			<br>
 				
@@ -32,9 +33,7 @@
 				<label style="color: red">Wrong Username Or Password</label>
 			<%} %>
 	</form>
-	
-	
-	
+
 	
 
 </body>

@@ -71,6 +71,7 @@ public class UpdateInfoCompany extends HttpServlet {
 		Company company = manager.getCompany(account.getID());
 		CompanyProfile profile = new CompanyProfile(name, description, essence, sqlDate, img, email, phoneNumber, address);
 		company.setProfile(profile);
+		System.out.println("Essence - " + profile.getEssence());
 		manager.updateCompany(company);	
 		
 		request.getRequestDispatcher("/JSP/Settings-Info-Company.jsp").forward(request, response);	

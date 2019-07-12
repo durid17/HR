@@ -15,8 +15,7 @@
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 
 <jsp:include page="Header.jsp" />
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/CompaniesListStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/CompaniesList.css">
 
 </head>
 
@@ -35,12 +34,13 @@
 		
 		<c:forEach var="company" items="${companies}">
 		
-			<a href="${pageContext.request.contextPath}/JSP/CompanyProfile.jsp?id=${company.getId()}">
-			
+			<a class="cardClass" href="${pageContext.request.contextPath}/JSP/CompanyProfile.jsp?id=${company.getId()}">
 			<div class="cardClass">	
-				<img class="labClass" id = "profileImage" src="${company.getProfile().getLogo()}" alt="Avatar">
-				<label class="labClass"> ${company.getProfile().getName()} </label>
-				<label class="labClass"> ${company.getProfile().getDescription()} </label> 			
+				
+						<img class="labClass" id = "profileImage" src="${company.getProfile().getLogo()}" alt="Avatar">
+						<label class="labClass" id="name"> ${company.getProfile().getName()} </label>
+						<label class="labClass" id="essence"> ${company.getProfile().getEssence()} </label> 			
+				
 			</div>
 			</a>
 		</c:forEach>

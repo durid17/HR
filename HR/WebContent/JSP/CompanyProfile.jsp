@@ -46,7 +46,11 @@
 			<div class="mainInfo">
 			    <p>Name: <%= profile.getName()%></p>
 			    <p>Essence: <%= profile.getEssence()%></p>
-			    <p>Founded in: <%= profile.getFounded()%></p>
+			    <%if(profile.getFounded() != null){ %>
+			    	<p>Founded in: <%= profile.getFounded()%></p>
+			    <%} else { %>
+			    	<p>Founded in: </p>	
+			    <%} %>
 			    <p>Location: <%= profile.getAddress()%></p>
 			    <p>Email: <%= profile.getEmail()%></p>
 			    <p>Phone Number: <%= profile.getPhoneNumber()%></p>
