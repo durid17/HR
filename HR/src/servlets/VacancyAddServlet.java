@@ -40,11 +40,16 @@ public class VacancyAddServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+	
+	public Vacancy factor(String heading, String position, String description, String jobType, int companyId, Requirement req, Date sqlDate) {
+		return new Vacancy(0, heading, position, description, jobType, companyId, req,
+				new Date(System.currentTimeMillis()),  sqlDate);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		String heading = request.getParameter("heading");
 		String prof = request.getParameter("profession");
@@ -67,24 +72,21 @@ public class VacancyAddServlet extends HttpServlet {
 		String [] tags = t.split(","); 
 		Requirement req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
 		Date sqlDate = null;
+		
 		try {
 			if(dt != null) {
 				java.util.Date utilDate = new java.util.Date();
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
 				sqlDate = new java.sql.Date(utilDate.getTime());
 			
-			} else {
-				System.out.println("Date carielia!");
-			}
+			} 
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
+		
 		Account company = (Account) request.getSession().getAttribute("account");
-		int companyId = 8;
-		if(company != null) companyId = company.getID();
-		Vacancy vacancy = new Vacancy(0, heading, position, description, jobType, companyId, req,
-					new Date(System.currentTimeMillis()) ,  sqlDate);
+		int companyId = company.getID();
+		Vacancy vacancy = factor(heading, position, description, jobType, companyId, req, sqlDate);
 		vacancy = manager.addVacancy(vacancy);
 		for(int i = 0 ; i < languages.length; i++) {
 			manager.addReqLanguage(vacancy.getId(), languages[i]);
@@ -96,7 +98,6 @@ public class VacancyAddServlet extends HttpServlet {
 		
 		JSONObject jobj = new JSONObject();
 		jobj.put("vacancyId", vacancy.getId());
-		//System.out.println(jobj.toString());
 		response.getWriter().write(jobj.toString());
 	}
 

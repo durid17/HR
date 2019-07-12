@@ -42,11 +42,16 @@ public class VacancyEditServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+	
+	public Vacancy factor(int id, String heading, String position, String description, String jobType, int companyId, Requirement req, Date sqlDate) {
+		return new Vacancy(id, heading, position, description, jobType, companyId, req,
+				new Date(System.currentTimeMillis()),  sqlDate);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		String heading = request.getParameter("heading");
 		String prof = request.getParameter("profession");
@@ -61,7 +66,7 @@ public class VacancyEditServlet extends HttpServlet {
 		String location = request.getParameter("location");
 		String l = request.getParameter("languages");
 		String t = request.getParameter("tags");
-		//System.out.println(request.getParameter("vacancyId"));
+		
 		JSONObject jsonid = new JSONObject(request.getParameter("vacancyId"));
 		int id = Integer.parseInt(jsonid.get("vacancyId").toString());
 		String qualification1 = request.getParameter("qualification_1");
@@ -78,19 +83,16 @@ public class VacancyEditServlet extends HttpServlet {
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
 				sqlDate = new java.sql.Date(utilDate.getTime());
 			
-			} else {
-				System.out.println("Date carielia!");
-			}
+			} 
+			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
+		
 		Account company = (Account) request.getSession().getAttribute("account");
-		int companyId = 8;
-		if(company != null) companyId = company.getID();
-		//System.out.println(id);
-		Vacancy vacancy = new Vacancy(id, heading, position, description, jobType, companyId, req,
-					new Date(System.currentTimeMillis()) ,  sqlDate);
+		int companyId = company.getID();
+		
+		Vacancy vacancy = factor(id, heading, position, description, jobType, companyId, req, sqlDate);
 		manager.updateVacancy(vacancy);
 		List<String> myTags = manager.getVacancyTags(vacancy.getId());
 		List<Language> myLanguages = manager.getRequirementLanguages(vacancy.getId());
@@ -98,6 +100,7 @@ public class VacancyEditServlet extends HttpServlet {
 		for(int i = 0 ; i < myTags.size(); i++) {
 			manager.removeVacancyTag(vacancy.getId(), myTags.get(i));
 		}
+		
 		for(int i = 0 ; i < myLanguages.size(); i++) {
 			manager.removeReqLanguage(vacancy.getId(), myLanguages.get(i).getLanguage());
 		}
@@ -105,6 +108,7 @@ public class VacancyEditServlet extends HttpServlet {
 		for(int i = 0 ; i < languages.length; i++) {
 			manager.addReqLanguage(vacancy.getId(), languages[i]);
 		}
+		
 		for(int i = 0 ; i < tags.length; i++) {
 			manager.addVacancyTag(vacancy.getId(), tags[i]);
 		}
@@ -112,7 +116,6 @@ public class VacancyEditServlet extends HttpServlet {
 		
 		JSONObject jobj = new JSONObject();
 		jobj.put("vacancyId", vacancy.getId());
-		//System.out.println(jobj.toString());
 		response.getWriter().write(jobj.toString());
 	}
 
