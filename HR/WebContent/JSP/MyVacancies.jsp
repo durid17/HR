@@ -74,9 +74,9 @@
           <div class="vacancy_content">
             <h4> Qualifications: </h4>
             <ul class="point">
-              <li> ${vacancy.getReq().getQualification1} </li>
-              <li> ${vacancy.getReq().getQualification2} </li>
-              <li> ${vacancy.getReq().getQualification3} </li>
+              <li> ${vacancy.getReq().getQualification1()} </li>
+              <li> ${vacancy.getReq().getQualification2()} </li>
+              <li> ${vacancy.getReq().getQualification3()} </li>
             </ul>
 
             <br> <br>
