@@ -403,7 +403,10 @@ public class DBManager {
 											+ "position, "
 											+ "years_of_experience, "
 											+ "location, "
-											+ "degree) VALUES (?,?,?,?,?,?,?,?,?,?)";
+											+ "degree, "
+											+ "qualification_1, "
+											+ "qualification_2, "
+											+ "qualification_3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -417,6 +420,9 @@ public class DBManager {
 			stmt.setInt(8,  req.getYearsOfExp());
 			stmt.setString(9,  req.getLocation());
 			stmt.setString(10, req.getDegree());
+			stmt.setString(11, req.getQualification1());
+			stmt.setString(12, req.getQualification2());
+			stmt.setString(13, req.getQualification3());
 
 			stmt.executeUpdate();
 			

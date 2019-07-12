@@ -123,6 +123,9 @@ class DBManagerTests {
 //		assertEquals(vacancy.getStartDate(), fromDBVacancy.getStartDate());
 		assertEquals(vacancy.getEndDate(), fromDBVacancy.getEndDate());
 		assertEquals(vacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
+		assertEquals(vacancy.getReq().getQualification1(), fromDBVacancy.getReq().getQualification1());
+		assertEquals(vacancy.getReq().getQualification2(), fromDBVacancy.getReq().getQualification2());
+		assertEquals(vacancy.getReq().getQualification3(), fromDBVacancy.getReq().getQualification3());
 		assertEquals(vacancy.getPosition(), fromDBVacancy.getPosition());
 		
 		Requirement updatedRequirement = new Requirement("Batumi", 5, "Bachelor", "Driver", "new qualification1", "new qualification2", "new qualification3");
@@ -138,6 +141,9 @@ class DBManagerTests {
 //		assertEquals(updatedVacancy.getStartDate(), fromDBVacancy.getStartDate());
 		assertEquals(updatedVacancy.getEndDate(), fromDBVacancy.getEndDate());
 		assertEquals(updatedVacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
+		assertEquals(updatedVacancy.getReq().getQualification1(), fromDBVacancy.getReq().getQualification1());
+		assertEquals(updatedVacancy.getReq().getQualification2(), fromDBVacancy.getReq().getQualification2());
+		assertEquals(updatedVacancy.getReq().getQualification3(), fromDBVacancy.getReq().getQualification3());
 		assertEquals(updatedVacancy.getPosition(), fromDBVacancy.getPosition());
 		
 		assertEquals(3, manager.getCompanyVacancies(TEST_COMPANY_ID).size());
@@ -175,8 +181,8 @@ class DBManagerTests {
 	void getDefaultListsTest() {
 		assertEquals(66, manager.getLocations().size());
 		assertEquals(67, manager.getProfessions().size());
-		assertEquals(6, manager.getEducationalInstitutionTypes().size());
-		assertEquals(6, manager.getDegrees().size());
+		assertEquals(5, manager.getEducationalInstitutionTypes().size());
+		assertEquals(5, manager.getDegrees().size());
 		assertEquals(4, manager.getQualities().size());
 		assertEquals(31, manager.getTags().size());
 		assertEquals(15, manager.getLanguages().size());
