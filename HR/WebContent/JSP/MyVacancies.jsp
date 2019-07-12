@@ -74,10 +74,9 @@
           <div class="vacancy_content">
             <h4> Qualifications: </h4>
             <ul class="point">
-              <li> As a developer you will participate in all agile processes starting from planning design architecture, implementation,
-                everyday meetings, planning and estimation, unit testing, code review </li>
-              <li> Write clean, stable and optimized code </li>
-              <li> Provide delivery with a team and code quality balance </li>
+              <li> ${vacancy.getReq().getQualification1} </li>
+              <li> ${vacancy.getReq().getQualification2} </li>
+              <li> ${vacancy.getReq().getQualification3} </li>
             </ul>
 
             <br> <br>

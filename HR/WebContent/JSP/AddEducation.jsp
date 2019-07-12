@@ -58,7 +58,7 @@
 			    	professions.add("prof4");
 			    	*/
 			    	for(int i = 0 ; i < majors.size(); i++){
-			    		out.print("<option value = \" ");
+			    		out.print("<option value = \"");
 						out.print(majors.get(i) + "\">");
 						out.print(majors.get(i) + "</option>");
 			    	}
@@ -76,7 +76,7 @@
 			    	professions.add("prof4");
 			    	*/
 			    	for(int i = 0 ; i < minors.size(); i++){
-			    		out.print("<option value = \" ");
+			    		out.print("<option value = \"");
 						out.print(minors.get(i) + "\">");
 						out.print(minors.get(i) + "</option>");
 			    	}

@@ -58,7 +58,7 @@
 			    	professions.add("prof4");
 			    	*/
 			    	for(int i = 0 ; i < professions.size(); i++){
-			    		out.print("<option value = \" ");
+			    		out.print("<option value = \"");
 						out.print(professions.get(i) + "\">");
 						out.print(professions.get(i) + "</option>");
 			    	}
@@ -72,7 +72,7 @@
 			  	<select id = "emptype" name = "emptype" class="selectpicker">
 				  <option value="Full-time">Full-time</option>
 				  <option value="Part-time">Part-time</option>
-				  <option value="Intern">Internship</option>
+				  <option value="Intern">Intern</option>
 				  <option value="Temporary">Temporary</option>
 				</select><br>
   				
