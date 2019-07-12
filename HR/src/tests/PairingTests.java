@@ -302,7 +302,7 @@ class PairingTests extends Mockito {
 		List<Vacancy> res = new ArrayList<Vacancy>(Arrays.asList(v9 , v3 , v2 , v4 , v8 , v5 , v11 ,
 					v12 , v10 , v13 , v1 , v6 , v7));
 		List<Vacancy> rs = pairing.getVacancies(0);
-		
+		Collections.reverse(rs);
 		assertEquals(res, rs);
 		
 	}
@@ -461,6 +461,7 @@ class PairingTests extends Mockito {
 //		}
 		List<Employee> res = new ArrayList<>(Arrays.asList(e11 , e10 , e12 , e1 , e9 , e8 , e5 , e7,
 					e0 , e2 , e3 , e6, e4));
+		Collections.reverse(rs);
 		assertEquals(res, rs);
 		
 	}

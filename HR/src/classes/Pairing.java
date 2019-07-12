@@ -36,8 +36,8 @@ public class Pairing {
 				if(firstMinor && !secondMinor) return 1;
 				if(!firstMinor && secondMinor) return -1;
 				
-				int firstExp = getYearsOfExp(employee.getId(), req0.getProfession());
-				int seconfExp = getYearsOfExp(employee.getId(), req1.getProfession());
+				int firstExp = getDaysOfExp(employee.getId(), req0.getProfession());
+				int seconfExp = getDaysOfExp(employee.getId(), req1.getProfession());
 				if(firstExp > seconfExp) return 1;
 				if(firstExp < seconfExp) return -1;
 				
@@ -54,8 +54,9 @@ public class Pairing {
 				return 0;
 			}		
 		});
-		
-		return all.subList(0, Math.min(all.size(), MAX_NUMBER_OF_VACANCYS));
+		List<Vacancy> res = all.subList(0, Math.min(all.size(), MAX_NUMBER_OF_VACANCYS));
+		Collections.reverse(res);
+		return res;
 	}
 	
 	public List<Employee> getEmoloyees(int vacancyId){
@@ -78,8 +79,8 @@ public class Pairing {
 				if(firstMinor && !secondMinor) return 1;
 				if(!firstMinor && secondMinor) return -1;
 				
-				int firstExp = getYearsOfExp(arg0.getId(), req.getProfession());
-				int seconfExp = getYearsOfExp(arg1.getId(), req.getProfession());
+				int firstExp = getDaysOfExp(arg0.getId(), req.getProfession());
+				int seconfExp = getDaysOfExp(arg1.getId(), req.getProfession());
 				if(firstExp > seconfExp) return 1;
 				if(firstExp < seconfExp) return -1;
 				
@@ -96,8 +97,9 @@ public class Pairing {
 				return 0;
 			}		
 		});
-		
-		return applicants.subList(0, Math.min(applicants.size(), MAX_NUMBER_OF_APPLICANTS));
+		List<Employee> res = applicants.subList(0, Math.min(applicants.size(), MAX_NUMBER_OF_APPLICANTS));
+		Collections.reverse(res);
+		return res;
 	}
 	
 	private List<String> values(List<Language> lan){
@@ -132,12 +134,15 @@ public class Pairing {
 		return false;
 	}
 
-	private int getYearsOfExp(int employeeId , String proff) {
+	private int getDaysOfExp(int employeeId , String proff) {
 		List<WorkExperience> exp = manager.getWorkExps(employeeId);
 		int sum = 0;
 		for(WorkExperience e : exp) {
+			System.out.println(1);
+			System.out.println(e.getProfession());
+			System.out.println(proff);
 			if(proff.equals(e.getProfession()))
-					sum += MyDateFormatter.yearsBetween(e.getStartDate() , e.getEndDate());
+					sum += MyDateFormatter.daysBetween(e.getStartDate() , e.getEndDate());
 		}
 		return sum;
 	}

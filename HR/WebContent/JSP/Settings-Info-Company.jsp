@@ -41,6 +41,9 @@
 			   	<label for="name"><b>Name *</b></label>
 			    <textarea class="area" name="name" required><%=profile.getName()%></textarea>
 			    
+			    <label for="name"><b>Essence *</b></label>
+			    <textarea class="area" name="essence" required><%=profile.getEssence()%></textarea>
+			    
   				<label for="date"><b>Founded</b></label>
   				<input type="date" class="inp" name="date" value=<%=profile.getFounded() %>> <br>
   				
