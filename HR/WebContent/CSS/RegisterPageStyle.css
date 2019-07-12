@@ -1,5 +1,11 @@
 * {box-sizing:border-box}
 
+html, body {
+	margin: 0; 
+	height: 100%; 
+	overflow: hidden
+}
+
 /* Slideshow container */
 .slideshow-container {
   	max-width: 100%;

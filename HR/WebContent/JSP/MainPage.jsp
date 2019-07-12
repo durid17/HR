@@ -20,15 +20,15 @@
 	
 	  	<!-- Full-width images with number and caption text -->
 	  	<div class="mySlides fade">
-		    <img src="../Images/main05.jpg" style="width:100%">
+		    <img src="../Images/main01.png" style="width:100%">
 		</div>
 	
 	  	<div class="mySlides fade">
-	    	<img src="../Images/main04.jpg" style="width:100%">
+	    	<img src="../Images/main02.png" style="width:100%">
 	  	</div>
 	
 	  	<div class="mySlides fade">
-	    	<img src="../Images/main03.jpg" style="width:100%">
+	    	<img src="../Images/main03.png" style="width:100%">
 	  	</div>
 		
 		<div class="container">

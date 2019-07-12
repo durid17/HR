@@ -1,9 +1,38 @@
 @charset "ISO-8859-1";
+
+.profileInfoLeft {
+	font-family: "Roboto";
+	position: absolute;
+	left: 2%;
+	top: 10%;
+	width: 20%;
+	height: auto;
+	float: left;
+	opacity: 0.97;
+  	border-radius: 20px;
+  	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  	padding: 2%;
+}
+
+.imgAvatar {
+	width: 100%;
+	height: auto;
+}
+
+.vacancies {
+	position: absolute;
+	top: 10%;
+	left: 26%;
+	float: right;
+	width: 74%;
+}
+
 .vacancy {
-  width: 90%;
+  width: 80%;
   padding: 20px;
-  margin-top: 20px;
+  margin-left: 8%;
   background-color: #f4f4f4;
+  border-radius: 10px;
 }
 
 .unstyled-list {
