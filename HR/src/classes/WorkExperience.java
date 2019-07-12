@@ -2,19 +2,55 @@ package classes;
 
 import java.sql.Date;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WorkExperience.
+ */
 public class WorkExperience {
+	
+	/** The Constant DEFAULT_ID. */
 	public static final int DEFAULT_ID = 0;
 	
+	/** The id. */
 	private int id;
+	
+	/** The start date. */
 	private Date startDate;
+	
+	/** The end date. */
 	private Date endDate;
+	
+	/** The company name. */
 	private String companyName;
+	
+	/** The profession. */
 	private String profession;
+	
+	/** The position. */
 	private String position;
+	
+	/** The employment type. */
 	private String employmentType; //full-time, part-time, internship
+	
+	/** The duty. */
 	private String duty;
+	
+	/** The achievement. */
 	private String achievement;
 	
+	/**
+	 * Instantiates a new work experience.
+	 *
+	 * @param id the id
+	 * @param start the start
+	 * @param end the end
+	 * @param company the company
+	 * @param prof the prof
+	 * @param pos the pos
+	 * @param empType the emp type
+	 * @param duty the duty
+	 * @param award the award
+	 */
 	public WorkExperience(int id, Date start, Date end, String company, String prof, String pos, 
 			String empType, String duty, String award) {
 		this.id = id;
@@ -28,74 +64,164 @@ public class WorkExperience {
 		this.achievement = award;
 	}
 	
+	/**
+	 * Gets the start date.
+	 *
+	 * @return the start date
+	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 	
+	/**
+	 * Sets the start date.
+	 *
+	 * @param startDate the new start date
+	 */
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	
+	/**
+	 * Gets the end date.
+	 *
+	 * @return the end date
+	 */
 	public Date getEndDate() {
 		return endDate;
 	}
 	
+	/**
+	 * Sets the end date.
+	 *
+	 * @param endDate the new end date
+	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	
+	/**
+	 * Gets the company name.
+	 *
+	 * @return the company name
+	 */
 	public String getCompanyName() {
 		return companyName;
 	}
 	
+	/**
+	 * Sets the company name.
+	 *
+	 * @param companyName the new company name
+	 */
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
 	
+	/**
+	 * Gets the postition.
+	 *
+	 * @return the postition
+	 */
 	public String getPostition() {
 		return position;
 	}
 	
+	/**
+	 * Sets the position.
+	 *
+	 * @param position the new position
+	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 
+	/**
+	 * Gets the duty.
+	 *
+	 * @return the duty
+	 */
 	public String getDuty() {
 		return duty;
 	}
 	
+	/**
+	 * Sets the duty.
+	 *
+	 * @param duty the new duty
+	 */
 	public void setDuty(String duty) {
 		this.duty = duty;
 	}
 	
+	/**
+	 * Gets the achievement.
+	 *
+	 * @return the achievement
+	 */
 	public String getAchievement() {
 		return achievement;
 	}
 	
+	/**
+	 * Sets the achievement.
+	 *
+	 * @param achievement the new achievement
+	 */
 	public void setAchievement(String achievement) {
 		this.achievement = achievement;
 	}
 	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * Gets the employment type.
+	 *
+	 * @return the employment type
+	 */
 	public String getEmploymentType() {
 		return employmentType;
 	}
 
+	/**
+	 * Sets the employment type.
+	 *
+	 * @param employmentType the new employment type
+	 */
 	public void setEmploymentType(String employmentType) {
 		this.employmentType = employmentType;
 	}
 	
+	/**
+	 * Gets the profession.
+	 *
+	 * @return the profession
+	 */
 	public String getProfession() {
 		return profession;
 	}
 
+	/**
+	 * Sets the profession.
+	 *
+	 * @param profession the new profession
+	 */
 	public void setProfession(String profession) {
 		this.profession = profession;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "WorkExperience [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", companyName="
@@ -103,6 +229,11 @@ public class WorkExperience {
 				+ ", achievement=" + achievement + "]";
 	}
 	
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,6 +250,12 @@ public class WorkExperience {
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

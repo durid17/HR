@@ -2,19 +2,55 @@ package classes;
 
 import java.sql.Date;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmployeeEducation.
+ */
 public class EmployeeEducation {
+	
+	/** The Constant DEFAULT_ID. */
 	public static final int DEFAULT_ID = 0;
 	
+	/** The id. */
 	private int id;
+	
+	/** The start date. */
 	private Date startDate;
+	
+	/** The end date. */
 	private Date endDate;
+	
+	/** The educational institution. */
 	private String educationalInstitution;
+	
+	/** The institution name. */
 	private String institutionName;
+	
+	/** The major. */
 	private String major;
+	
+	/** The minor. */
 	private String minor;
+	
+	/** The degree. */
 	private String degree;
+	
+	/** The grade. */
 	private double grade;
 	
+	/**
+	 * Instantiates a new employee education.
+	 *
+	 * @param id the id
+	 * @param start the start
+	 * @param end the end
+	 * @param educationalInstitution the educational institution
+	 * @param institutionName the institution name
+	 * @param major the major
+	 * @param minor the minor
+	 * @param degree the degree
+	 * @param grade the grade
+	 */
 	public EmployeeEducation(int id, Date start, Date end, String educationalInstitution, 
 			String institutionName, String major, String minor, String degree, double grade) {
 		this.id = id;
@@ -28,74 +64,164 @@ public class EmployeeEducation {
 		this.grade = grade;
 	}
 	
+	/**
+	 * Gets the start date.
+	 *
+	 * @return the start date
+	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 	
+	/**
+	 * Sets the start date.
+	 *
+	 * @param startDate the new start date
+	 */
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
+	/**
+	 * Gets the end date.
+	 *
+	 * @return the end date
+	 */
 	public Date getEndDate() {
 		return endDate;
 	}
 
+	/**
+	 * Sets the end date.
+	 *
+	 * @param endDate the new end date
+	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
+	/**
+	 * Gets the educational institution.
+	 *
+	 * @return the educational institution
+	 */
 	public String getEducationalInstitution() {
 		return educationalInstitution;
 	}
 
+	/**
+	 * Sets the educational institution.
+	 *
+	 * @param educationalInstitution the new educational institution
+	 */
 	public void setEducationalInstitution(String educationalInstitution) {
 		this.educationalInstitution = educationalInstitution;
 	}
 
+	/**
+	 * Gets the institution name.
+	 *
+	 * @return the institution name
+	 */
 	public String getInstitutionName() {
 		return institutionName;
 	}
 
+	/**
+	 * Sets the institution name.
+	 *
+	 * @param institutionName the new institution name
+	 */
 	public void setInstitutionName(String institutionName) {
 		this.institutionName = institutionName;
 	}
 
+	/**
+	 * Gets the degree.
+	 *
+	 * @return the degree
+	 */
 	public String getDegree() {
 		return degree;
 	}
 
+	/**
+	 * Sets the degree.
+	 *
+	 * @param degree the new degree
+	 */
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
 
+	/**
+	 * Gets the grade.
+	 *
+	 * @return the grade
+	 */
 	public double getGrade() {
 		return grade;
 	}
 
+	/**
+	 * Sets the grade.
+	 *
+	 * @param grade the new grade
+	 */
 	public void setGrade(double grade) {
 		this.grade = grade;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the major.
+	 *
+	 * @return the major
+	 */
 	public String getMajor() {
 		return major;
 	}
 
+	/**
+	 * Sets the major.
+	 *
+	 * @param major the new major
+	 */
 	public void setMajor(String major) {
 		this.major = major;
 	}
 
+	/**
+	 * Gets the minor.
+	 *
+	 * @return the minor
+	 */
 	public String getMinor() {
 		return minor;
 	}
 
+	/**
+	 * Sets the minor.
+	 *
+	 * @param minor the new minor
+	 */
 	public void setMinor(String minor) {
 		this.minor = minor;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "EmployeeEducation [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate
@@ -103,6 +229,11 @@ public class EmployeeEducation {
 				+ ", major=" + major + ", minor=" + minor + ", degree=" + degree + ", grade=" + grade + "]";
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -121,6 +252,12 @@ public class EmployeeEducation {
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -1,32 +1,71 @@
 package classes;
 
+/**
+ * The Class Tag.
+ */
 public class Tag {
+	
+	/** The Constant DEFAULT_ID. */
 	public static final int DEFAULT_ID = 0;
 	
+	/** The id. */
 	private int id;
+	
+	/** The tag name. */
 	private String tagName;
 	
+	/**
+	 * Instantiates a new tag.
+	 *
+	 * @param tagName the tag name
+	 */
 	public Tag(String tagName) {
 		this.tagName = tagName;
 	}
 	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the tag name.
+	 *
+	 * @return the tag name
+	 */
 	public String getTagName() {
 		return tagName;
 	}
 
+	/**
+	 * Gets the tag name.
+	 *
+	 * @param tag the tag
+	 * @return the tag name
+	 */
 	public void getTagName(String tag) {
 		this.tagName = tag;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "Tag [id=" + id + ", tag=" + tagName + "]";
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -36,6 +75,12 @@ public class Tag {
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -1,38 +1,78 @@
 package classes;
 
-import java.util.List;
-
+/**
+ * The Class Employee.
+ */
 public class Employee {
 	
+	/** The account. */
 	private Account account;
+	
+	/** The profile. */
 	private EmployeeProfile profile;
 	
+	/**
+	 * Instantiates a new employee.
+	 *
+	 * @param account the account
+	 * @param profile the profile
+	 */
 	public Employee(Account account, EmployeeProfile profile) {
 		this.account = account;
 		this.profile = profile;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return account.getID();
 	}
 
+	/**
+	 * Gets the account.
+	 *
+	 * @return the account
+	 */
 	public Account getAccount() {
 		return account;
 	}
 
+	/**
+	 * Gets the profile.
+	 *
+	 * @return the profile
+	 */
 	public EmployeeProfile getProfile() {
 		return profile;
 	}
 
+	/**
+	 * Sets the profile.
+	 *
+	 * @param profile the new profile
+	 */
 	public void setProfile(EmployeeProfile profile) {
 		this.profile = profile;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "Employee [account=" + account + ", profile=" + profile + "]";
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -42,6 +82,12 @@ public class Employee {
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

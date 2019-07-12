@@ -2,17 +2,48 @@ package classes;
 
 import java.sql.Date;
 
+/**
+ * The Class CompanyProfile.
+ */
 public class CompanyProfile {
+	
+	/** The name. */
 	private String name;
+	
+	/** The description. */
 	private String description;
+	
+	/** The essence. */
 	private String essence;
+	
+	/** The founded. */
 	private Date founded;
+	
+	/** The logo. */
 	private String logo;
+	
+	/** The email. */
 	private String email;
+	
+	/** The phone number. */
 	private String phoneNumber;
+	
+	/** The address. */
 	private String address;
 	
 	
+	/**
+	 * Instantiates a new company profile.
+	 *
+	 * @param name the name
+	 * @param description the description
+	 * @param essence the essence
+	 * @param founded the founded
+	 * @param logo the logo
+	 * @param email the email
+	 * @param phoneNumber the phone number
+	 * @param address the address
+	 */
 	public CompanyProfile(String name, String description, String essence, Date founded, String logo, String email, String phoneNumber, String address) {
 		this.setName(name);
 		this.setDescription(description);
@@ -23,79 +54,164 @@ public class CompanyProfile {
 		this.setAddress(address);
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		if(name == null) return "";
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription() {
 		if(description == null) return "";
 		return description;
 	}
 
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the new description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Gets the founded.
+	 *
+	 * @return the founded
+	 */
 	public Date getFounded() {
 		return founded;
 	}
 
 	
+	/**
+	 * Sets the founded.
+	 *
+	 * @param founded the new founded
+	 */
 	public void setFounded(Date founded) {
 		this.founded = founded;
 	}
 
 	
+	/**
+	 * Gets the logo.
+	 *
+	 * @return the logo
+	 */
 	public String getLogo() {
 		if(logo == null) return "";
 		return logo;
 	}
 
 	
+	/**
+	 * Sets the logo.
+	 *
+	 * @param logo the new logo
+	 */
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
 
+	/**
+	 * Gets the email.
+	 *
+	 * @return the email
+	 */
 	public String getEmail() {
 		if(email == null) return "";
 		return email;
 	}
 
+	/**
+	 * Sets the email.
+	 *
+	 * @param email the new email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Gets the phone number.
+	 *
+	 * @return the phone number
+	 */
 	public String getPhoneNumber() {
 		if(phoneNumber == null) return "";
 		return phoneNumber;
 	}
 
+	/**
+	 * Sets the phone number.
+	 *
+	 * @param phoneNumber the new phone number
+	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
+	/**
+	 * Gets the address.
+	 *
+	 * @return the address
+	 */
 	public String getAddress() {
 		if(address == null) return "";
 		return address;
 	}
 
+	/**
+	 * Sets the address.
+	 *
+	 * @param address the new address
+	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
+	/**
+	 * Gets the essence.
+	 *
+	 * @return the essence
+	 */
 	public String getEssence() {
 		return essence;
 	}
 
+	/**
+	 * Sets the essence.
+	 *
+	 * @param essence the new essence
+	 */
 	public void setEssence(String essence) {
 		this.essence = essence;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "CompanyProfile [name=" + name + ", description=" + description + ", essence=" + essence + ", founded="
@@ -103,6 +219,11 @@ public class CompanyProfile {
 				+ address + "]";
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -118,6 +239,12 @@ public class CompanyProfile {
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

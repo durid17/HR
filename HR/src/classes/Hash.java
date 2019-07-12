@@ -3,9 +3,16 @@ package classes;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * The Class Hash.
+ */
 public class Hash {
 	
-	/*
+	/**
+	 * Hex to string.
+	 *
+	 * @param bytes the bytes
+	 * @return the string
 	 Given a byte[] array, produces a hex String,
 	 such as "234a6f". with 2 chars for each byte in the array.
 	 (provided code)
@@ -22,14 +29,19 @@ public class Hash {
 	}
 	
 	
-	// returns hash of the given string 
+	/**
+	 * Gets the hash.
+	 *
+	 * @param str the str
+	 * @return the hash
+	 * returns hash of the given string 
+	 */
 	public static String getHash(String str) {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("SHA");
 			messageDigest.update(str.getBytes());
 			return hexToString(messageDigest.digest());
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

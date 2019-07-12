@@ -2,22 +2,42 @@ package classes;
 
 import java.util.*;
 
+/**
+ * The Class Pairing.
+ */
 public class Pairing {
+	
+	/** The manager. */
 	private DBManager manager;
+	
+	/** The max number of applicants. */
 	private final int MAX_NUMBER_OF_APPLICANTS = 18;
-	private final int MAX_NUMBER_OF_VACANCYS = 30;
+	
+	/** The max number of vacancies. */
+	private final int MAX_NUMBER_OF_VACANCIES = 30;
 
 	
+	/**
+	 * Instantiates a new pairing.
+	 *
+	 * @param manager the manager
+	 */
 	public Pairing(DBManager manager) {
 		this.manager = manager;
 	}
 	
+	/**
+	 * Gets the vacancies.
+	 *
+	 * @param employeeId the employee id
+	 * @return the best vacancies suitable for employee
+	 * generated with a special algrithm
+	 */
 	public List<Vacancy> getVacancies(int employeeId){
 		Employee employee = manager.getEmployee(employeeId);
 		List<String> tags = manager.getEmployeeTags(employeeId);
 		List<Language> lan = manager.getEmployeeLanguages(employeeId);
 		List<Vacancy> all = manager.getVacancies();
-//		System.out.println(all.size());
 		
 		all.sort(new Comparator<Vacancy>() {
 			@Override
@@ -54,11 +74,18 @@ public class Pairing {
 				return 0;
 			}		
 		});
-		List<Vacancy> res = all.subList(0, Math.min(all.size(), MAX_NUMBER_OF_VACANCYS));
+		List<Vacancy> res = all.subList(0, Math.min(all.size(), MAX_NUMBER_OF_VACANCIES));
 		Collections.reverse(res);
 		return res;
 	}
 	
+	/**
+	 * Gets the emoloyees.
+	 *
+	 * @param vacancyId the vacancy id
+	 * @return best employees suitable for vacancy
+	 * generated with our special algrithm
+	 */
 	public List<Employee> getEmoloyees(int vacancyId){
 		Vacancy vacancy = manager.getVacancy(vacancyId);
 		Requirement req = vacancy.getReq();
@@ -102,6 +129,12 @@ public class Pairing {
 		return res;
 	}
 	
+	/**
+	 * Values.
+	 *
+	 * @param List of languages
+	 * @return List og Languages values in strings
+	 */
 	private List<String> values(List<Language> lan){
 		List<String> res = new ArrayList<String>();
 		for(Language l : lan) {
@@ -110,6 +143,13 @@ public class Pairing {
 		return res;
 	}
 	
+	/**
+	 * Gets the common.
+	 *
+	 * @param tags the vacancy tags
+	 * @param employeeTags the employee tags
+	 * @return common tags between this two
+	 */
 	private int getCommon(List<String> tags, List<String> employeeTags) {
 		int res = 0;
 		for(String s: tags) {
@@ -118,6 +158,14 @@ public class Pairing {
 		return res;
 	}
 	
+	/**
+	 * Checks for minor.
+	 *
+	 * @param employeeId the employee id
+	 * @param profession the profession
+	 * @param degree the degree
+	 * @return true, if employees has minor education in this profession with this degree
+	 */
 	private boolean hasMinor(int employeeId, String profession, String degree) {
 		List<EmployeeEducation> edu = manager.getEducation(employeeId);
 		for(EmployeeEducation e : edu) {
@@ -126,6 +174,14 @@ public class Pairing {
 		return false;
 	}
 	
+	/**
+	 * Checks for major.
+	 *
+	 * @param employeeId the employee id
+	 * @param profession the profession
+	 * @param degree the degree
+	 * @return true, if if employees has major education in this profession with this degree
+	 */
 	private boolean hasMajor(int employeeId, String profession, String degree) {
 		List<EmployeeEducation> edu = manager.getEducation(employeeId);
 		for(EmployeeEducation e : edu) {
@@ -134,40 +190,20 @@ public class Pairing {
 		return false;
 	}
 
+	/**
+	 * Gets the days of experience
+	 *
+	 * @param employeeId the employee id
+	 * @param proff the profession
+	 * @return the days of experience
+	 */
 	private int getDaysOfExp(int employeeId , String proff) {
 		List<WorkExperience> exp = manager.getWorkExps(employeeId);
 		int sum = 0;
 		for(WorkExperience e : exp) {
-			System.out.println(1);
-			System.out.println(e.getProfession());
-			System.out.println(proff);
 			if(proff.equals(e.getProfession()))
 					sum += MyDateFormatter.daysBetween(e.getStartDate() , e.getEndDate());
 		}
 		return sum;
 	}
 }
-
-
-//private boolean Qualified(int employeeId, String profession, String degree) {
-//	return hasMajor(employeeId, profession, degree) || hasMinor(employeeId, profession, degree);
-//}
-//		for(Vacancy vacancy : all) {
-//			Requirement req = vacancy.getReq();
-//			int years = getYearsOfExp(employee.getId() , req.getProfession());
-//			if(years < req.getYearsOfExp()) continue;
-//			if(!prof.getAddress().equals(req.getLocation())) continue;
-//			if(!Qualified(employee.getId() , req.getProfession() , req.getDegree())) continue;
-//			res.add(vacancy);
-//		}	
-
-
-
-//		for(Employee employee : applicants) {
-//			int years = getYearsOfExp(employee.getId() , req.getProfession());
-//			EmployeeProfile prof = employee.getProfile();
-//			if(years < req.getYearsOfExp()) continue;
-//			if(!prof.getAddress().equals(req.getLocation())) continue;
-//			if(!Qualified(employee.getId() , req.getProfession() , req.getDegree())) continue;
-//			res.add(employee);
-//		}	

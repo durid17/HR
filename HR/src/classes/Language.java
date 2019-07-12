@@ -1,13 +1,33 @@
 package classes;
 
+/**
+ * The Class Language.
+ */
 public class Language {
+	
+	/** The Constant DEFAULT_ID. */
 	public static final int DEFAULT_ID = 0;
 	
+	/** The id. */
 	private int id;
+	
+	/** The language. */
 	private String language;
+	
+	/** The quality. */
 	private String quality;
+	
+	/** The certificate. */
 	private String certificate;
 	
+	/**
+	 * Instantiates a new language.
+	 *
+	 * @param id the id
+	 * @param language the language
+	 * @param quality the quality
+	 * @param certificate the certificate
+	 */
 	public Language(int id, String language, String quality, String certificate) {
 		this.id = id;
 		this.language = language;
@@ -15,40 +35,85 @@ public class Language {
 		this.certificate = certificate;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the language.
+	 *
+	 * @return the language
+	 */
 	public String getLanguage() {
 		return language;
 	}
 
+	/**
+	 * Sets the language.
+	 *
+	 * @param language the new language
+	 */
 	public void setLanguage(String language) {
 		this.language = language;
 	}
 
+	/**
+	 * Gets the quality.
+	 *
+	 * @return the quality
+	 */
 	public String getQuality() {
 		return quality;
 	}
 
+	/**
+	 * Sets the quality.
+	 *
+	 * @param quality the new quality
+	 */
 	public void setQuality(String quality) {
 		this.quality = quality;
 	}
 
+	/**
+	 * Gets the certificate.
+	 *
+	 * @return the certificate
+	 */
 	public String getCertificate() {
 		return certificate;
 	}
 
+	/**
+	 * Sets the certificate.
+	 *
+	 * @param certificate the new certificate
+	 */
 	public void setCertificate(String certificate) {
 		this.certificate = certificate;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "Language [id=" + id + ", language=" + language + ", quality=" + quality + ", certificate=" + certificate
 				+ "]";
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,6 +125,12 @@ public class Language {
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

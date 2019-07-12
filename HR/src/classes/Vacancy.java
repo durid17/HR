@@ -2,22 +2,61 @@ package classes;
 
 import java.sql.Date;
 
+/**
+ * The Class Vacancy.
+ */
 public class Vacancy {
+	
+	/** The Constant PART_TIME_EMP_TYPE. */
 	public static final String PART_TIME_EMP_TYPE = "Part-time";
+	
+	/** The Constant FULL_TIME_EMP_TYPE. */
 	public static final String FULL_TIME_EMP_TYPE = "Full-time";
+	
+	/** The Constant INTERNSHIP_EMP_TYPE. */
 	public static final String INTERNSHIP_EMP_TYPE = "Internship";
 	
+	/** The id. */
 	private int id;
-	private String heading; // prosta satauri
-	private String position; // aq ra poziciaze edzebs tanamshromels
+	
+	/** The heading. */
+	private String heading;
+	
+	/** The position. */
+	private String position;
+	
+	/** The description. */
 	private String description; 
-	private String empType; // part-time, full-time
+	
+	/** The emp type. */
+	private String empType;
+	
+	/** The company id. */
 	private int companyId;
+	
+	/** The req. */
 	private Requirement req;
+	
+	/** The start date. */
 	private Date startDate;
+	
+	/** The end date. */
 	private Date endDate;
 	
 	
+	/**
+	 * Instantiates a new vacancy.
+	 *
+	 * @param id the id
+	 * @param heading the heading
+	 * @param position the position
+	 * @param description the description
+	 * @param empType the emp type
+	 * @param companyId the company id
+	 * @param req the req
+	 * @param startDate the start date
+	 * @param endDate the end date
+	 */
 	public Vacancy(int id, String heading, String position, String description, String empType, 
 			int companyId, Requirement req, Date startDate, Date endDate) {
 		this.id = id;
@@ -31,66 +70,146 @@ public class Vacancy {
 		this.endDate = MyDateFormatter.truncate(endDate);
 	}
 	
+	/**
+	 * Gets the heading.
+	 *
+	 * @return the heading
+	 */
 	public String getHeading() {
 		return heading;
 	}
 	
+	/**
+	 * Sets the heading.
+	 *
+	 * @param heading the new heading
+	 */
 	public void setHeading(String heading) {
 		this.heading = heading;
 	}
 	
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
 	
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the new description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	
+	/**
+	 * Gets the req.
+	 *
+	 * @return the req
+	 */
 	public Requirement getReq() {
 		return req;
 	}
 	
+	/**
+	 * Sets the req.
+	 *
+	 * @param req the new req
+	 */
 	public void setReq(Requirement req) {
 		this.req = req;
 	}
 	
+	/**
+	 * Gets the start date.
+	 *
+	 * @return the start date
+	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 	
+	/**
+	 * Gets the end date.
+	 *
+	 * @return the end date
+	 */
 	public Date getEndDate() {
 		return endDate;
 	}
 	
+	/**
+	 * Sets the end date.
+	 *
+	 * @param endDate the new end date
+	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
+	/**
+	 * Gets the company id.
+	 *
+	 * @return the company id
+	 */
 	public int getCompanyId() {
 		return companyId;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the emp type.
+	 *
+	 * @return the emp type
+	 */
 	public String getEmpType() {
 		return empType;
 	}
 
+	/**
+	 * Sets the emp type.
+	 *
+	 * @param empType the new emp type
+	 */
 	public void setEmpType(String empType) {
 		this.empType = empType;
 	}
 
+	/**
+	 * Gets the position.
+	 *
+	 * @return the position
+	 */
 	public String getPosition() {
 		return position;
 	}
 
+	/**
+	 * Sets the position.
+	 *
+	 * @param position the new position
+	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "Vacancy [id=" + id + ", heading=" + heading + ", position=" + position + ", description=" + description
@@ -98,6 +217,11 @@ public class Vacancy {
 				+ ", endDate=" + endDate + "]";
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -114,6 +238,12 @@ public class Vacancy {
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
