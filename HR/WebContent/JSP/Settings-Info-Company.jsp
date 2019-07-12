@@ -57,7 +57,7 @@
 			    <textarea class="area" name="address"><%=profile.getAddress()%></textarea>
 			    
 			    <label><b>About</b></label>
-			    <textarea  class="area"style=" resize: none;" name="description"><%=profile.getDescription()%></textarea>
+			    <textarea  class="area"style=" resize: vertical;" name="description"><%=profile.getDescription()%></textarea>
 			    
 			    <label for="image"><b>Image *</b></label>
 			    <input type="text"  class="inp" name = "image"  value=<%=profile.getLogo()%> required>
@@ -67,9 +67,5 @@
 			    <button type="submit" class="submitButton">Save Changes</button> <br><br>
 	  		</form>
   		 </div>
-		
-	
-		
-		
 </body>
 </html>

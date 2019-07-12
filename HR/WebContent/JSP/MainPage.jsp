@@ -33,28 +33,13 @@
 		
 		<div class="container">
 			<div class="subheader">
-		    	<h1>JOIN US</h1>
-				<h4>Our recruiting platform is made to meet the needs of any business. Powerful software that makes hiring easy.</h4>
-		  	</div>
-			
-			<div class="button-container">
-				<button class="my-button" id="company">I want to hire</button> <br>
-				<button class="my-button" id=worker>I want to work</button>
+		    	<h1 class="subheader-text">Powerful software that makes hiring easy.</h1>
+		    	<p><i>"If you think hiring professionals is expensive, try hiring amateurs"</i></p>
+		    	<p align="right"><i>- Anonymous</i></p>
 			</div>
 		</div>
 	</div>
 </body>
-
-<script type="text/javascript">
-	document.getElementById("company").onclick = function() {
-		location.href = "CompanyRegister.jsp";
-	};
-
-	document.getElementById("worker").onclick = function() {
-		location.href = "ClientRegister.jsp";
-	};
-</script>
-
 
 <script>	
 	var slideIndex = 0;

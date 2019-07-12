@@ -128,7 +128,7 @@
 				</select><br>
 			   
 			    <label ><b>About</b></label>
-			    <textarea  class="area"style=" resize: none;" id = "description" name="description"><%=profile.getDescription()%></textarea>
+			    <textarea  class="area"style=" resize: vertical;" id = "description" name="description"><%=profile.getDescription()%></textarea>
 				
 				<label for="image"><b>Image</b></label>
 			    <input type="text"  id = "image" class="inp" name = "image"  value=<%=profile.getProfilePicture()%> required>

@@ -10,12 +10,12 @@
 
 .container {
 	width: 30%;
-	height: 60%;
+	height: 40%;
 	background: white;
 	opacity: 0.97;
   	position: absolute;
-  	top: 20%;
-  	left: 35%;
+  	top: 30%;
+  	left: 7%;
   	text-align: center;
   	border-radius: 20px;
   	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
@@ -31,28 +31,8 @@
 	padding-bottom: 2%;
 }
 
-.button-container {
-	padding: auto;
-}
-
-.my-button {
-	opacity: 1;
-	width: 60%;
-	font-family: "Roboto";
-	font-style: italic;
-	color: white;
-	font-size: 1.3vw;
-	border: none;
-	padding: 5% 10%;
-	background-color: #323F6C;
-	cursor: pointer;
-	margin: 4px 2px;
-	border-radius: 12px;
-	text-align: center;
-}
-
-.my-button:hover {
-	transform: scale(1.08)
+.subheader-text {
+	margin-bottom: 10%;
 }
 
 /* Hide the images by default */

@@ -34,7 +34,6 @@ public class DBManager {
 	 * @param account the account
 	 * @return the account
 	 */
-	//
 	public Account addAccount(Account account) {
 		try {
 			PreparedStatement stmt1 = con.prepareStatement("INSERT INTO accounts (username, password_hash, account_type) VALUES (?, ?, ?)");
@@ -167,7 +166,6 @@ public class DBManager {
 	 *
 	 * @param company the company
 	 */
-	//
 	public void updateCompany(Company company) {
 		CompanyProfile profile = company.getProfile();
 		PreparedStatement updateCompany = null;
@@ -331,7 +329,6 @@ public class DBManager {
 	 * @param employeeId the employee id
 	 * @return the employee
 	 */
-	//
 	public Employee getEmployee(int employeeId) {
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM employees WHERE id = ?");
@@ -487,7 +484,6 @@ public class DBManager {
 	 * @param vacancy the vacancy
 	 * @return the vacancy
 	 */
-	//
 	public Vacancy addVacancy(Vacancy vacancy) {
 		int id = 0;
 		Requirement req = vacancy.getReq();
@@ -605,7 +601,6 @@ public class DBManager {
 	 * @param id the id
 	 * @return the vacancy
 	 */
-	//
 	public Vacancy getVacancy(int id) {
 		PreparedStatement getCompany = null;
 		Requirement req = null;
@@ -722,7 +717,6 @@ public class DBManager {
 	 * @param companyId the company id
 	 * @param employeeId the employee id
 	 */
-	//
 	public void addFollower(int companyId, int employeeId) {
 		PreparedStatement stmt = null;
 		String query = "insert into followers (employee_id, company_id) " + "VALUES (?,?)";

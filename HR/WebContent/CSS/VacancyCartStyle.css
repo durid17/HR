@@ -4,6 +4,7 @@
   margin-top: 20px;
   margin-left: 80px;
   background-color: #f4f4f4;
+  border-radius: 10px;
 }
 
 .unstyled-list {
@@ -193,13 +194,15 @@ ul.horizontal-list li {
 
 .vacancies {
   float: right;
-  width: 82%;
+  width: 80%;
 }
 
 .split_sidebar {
   width: 18%;
   height: 100%;
   float: left;
+  position: absolute;
+  left: 2%;
 }
 
 .titles {
@@ -217,6 +220,7 @@ ul.horizontal-list li {
 
 .filter {
   background-color: #f4f4f4;
+  border-radius: 10px;
 }
 
 .filter_header {

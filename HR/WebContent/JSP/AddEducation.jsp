@@ -67,6 +67,7 @@
 			    
 			    <label for="minor"><b>Minor</b></label>
 			    <select id = "minor" name="minor" class="selectpicker">
+			    	<option value="None" selected>None</option>
 			    <%
 					List<String> minors = manager.getProfessions();
 			    	/*

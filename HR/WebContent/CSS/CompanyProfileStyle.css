@@ -1,52 +1,133 @@
-body {
-	background-color: #FEFEFE;
-}
-div{
-	border: none;
-	border-radius: 2px;
-}
-
-.container {
-	padding: 5px;
-	position: relative;
-	top: 15px;
-}
 
 .profileInfoLeft {
-	position: relative;
-	background-color: #E5E7E9;
-	left: 20px;
-	max-width: 15%;
-	max-height: 20%;
+	font-family: "Roboto";
+	position: absolute;
+	left: 2%;
+	top: 10%;
+	width: 20%;
+	height: auto;
 	float: left;
+	opacity: 0.97;
+  	border-radius: 20px;
+  	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  	padding: 2%;
 }
 
-#profileImage {
+.imgAvatar {
 	width: 100%;
-	height: 60%;
-}
-.mainInfo{
-	padding: 5px;
+	height: auto;
 }
 
-.rightSide{
-	background-color: #E5E7E9;
-	position: relative;
+.vacancy {
+  width: 80%;
+  padding: 20px;
+  margin-top: 20px;
+  margin-left: 10%;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+}
+
+.unstyled-list {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.vacancy_header {
+  overflow: hidden;
+}
+
+.unstyled-list ol {
+  display: block;
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.horizontal-list {
+  list-style: none;
+  padding-left: 0;
+  display:inline;
+}
+
+ul.horizontal-list {
+	min-width: 696px;
+	list-style: none;
+	padding-left: 0;
+}
+ul.horizontal-list li {
+	display: inline;
+}
+
+.post_date {
+  float: right;
+  margin-left: 20px;
+}
+
+.point li {
+  content: "\2022";
+  font-size: 16px;
+  margin-right: 20px;
+  vertical-align: middle;
+}
+
+.read_more {
+  color: #3399FF;
+  font-family: "Roboto";
+  font-size: 10pt;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #3399FF;
+  border-radius: 10px;
+  cursor: hand;
+  display: inline-block;
+  text-align: center;
+  padding: 15px 40px;
+  position:relative;
+  left: 40%;
+}
+
+.split {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    position: relative
+    margin: auto;
+}
+
+.vacancies {
 	float: right;
-	margin-right: 100px;
-	padding: 10px;
-	width: 50%;
-}
-
-#title{
-	margin-left: 5px;
-	
-}
-
-.about{
-	background-color: white;
-	padding: 5px;
+	width: 74%;
 }
 
 
+.titles {
+    font-family: "Roboto";
+    font-size: 30px;
+    font-weight: bold;
+    color: #0a3251;
+    margin-bottom: 30px;
+}
 
+.vacancy_tytle {
+  margin-left: 77px;
+}
+
+#edit {
+  -webkit-appearance: none;
+  font-family: "Roboto";
+  font-size: 20px;
+  font-weight: 500;
+  text-align: right;
+  color: #99a8b4;
+  background: transparent;
+  border: none;
+  position: relative;
+  float: right;
+  margin-top: 20px;
+  margin-left: 20px;
+}
