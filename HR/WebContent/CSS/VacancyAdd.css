@@ -30,12 +30,3 @@ input[type=text], input[type=password] {
 	border: none;
 	background: #f1f1f1;
 }
-
-
-.bootstrap-select{
-	width: 80% !important;
-}
-
-.selectpicker{
-	width: 80% !important;
-}

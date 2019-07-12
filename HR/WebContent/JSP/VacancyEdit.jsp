@@ -71,6 +71,13 @@
 		        return;
 		    }
 		    
+		    if(document.getElementById("qualification_1").value == "" || 
+		    	document.getElementById("qualification_2").value == "" ||
+		    	document.getElementById("qualification_3").value == ""){
+		        alert('Qualifications can not be empty');
+		        return;
+		    }
+		    
 			var data = {
 		    	heading : document.getElementById("heading").value.trim() , 
 		    	profession : document.getElementById("profession").options[document.getElementById("profession").selectedIndex].value.trim(),
@@ -83,6 +90,9 @@
 		   	 	location : document.getElementById("locations").options[document.getElementById("locations").selectedIndex].value.trim(),
 		    	languages : toString($('#languages').val()),
 		    	tags : toString($('#tags').val()),
+		    	qualification_1 : document.getElementById("qualification_1").value,
+		    	qualification_2 : document.getElementById("qualification_2").value,
+		    	qualification_3 : document.getElementById("qualification_3").value,
 		    	vacancyId : '<%= jobj.toString() %>'
 		    }
 			var url = "../VacancyEditServlet";
@@ -124,7 +134,7 @@
     	professions.add("prof4");
     	*/
     	for(int i = 0 ; i < professions.size(); i++){
-    		out.print("<option value = \" ");
+    		out.print("<option value = \"");
 			out.print(professions.get(i) + "\"");
 			if(professions.get(i).equals(vacancy.getReq().getProfession())) 
 				out.print("selected = \"selected\"");
@@ -138,6 +148,10 @@
     <label for="position"><b>Position *</b></label>
     <input type="text" id="position" value= <%= vacancy.getPosition() %>><br>
    	
+   	<label for=""><b>Qualifications:</b></label>
+    <input type="text" id="qualification_1" value = <%=vacancy.getReq().getQualification1() %>><br>
+    <input type="text" id="qualification_2" value = <%=vacancy.getReq().getQualification2() %>><br>
+    <input type="text" id="qualification_3" value = <%=vacancy.getReq().getQualification3() %>><br>
      
     <label for="description"><b>Description</b></label><br>
     <textarea  id="description" rows="5"><%= vacancy.getDescription() %></textarea>
@@ -191,7 +205,7 @@
 		<select id = "locations">		
 		<%
 			for(int i = 0 ; i < locations.size(); i++){
-				out.print("<option value = \" ");
+				out.print("<option value = \"");
 				out.print(locations.get(i) + "\"");
 				if(locations.get(i).equals(vacancy.getReq().getLocation())) 
 					out.print("selected = \"selected\"");
@@ -220,7 +234,7 @@
 			}
 				
 			for(int i = 0 ; i < languages.size(); i++){
-				out.print("<option value = \" ");
+				out.print("<option value = \"");
 				out.print(languages.get(i) + "\"");
 				if(myLanguages.contains(languages.get(i))) 
 					out.print("selected = \"selected\"");
@@ -241,7 +255,7 @@
 			tags.add("opa2");
 			*/
 			for(int i = 0 ; i < tags.size(); i++){
-				out.print("<option value = \" ");
+				out.print("<option value = \"");
 				out.print(tags.get(i) + "\"");
 				if(myTags.contains(tags.get(i))) 
 					out.print("selected = \"selected\"");

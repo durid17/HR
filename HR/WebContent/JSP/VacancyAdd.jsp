@@ -37,21 +37,33 @@
 		    var CurrentDate = new Date();
 		    //console.log("op");
 		    //console.log(GivenDate);
-		    if(GivenDate == "") return;
+		    if(GivenDate == "") {
+		    	alert('Date can not be empty');
+		        return;
+		    }
 		    GivenDate = new Date(GivenDate);
 		    if(document.getElementById("heading").value == ""){
 		    	alert('Heading can not be empty');
 		        return;
 		    }
+
 		    if(document.getElementById("position").value == ""){
 		    	alert('Position can not be empty');
 		        return;
 		    }
-		    
+
 		    if(GivenDate < CurrentDate){
 		        alert('Given date is not greater than the current date.');
 		        return;
 		    }
+
+		    if(document.getElementById("qualification_1").value == "" || 
+		    		document.getElementById("qualification_2").value == "" ||
+		    		document.getElementById("qualification_3").value == ""){
+		        alert('Qualifications can not be empty');
+		        return;
+		    }
+		    
 		    
 			var data = {
 		    	heading : document.getElementById("heading").value.trim() , 
@@ -64,7 +76,11 @@
 		   	 	degree : document.getElementById("degree").options[document.getElementById("degree").selectedIndex].value.trim(),
 		   	 	location : document.getElementById("locations").options[document.getElementById("locations").selectedIndex].value.trim(),
 		    	languages : toString($('#languages').val()),
-		    	tags : toString($('#tags').val())
+		    	tags : toString($('#tags').val()),
+		    	qualification_1 : document.getElementById("qualification_1").value,
+		    	qualification_2 : document.getElementById("qualification_2").value,
+		    	qualification_3 : document.getElementById("qualification_3").value
+		    	
 		    }
 			var url = "../VacancyAddServlet";
 			$.post(url,data, 
@@ -108,7 +124,7 @@
     	professions.add("prof4");
     	*/
     	for(int i = 0 ; i < professions.size(); i++){
-    		out.print("<option value = \" ");
+    		out.print("<option value = \"");
 			out.print(professions.get(i) + "\">");
 			out.print(professions.get(i) + "</option>");
     	}
@@ -118,7 +134,11 @@
     
     <label for="position"><b>Position *</b></label>
     <input type="text" placeholder="position" id="position" required><br>
-   	
+    
+    <label for=""><b>Qualifications:</b></label>
+    <input type="text" placeholder="qualification" id="qualification_1" ><br>
+    <input type="text" placeholder="qualification" id="qualification_2" ><br>
+    <input type="text" placeholder="qualification" id="qualification_3" ><br>
      
     <label for="description"><b>Description</b></label><br>
     <textarea  id="description" rows="5" ></textarea>
@@ -155,7 +175,7 @@
 		<select id = "locations">		
 		<%
 			for(int i = 0 ; i < locations.size(); i++){
-				out.print("<option value = \" ");
+				out.print("<option value = \"");
 				out.print(locations.get(i) + "\">");
 				out.print(locations.get(i) + "</option>");
 			}		
@@ -175,7 +195,7 @@
 		<select id = "languages" class="selectpicker" multiple data-live-search="true">
 	<%
 			for(int i = 0 ; i < languages.size(); i++){
-				out.print("<option value = \" ");
+				out.print("<option value = \"");
 				out.print(languages.get(i) + "\">");
 				out.print(languages.get(i) + "</option>");
 			}
@@ -192,7 +212,7 @@
 			tags.add("opa2");
 			*/
 			for(int i = 0 ; i < tags.size(); i++){
-				out.print("<option value = \" ");
+				out.print("<option value = \"");
 				out.print(tags.get(i) + "\">");
 				out.print(tags.get(i) + "</option>");
 			}
