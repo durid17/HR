@@ -86,7 +86,7 @@ class DBManagerTests {
 		Account account = new Account(0, new Date(System.currentTimeMillis()), "testCompany", "password", Account.COMPANY_ACCOUNT_TYPE);
 		account = manager.addAccount(account);
 		
-		CompanyProfile profile = new CompanyProfile("Test University", "Desc", new Date(12371237), "logo.jpg", "email", "599111213", "Address 1");
+		CompanyProfile profile = new CompanyProfile("Test University", "Desc", "Social Network",  new Date(12371237), "logo.jpg", "email", "599111213", "Address 1");
 		Company company = new Company(account, profile);
 		manager.updateCompany(company);
 
@@ -111,7 +111,7 @@ class DBManagerTests {
 	
 	@Test
 	void vacancyTest() {
-		Requirement requirement = new Requirement("Tbilisi", 0, "Bachelor", "finansisti");
+		Requirement requirement = new Requirement("Tbilisi", 0, "Bachelor", "Chef", "qualification1", "qualification2", "qualification3");
 		Vacancy vacancy = new Vacancy(7, "Heading", "Pos", "Desc", "Part-time", TEST_COMPANY_ID,
 				requirement, null, new Date(System.currentTimeMillis() + 5000000));
 		int id = manager.addVacancy(vacancy).getId();
@@ -125,7 +125,7 @@ class DBManagerTests {
 		assertEquals(vacancy.getReq().getLocation(), fromDBVacancy.getReq().getLocation());
 		assertEquals(vacancy.getPosition(), fromDBVacancy.getPosition());
 		
-		Requirement updatedRequirement = new Requirement("Batumi", 5, "Bachelor", "finansisti");
+		Requirement updatedRequirement = new Requirement("Batumi", 5, "Bachelor", "Driver", "new qualification1", "new qualification2", "new qualification3");
 		Vacancy updatedVacancy = new Vacancy(id, "UpdatedHeading", "Salesperson", "UpdatedDesc", "Full-time", 
 				TEST_COMPANY_ID, updatedRequirement, null, new Date(System.currentTimeMillis() + 10000));
 		manager.updateVacancy(updatedVacancy);
@@ -178,7 +178,7 @@ class DBManagerTests {
 		assertEquals(6, manager.getEducationalInstitutionTypes().size());
 		assertEquals(6, manager.getDegrees().size());
 		assertEquals(4, manager.getQualities().size());
-		assertEquals(33, manager.getTags().size());
+		assertEquals(31, manager.getTags().size());
 		assertEquals(15, manager.getLanguages().size());
 	}
 	

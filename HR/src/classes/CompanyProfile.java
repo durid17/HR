@@ -5,6 +5,7 @@ import java.sql.Date;
 public class CompanyProfile {
 	private String name;
 	private String description;
+	private String essence;
 	private Date founded;
 	private String logo;
 	private String email;
@@ -12,7 +13,7 @@ public class CompanyProfile {
 	private String address;
 	
 	
-	public CompanyProfile(String name, String description, Date founded, String logo, String email, String phoneNumber, String address) {
+	public CompanyProfile(String name, String description, String essence, Date founded, String logo, String email, String phoneNumber, String address) {
 		this.setName(name);
 		this.setDescription(description);
 		this.setFounded(MyDateFormatter.truncate(founded));
@@ -87,10 +88,19 @@ public class CompanyProfile {
 		this.address = address;
 	}
 
+	public String getEssence() {
+		return essence;
+	}
+
+	public void setEssence(String essence) {
+		this.essence = essence;
+	}
+
 	@Override
 	public String toString() {
-		return "CompanyProfile [name=" + name + ", description=" + description + ", founded=" + founded + ", logo="
-				+ logo + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + "]";
+		return "CompanyProfile [name=" + name + ", description=" + description + ", essence=" + essence + ", founded="
+				+ founded + ", logo=" + logo + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address="
+				+ address + "]";
 	}
 
 	@Override
@@ -100,6 +110,7 @@ public class CompanyProfile {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((essence == null) ? 0 : essence.hashCode());
 		result = prime * result + ((founded == null) ? 0 : founded.hashCode());
 		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -130,6 +141,11 @@ public class CompanyProfile {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (essence == null) {
+			if (other.essence != null)
+				return false;
+		} else if (!essence.equals(other.essence))
 			return false;
 		if (founded == null) {
 			if (other.founded != null)

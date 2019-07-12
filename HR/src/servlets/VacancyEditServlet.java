@@ -64,10 +64,13 @@ public class VacancyEditServlet extends HttpServlet {
 		//System.out.println(request.getParameter("vacancyId"));
 		JSONObject jsonid = new JSONObject(request.getParameter("vacancyId"));
 		int id = Integer.parseInt(jsonid.get("vacancyId").toString());
+		String qualification1 = request.getParameter("qualification_1");
+		String qualification2 = request.getParameter("qualification_2");
+		String qualification3 = request.getParameter("qualification_3");
 		
 		String [] languages = l.split(","); 
 		String [] tags = t.split(","); 
-		Requirement req = new Requirement(location, yearsOfExp, degree, prof);
+		Requirement req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
 		Date sqlDate = null;
 		try {
 			if(dt != null) {

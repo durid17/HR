@@ -205,27 +205,27 @@ class PairingTests extends Mockito {
 		tags.add(t4);
 		employee_tags.put(0 , tags);
 		
-		Requirement r1 = new Requirement("", 3, "degree1", "prof1");
+		Requirement r1 = new Requirement("", 3, "degree1", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v1 = new Vacancy(0, "", "", "", "", 0, r1, null, null);
 		l1 = new Language(0, "lan1", null, null);
 		l2 = new Language(0, "lan2", null, null);
 		vac_languages.put( 0 , new ArrayList<Language>(Arrays.asList(l1 , l2)));
 		vac_tags.put(0 , new ArrayList<String>(Arrays.asList(t1 , t2)));
 		
-		Requirement r2 = new Requirement("", 3, "degree2", "prof1");
+		Requirement r2 = new Requirement("", 3, "degree2", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v2 = new Vacancy(1 , "", "", "", "", 0, r2, null, null);
 		l1 = new Language(0, "lan3", null, null);
 		l2 = new Language(0, "lan2", null, null);
 		vac_languages.put(1 , new ArrayList<Language>(Arrays.asList(l1 , l2)));
 		vac_tags.put(1 , new ArrayList<String>(Arrays.asList(t3 , t2))); 
 		
-		Requirement r3 = new Requirement("", 3, "degree1", "prof3");
+		Requirement r3 = new Requirement("", 3, "degree1", "prof3", "qualification1", "qualification2", "qualification3");
 		Vacancy v3 = new Vacancy(2, "", "", "", "", 0, r3, null, null);
 		l1 = new Language(0, "lan1", null, null);
 		vac_languages.put(2 , new ArrayList<Language>(Arrays.asList(l1 , l2)));
 		vac_tags.put(2 , new ArrayList<String>(Arrays.asList(t3 , t2))); 
 		
-		Requirement r4 = new Requirement("", 3, "degree3", "prof1");
+		Requirement r4 = new Requirement("", 3, "degree3", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v4 = new Vacancy(3, "", "", "", "", 0, r4, null, null);
 		l1 = new Language(0, "lan3", null, null);
 		l2 = new Language(0, "lan2", null, null);
@@ -233,53 +233,53 @@ class PairingTests extends Mockito {
 		vac_languages.put(3 , new ArrayList<Language>(Arrays.asList(l1 , l2 , l3)));
 		vac_tags.put(3 , new ArrayList<String>(Arrays.asList(t3 , t2 , t4 , t1))); 
 		
-		Requirement r5 = new Requirement("", 3, "degree1", "prof2");
+		Requirement r5 = new Requirement("", 3, "degree1", "prof2", "qualification1", "qualification2", "qualification3");
 		Vacancy v5 = new Vacancy(4, "", "", "", "", 0, r5, null, null);
 		l1 = new Language(0, "lan1", null, null);
 		l2 = new Language(0, "lan2", null, null);
 		vac_languages.put(4 , new ArrayList<Language>(Arrays.asList(l1 , l2)));
 		vac_tags.put(4 , new ArrayList<String>(Arrays.asList(t1 , t2 , t3))); 
 		
-		Requirement r6 = new Requirement("", 3, "degree1", "prof1");
+		Requirement r6 = new Requirement("", 3, "degree1", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v6 = new Vacancy(5, "", "", "", "", 0, r6, null, null);
 		l1 = new Language(0, "lan3", null, null);
 		l2 = new Language(0, "lan2", null, null);
 		vac_languages.put(5 , new ArrayList<Language>(Arrays.asList(l1 , l2)));
 		vac_tags.put(5 , new ArrayList<String>(Arrays.asList(t1 , t4))); 
 		
-		Requirement r7 = new Requirement("", 3, "degree1", "prof1");
+		Requirement r7 = new Requirement("", 3, "degree1", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v7 = new Vacancy(6, "", "", "", "", 0, r7, null, null);
 		l1 = new Language(0, "lan3", null, null);
 		l2 = new Language(0, "lan2", null, null);
 		vac_languages.put(6 , new ArrayList<Language>(Arrays.asList(l4 , l3)));
 		vac_tags.put(6 , new ArrayList<String>(Arrays.asList(t1 , t2 , t3))); 
 		
-		Requirement r8 = new Requirement("", 3, "degree1", "prof2");
+		Requirement r8 = new Requirement("", 3, "degree1", "prof2", "qualification1", "qualification2", "qualification3");
 		Vacancy v8 = new Vacancy(7 , "", "", "", "", 0, r8, null, null);
 		vac_languages.put(7 , new ArrayList<Language>());
 		vac_tags.put(7 , new ArrayList<String>()); 
 		
-		Requirement r9 = new Requirement("", 3, "degree1", "prof7");
+		Requirement r9 = new Requirement("", 3, "degree1", "prof7", "qualification1", "qualification2", "qualification3");
 		Vacancy v9 = new Vacancy(8 , "", "", "", "", 0, r9, null, null);
 		vac_languages.put(8 , new ArrayList<Language>());
 		vac_tags.put(8 , new ArrayList<String>());
 		
-		Requirement r10 = new Requirement("", 3, "degree1", "prof1");
+		Requirement r10 = new Requirement("", 3, "degree1", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v10 = new Vacancy(9 , "", "", "", "", 0, r10, null, null);
 		vac_languages.put(9 , new ArrayList<Language>(Arrays.asList(l1)));
 		vac_tags.put(9 , new ArrayList<String>(Arrays.asList(t1 , t2))); 
 		
-		Requirement r11 = new Requirement("", 3, "degree1", "prof1");
+		Requirement r11 = new Requirement("", 3, "degree1", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v11 = new Vacancy(10 , "", "", "", "", 0, r11, null, null);
 		vac_languages.put(10 , new ArrayList<Language>());
 		vac_tags.put(10 , new ArrayList<String>(Arrays.asList(t1 , t2))); 
 		
-		Requirement r12 = new Requirement("", 3, "degree1", "prof1");
+		Requirement r12 = new Requirement("", 3, "degree1", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v12 = new Vacancy(11, "", "", "", "", 0, r12, null, null);
 		vac_languages.put(11 , new ArrayList<Language>(Arrays.asList()));
 		vac_tags.put(11 , new ArrayList<String>(Arrays.asList(t1 , t2))); 
 		
-		Requirement r13 = new Requirement("", 3, "degree1", "prof1");
+		Requirement r13 = new Requirement("", 3, "degree1", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v13 = new Vacancy(12 , "", "", "", "", 0, r13, null, null);
 		vac_languages.put(12 , new ArrayList<Language>(Arrays.asList(l1)));
 		vac_tags.put(12 , new ArrayList<String>(Arrays.asList(t1 , t2))); 
@@ -329,7 +329,7 @@ class PairingTests extends Mockito {
 		WorkExperience w;
 		EmployeeEducation ed0 , ed1;
 		
-		Requirement r = new Requirement("", 3, "degree1", "prof1");
+		Requirement r = new Requirement("", 3, "degree1", "prof1", "qualification1", "qualification2", "qualification3");
 		Vacancy v = new Vacancy(0, "", "", "", "", 0, r, null, null);
 		vac_languages.put(0 , new ArrayList<Language>(Arrays.asList(l1 , l2 , l3 , l4 , l5 , l6)));
 		vac_tags.put(0 , new ArrayList<String>(Arrays.asList(t1 , t2 , t3 , t4 , t5 , t6)));

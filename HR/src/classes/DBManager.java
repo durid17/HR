@@ -129,7 +129,8 @@ public class DBManager {
 												 + "founded_date = ?, "
 												 + "email = ?, "
 												 + "phone = ?, "
-												 + "location = ? WHERE id = ?";
+												 + "location = ?, "
+												 + "essence = ? WHERE id = ?";
 
 		try {
 			updateCompany = con.prepareStatement(updateString);
@@ -141,7 +142,8 @@ public class DBManager {
 			updateCompany.setString(5, profile.getEmail());
 			updateCompany.setString(6, profile.getPhoneNumber());
 			updateCompany.setString(7, profile.getAddress());
-			updateCompany.setInt(8, company.getId());
+			updateCompany.setString(8, profile.getEssence());
+			updateCompany.setInt(9, company.getId());
 			updateCompany.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -165,13 +167,14 @@ public class DBManager {
 				int id = resultSet.getInt("id");
 				String name = resultSet.getString("name");
 				String description = resultSet.getString("description");
+				String essence = resultSet.getString("essence");
 				String logo = resultSet.getString("logo");
 				Date foundedDate = resultSet.getDate("founded_date");
 				String email = resultSet.getString("email");
 				String phone = resultSet.getString("phone");
 				String address = resultSet.getString("location");
 
-				profile = new CompanyProfile(name, description, foundedDate, logo, email, phone, address);
+				profile = new CompanyProfile(name, description,essence, foundedDate, logo, email, phone, address);
 				company = new Company(getAccount(companyId), profile);
 			}
 
@@ -198,13 +201,14 @@ public class DBManager {
 				int id = resultSet.getInt("id");
 				String name = resultSet.getString("name");
 				String description = resultSet.getString("description");
+				String essence = resultSet.getString("essence");
 				String logo = resultSet.getString("logo");
 				Date foundedDate = resultSet.getDate("founded_date");
 				String email = resultSet.getString("email");
 				String phone = resultSet.getString("phone");
 				String address = resultSet.getString("location");
 
-				profile = new CompanyProfile(name, description, foundedDate, logo, email, phone, address);
+				profile = new CompanyProfile(name, description, essence, foundedDate, logo, email, phone, address);
 				res.add(new Company(getAccount(id), profile));
 			}
 
@@ -240,8 +244,11 @@ public class DBManager {
 				String location = resultSet.getString("location");
 				String degree = resultSet.getString("degree");
 				int yearsOfExp = resultSet.getInt("years_of_experience");
+				String qualification1 = resultSet.getString("qualification_1");
+				String qualification2 = resultSet.getString("qualification_2");
+				String qualification3 = resultSet.getString("qualification_3");
 
-				Requirement req = new Requirement(location, yearsOfExp, degree, prof);
+				Requirement req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
 				Vacancy vac = new Vacancy(id, title, position, description, empType,
 						company_id, req, creationDate, expiryDate);
 				res.add(vac);
@@ -435,7 +442,10 @@ public class DBManager {
 												+ "position = ?, "
 												+ "years_of_experience = ?, "
 												+ "location = ?, "
-												+ "degree = ? WHERE id = ?";
+												+ "degree = ?, "
+												+ "qualification_1 = ?, "
+												+ "qualification_2 = ?, "
+												+ "qualification_3 = ? WHERE id = ?";
 		
 		try {
 			updateVacancy = con.prepareStatement(updateQuery);
@@ -449,7 +459,10 @@ public class DBManager {
 			updateVacancy.setInt(7, req.getYearsOfExp());
 			updateVacancy.setString(8, req.getLocation());
 			updateVacancy.setString(9, req.getDegree());
-			updateVacancy.setInt(10, vacancy.getId());
+			updateVacancy.setString(10, req.getQualification1());
+			updateVacancy.setString(11, req.getQualification2());
+			updateVacancy.setString(12, req.getQualification3());
+			updateVacancy.setInt(13, vacancy.getId());
 
 			updateVacancy.executeUpdate();
 			
@@ -497,8 +510,11 @@ public class DBManager {
 				String location = resultSet.getString("location");
 				String degree = resultSet.getString("degree");
 				int yearsOfExp = resultSet.getInt("years_of_experience");
+				String qualification1 = resultSet.getString("qualification_1");
+				String qualification2 = resultSet.getString("qualification_2");
+				String qualification3 = resultSet.getString("qualification_3");
 
-				req = new Requirement(location, yearsOfExp, degree, prof);
+				req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
 				vac = new Vacancy(vacId, title, position, description, empType,
 						 company_id, req, creationDate, expiryDate);
 
@@ -553,8 +569,11 @@ public class DBManager {
 				String location = resultSet.getString("location");
 				String degree = resultSet.getString("degree");
 				int yearsOfExp = resultSet.getInt("years_of_experience");
+				String qualification1 = resultSet.getString("qualification_1");
+				String qualification2 = resultSet.getString("qualification_2");
+				String qualification3 = resultSet.getString("qualification_3");
 
-				req = new Requirement(location, yearsOfExp, degree, prof);
+				req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
 				vac = new Vacancy(vacId, title, position, description, empType,
 						 company_id, req, creationDate, expiryDate);
 				res.add(vac);
@@ -642,23 +661,6 @@ public class DBManager {
 			e.printStackTrace();
 		}
 		return false;
-	}
-	
-
-	private int getTagTypeId(String tagName) {
-		int tagTypeId = 0;
-		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT id FROM tag_types WHERE name = ?");
-			stmt.setString(1, tagName);
-			ResultSet resultSet = stmt.executeQuery();
-			if (resultSet.next()) {
-				tagTypeId = resultSet.getInt("id");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return tagTypeId;
 	}
 	
 	public void addVacancyTag(int vacancyId, String tag) {
@@ -1297,8 +1299,11 @@ public class DBManager {
 				String location = resultSet.getString("location");
 				String degree = resultSet.getString("degree");
 				int yearsOfExp = resultSet.getInt("years_of_experience");
+				String qualification1 = resultSet.getString("qualification_1");
+				String qualification2 = resultSet.getString("qualification_2");
+				String qualification3 = resultSet.getString("qualification_3");
 
-				req = new Requirement(location, yearsOfExp, degree, profes);
+				req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
 				vac = new Vacancy(vacId, title, position, description, empType,
 						 company_id, req, creationDate, expiryDate);
 				currSet.add(vac);

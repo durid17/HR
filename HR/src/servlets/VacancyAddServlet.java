@@ -59,10 +59,13 @@ public class VacancyAddServlet extends HttpServlet {
 		String location = request.getParameter("location");
 		String l = request.getParameter("languages");
 		String t = request.getParameter("tags");
+		String qualification1 = request.getParameter("qualification_1");
+		String qualification2 = request.getParameter("qualification_2");
+		String qualification3 = request.getParameter("qualification_3");
 		
 		String [] languages = l.split(","); 
 		String [] tags = t.split(","); 
-		Requirement req = new Requirement(location, yearsOfExp, degree, prof);
+		Requirement req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
 		Date sqlDate = null;
 		try {
 			if(dt != null) {

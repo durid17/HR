@@ -47,6 +47,7 @@ public class UpdateInfoCompany extends HttpServlet {
 		// TODO Auto-generated method stub
 		String name =  request.getParameter("name");
 		String description =  request.getParameter("description"); 
+		String essence =  request.getParameter("essence"); 
 		String email =  request.getParameter("email");
 		String img =  request.getParameter("image");
 		String phoneNumber =  request.getParameter("phoneNumber");
@@ -72,7 +73,7 @@ public class UpdateInfoCompany extends HttpServlet {
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Company company = manager.getCompany(account.getID());
-		CompanyProfile profile = new CompanyProfile(name, description, sqlDate, img, email, phoneNumber, address);
+		CompanyProfile profile = new CompanyProfile(name, description, essence, sqlDate, img, email, phoneNumber, address);
 
 		company.setProfile(profile);
 		manager.updateCompany(company);	

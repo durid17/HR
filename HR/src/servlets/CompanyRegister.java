@@ -66,7 +66,7 @@ public class CompanyRegister extends HttpServlet {
 		String email = request.getParameter("email");
 		String companyName = request.getParameter("companyName");
 		
-		CompanyProfile cmpPrf = new CompanyProfile(companyName, null , null, img,  email, null, null); 
+		CompanyProfile cmpPrf = new CompanyProfile(companyName, null, null, null, img,  email, null, null); 
 		Company newCompany = new  Company(newAccount, cmpPrf);
 		
 		//Add info in base
