@@ -1,0 +1,189 @@
+@charset "ISO-8859-1";
+
+.vacancies {
+	position: relative;
+	margin-top: 2%;
+	left: 8%;
+	width: 80%;
+}
+
+.vacancy {
+  width: 100%;
+  padding: 2%;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+}
+
+.unstyled-list {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.vacancy_header {
+  overflow: hidden;
+}
+
+ol {
+  display: block;
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes follow-animation {
+  from {
+    background: white;
+    color: #3399FF;
+    width: 85px;
+    left: 50px;
+  }
+
+  to {
+    background: #2EB82E;
+    border-color: #2EB82E;
+    color: #ffffff;
+    width: 120px;
+    left: 35px;
+  }
+}
+
+@-webkit-keyframes unfollow-animation {
+  from {
+    background: #2EB82E;
+    color: #ffffff;
+    width: 120px;
+    left: 35px;
+  }
+
+  to {
+    background: white;
+    border-color: #3399FF;
+    color: #3399FF;
+    width: 85px;
+    left: 50px;
+  }
+}
+
+/* Standard syntax */
+@keyframes follow-animation {
+  from {
+    background: white;
+    color: #3399FF;
+    width: 85px;
+    left: 50px;
+  }
+
+  to {
+    background: #2EB82E;
+    border-color: #2EB82E;
+    color: #ffffff;
+    width: 120px;
+    left: 35px;
+  }
+}
+
+@keyframes unfollow-animation {
+  from {
+    background: #2EB82E;
+    color: #ffffff;
+    width: 120px;
+    left: 35px;
+  }
+
+  to {
+    background: white;
+    border-color: #3399FF;
+    color: #3399FF;
+    width: 85px;
+    left: 50px;
+  }
+}
+
+.interest {
+  -webkit-appearance: none;
+  position: relative;
+  float: right;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.interest:after {
+  color: #3399FF;
+  font-family: "Helvetica";
+  font-size: 10pt;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #3399FF;
+  border-radius: 3px;
+  top: 50px;
+  cursor: hand;
+  display: inline-block;
+  text-align: center;
+  padding: 5px 15px;
+  content: '+ Interest';
+  -webkit-animation: unfollow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-animation-fill-mode: forwards;
+  animation: unfollow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation-fill-mode: forwards;
+}
+
+.interest:checked:after {
+  float: right;
+  content: 'Interested';
+  -webkit-animation: follow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-animation-fill-mode: forwards;
+  animation: follow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation-fill-mode: forwards;
+}
+
+.horizontal-list {
+  list-style: none;
+  padding-left: 0;
+  display:inline;
+}
+
+ul.horizontal-list {
+	min-width: 696px;
+	list-style: none;
+	padding-left: 0;
+}
+
+ul.horizontal-list li {
+	display: inline;
+}
+
+.post_date {
+  float: right;
+  margin-left: 20px;
+}
+
+.vacancy_details{
+  display: table;
+}
+
+.vacancy_details_left{
+  float: left;
+}
+
+.vacancy_details_right {
+  float: right;
+}
+
+#edit {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: right;
+  color: #99a8b4;
+  background: transparent;
+  border: none;
+  position: relative;
+  float: right;
+  margin-top: 20px;
+  margin-left: 20px;
+}

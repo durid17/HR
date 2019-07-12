@@ -11,7 +11,7 @@
   <title> Vacancies </title>
  
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/VacancyPageStyle.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/MyVacancyStyle.css">
   <jsp:include page="Header.jsp" />
   <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
   
