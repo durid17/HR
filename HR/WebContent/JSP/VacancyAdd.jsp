@@ -161,9 +161,9 @@
 	
 	<label for="Degree"><b>Degree</b></label>
 	<select id = degree>
-	  <option value="Bachelor's">Bachelor's</option>
+	  <option value="Bachelor">Bachelor's</option>
 	  <option value="Associate">Associate</option>
-	  <option value="Master's">Master's</option>
+	  <option value="Master">Master's</option>
 	  <option value="Ph.D">Ph.D</option>
 	  <option value="Pursuing Degree">Pursuing Degree</option>
 	</select><br>

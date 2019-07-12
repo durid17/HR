@@ -88,9 +88,9 @@
 			  
 			  	<label for="Degree"><b>Degree</b></label>
 				<select id = degree name="degree" class="selectpicker">
-				  <option value="Bachelor's">Bachelor's</option>
+				  <option value="Bachelor">Bachelor</option>
 				  <option value="Associate">Associate</option>
-				  <option value="Master's">Master's</option>
+				  <option value="Master">Master</option>
 				  <option value="Ph.D">Ph.D</option>
 				  <option value="Pursuing Degree">Pursuing Degree</option>
 				</select>

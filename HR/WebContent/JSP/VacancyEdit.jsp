@@ -181,11 +181,11 @@
 		  %>
 	  >Bachelor's</option>
 	  <option value="Associate"
-	  <% if(degree.equals("Bachelor's"))
+	  <% if(degree.equals("Bachelor"))
 		  	out.print("selected = \"selected\"");
 		  %>>Associate</option>
 	  <option value="Master's"
-	  <% if(degree.equals("Master's"))
+	  <% if(degree.equals("Master"))
 		  	out.print("selected = \"selected\"");
 		  %>>Master's</option>
 	  <option value="Ph.D"
