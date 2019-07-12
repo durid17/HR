@@ -43,8 +43,8 @@ public class UpdateInfoCompany extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String name =  request.getParameter("name");
 		String description =  request.getParameter("description"); 
 		String essence =  request.getParameter("essence"); 
@@ -52,34 +52,28 @@ public class UpdateInfoCompany extends HttpServlet {
 		String img =  request.getParameter("image");
 		String phoneNumber =  request.getParameter("phoneNumber");
 		String address =  request.getParameter("address");
-		
 		String dt =request.getParameter("date");
 		java.sql.Date sqlDate = null;
 		
 		try {
-			if(! dt.equals("")) {
+			if(!dt.equals("")) {
 				java.util.Date utilDate=new java.util.Date();
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
 				sqlDate = new java.sql.Date(utilDate.getTime());
 			
-			} else {
-				System.out.println("Date carielia!");
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}  
 		
 		Account account = (Account)request.getSession().getAttribute("account");
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
 		Company company = manager.getCompany(account.getID());
 		CompanyProfile profile = new CompanyProfile(name, description, essence, sqlDate, img, email, phoneNumber, address);
-
 		company.setProfile(profile);
 		manager.updateCompany(company);	
 		
 		request.getRequestDispatcher("/JSP/Settings-Info-Company.jsp").forward(request, response);	
-		//doGet(request, response);
 	}
 
 }

@@ -45,10 +45,9 @@ public class UpdateInfo extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String firstName = request.getParameter("firstName");
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
 		String img =  request.getParameter("image");
@@ -57,37 +56,35 @@ public class UpdateInfo extends HttpServlet {
 		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
 		String description = request.getParameter("description");
-
 		String dt = request.getParameter("bday");
 		java.sql.Date sqlDate = null;
-		System.out.println("date - " + dt);
+		
+		
 		try {
 			if(!dt.equals("")) {
 				java.util.Date utilDate=new java.util.Date();
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
 				sqlDate = new java.sql.Date(utilDate.getTime());
-			
-			} else {
-				System.out.println("Date carielia!");
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}  
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
+		
 		//Tags
 		List<String> myTags = manager.getEmployeeTags(id);
-		
 		for(int i = 0 ; i < myTags.size(); i++) {
 			manager.removeEmployeeTag(id, myTags.get(i));
 		}
+		
 		String t = request.getParameter("tags");
 		String [] tags = t.split(","); 
 		for(int i = 0 ; i < tags.length; i++) {
 			manager.addEmployeeTag(id, tags[i]);
 		}
+		
 		//Languages
 		String l = request.getParameter("languages");
 		String [] languages = l.split(","); 
@@ -107,8 +104,6 @@ public class UpdateInfo extends HttpServlet {
 		
 		emp.setProfile(profile);
 		manager.updateEmployee(emp);
-		//request.getRequestDispatcher("/JSP/Settings-Info-User.jsp").forward(request, response);	
-		//doGet(request, response);
 	}
 
 }

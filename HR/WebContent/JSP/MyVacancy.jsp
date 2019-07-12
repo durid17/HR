@@ -146,8 +146,8 @@ display:inline-block;
           <h4> Qualifications: </h4>
           <ul class="point">
               <li> <%= vac.getReq().getQualification1() %> </li>
-              <li> <%= vac.getReq().getQualification1() %> </li>
-              <li> <%= vac.getReq().getQualification1() %> </li>
+              <li> <%= vac.getReq().getQualification2() %> </li>
+              <li> <%= vac.getReq().getQualification3() %> </li>
            </ul>
            
            <br>
