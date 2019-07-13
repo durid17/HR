@@ -25,7 +25,7 @@
 				 <% if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)) { %>
 				 	<a class="left123" href="${pageContext.request.contextPath}/JSP/VacancyAdd.jsp">Add Vacancy</a>
 				 <%} else { %>
-					<a class="left123" href="${pageContext.request.contextPath}/JSP/CompaniesListPage.jsp">Companies</a>
+					<a class="left123" href="${pageContext.request.contextPath}/JSP/CompList.jsp">Companies</a>
 					<a class="left123" href="${pageContext.request.contextPath}/VacanciesServlet">Vacancies</a>
 				 <%} %>
 				

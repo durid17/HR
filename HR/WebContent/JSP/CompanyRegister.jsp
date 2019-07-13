@@ -33,6 +33,9 @@
         
     <label for="companyName"><b>Company Name</b></label>
     <input type="text" name="companyName" required>
+    
+    <label for="essence"><b>Field</b></label>
+    <input type="text" name="essence" required>
    
 
     <hr>

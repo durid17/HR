@@ -41,7 +41,7 @@
 			   	<label for="name"><b>Name *</b></label>
 			    <textarea class="area" name="name" required><%=profile.getName()%></textarea>
 			    
-			    <label for="name"><b>Essence *</b></label>
+			    <label for="name"><b>Field *</b></label>
 			    <textarea class="area" name="essence" required><%=profile.getEssence()%></textarea>
 			    
   				<label for="date"><b>Founded</b></label>
