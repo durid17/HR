@@ -107,7 +107,7 @@
 						List<String> locations = manager.getLocations();
 						String mylocation = profile.getAddress();							
 						for(int i = 0 ; i < locations.size(); i++){
-							out.print("<option value = \" ");
+							out.print("<option value = \"");
 							out.print(locations.get(i) + "\"");
 							if(mylocation.equals(locations.get(i))) 
 								out.print("selected = \"selected\"");
@@ -136,7 +136,7 @@
 					}
 						
 					for(int i = 0 ; i < languages.size(); i++){
-						out.print("<option value = \" ");
+						out.print("<option value = \"");
 						out.print(languages.get(i) + "\"");
 						if(myLanguages.contains(languages.get(i))) 
 							out.print("selected = \"selected\"");
@@ -153,7 +153,7 @@
 					List<String> tags = manager.getTags();
 					List<String> myTags = manager.getEmployeeTags(employee.getId());
 					for(int i = 0 ; i < tags.size(); i++){
-						out.print("<option value = \" ");
+						out.print("<option value = \"");
 						out.print(tags.get(i) + "\"");
 						if(myTags.contains(tags.get(i))) 
 							out.print("selected = \"selected\"");
