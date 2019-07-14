@@ -22,8 +22,14 @@ public class DBConnection {
 	/** The database. */
 	static String database = MyDBInfo.MYSQL_DATABASE_NAME;
 	
-	/** The Connection. */
+	/** The test database. */
+	static String testDatabase = MyDBInfo.MYSQL_TEST_DATABASE_NAME;
+	
+	
+	
+	/** The Connections. */
 	private static Connection con;
+	private static Connection testCon;
 	
 	/**
 	 * Gets the Connection.
@@ -37,6 +43,28 @@ public class DBConnection {
 				con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);		
 				Statement statement = con.createStatement();
 				statement.executeQuery("USE " + database);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return con;
+	}
+	
+	/**
+	 * Gets the test Connection.
+	 *
+	 * @return the test Connection
+	 */
+	public static Connection getTestCon() {
+		try { 
+			if(testCon == null) {
+				Class.forName("com.mysql.jdbc.Driver");
+				testCon = DriverManager.getConnection("jdbc:mysql://" + server, account, password);		
+				Statement statement = con.createStatement();
+				statement.executeQuery("USE " + testDatabase);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
