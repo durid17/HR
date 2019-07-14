@@ -16,40 +16,36 @@ import classes.DBManager;
 @WebListener
 public class Listener implements HttpSessionListener, ServletContextListener {
 
-    /**
-     * Default constructor. 
-     */
-    public Listener() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public Listener() {
+	}
 
 	/**
-     * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
-     */
-    public void sessionCreated(HttpSessionEvent se)  { 
-         // TODO Auto-generated method stub
-    }
+	 * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
+	 */
+	public void sessionCreated(HttpSessionEvent se) {
+	}
 
 	/**
-     * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
-     */
-    public void sessionDestroyed(HttpSessionEvent se)  { 
-         // TODO Auto-generated method stub
-    }
+	 * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
+	 */
+	public void sessionDestroyed(HttpSessionEvent se) {
+	}
 
 	/**
-     * @see ServletContextListener#contextDestroyed(ServletContextEvent)
-     */
-    public void contextDestroyed(ServletContextEvent sce)  { 
-         // TODO Auto-generated method stub
-    }
+	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
+	 */
+	public void contextDestroyed(ServletContextEvent sce) {
+	}
 
 	/**
-     * @see ServletContextListener#contextInitialized(ServletContextEvent)
-     */
-    public void contextInitialized(ServletContextEvent sce)  { 
-         // TODO Auto-generated method stub
-    	sce.getServletContext().setAttribute("DBManager", new DBManager(DBConnection.getCon()));
-    }
-	
+	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
+	 * Sets DBManaer object in Servlet context
+	 */
+	public void contextInitialized(ServletContextEvent sce) {
+		sce.getServletContext().setAttribute("DBManager", new DBManager(DBConnection.getCon()));
+	}
+
 }

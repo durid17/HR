@@ -44,7 +44,7 @@
 		  <div class="right">
 		  	<form action = "${pageContext.request.contextPath}/AddEducation" method ="post">
 	
-			    <label for="institution"><b>Educational Institution Name</b></label>
+			    <label for="institution"><b>Educational Institution Name *</b></label>
 			    <textarea class="area" name="institution" required></textarea>
 			    
 			    <label for="major"><b>Major</b></label>
@@ -83,8 +83,6 @@
 			    	}
 			    %>
 			    </select><br>
-			    <label for="subject"><b>Subject</b></label>
-			    <textarea class="area" name="subject" required></textarea>
 			  
 			  	<label for="Degree"><b>Degree</b></label>
 				<select id = degree name="degree" class="selectpicker">

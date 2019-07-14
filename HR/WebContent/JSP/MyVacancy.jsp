@@ -130,7 +130,7 @@ display:inline-block;
 
           <ul class="vacancy_details_right">
             <li> <strong>Degree: </strong> <%= vac.getReq().getDegree() %> </li>
-            <li> <strong>Salary </strong> 1000$ </li>
+            <li> <strong>Salary: </strong> Upon Agreement </li>
           </ul>
 
 

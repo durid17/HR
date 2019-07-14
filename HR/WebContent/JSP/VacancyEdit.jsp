@@ -146,7 +146,7 @@
     
     
     <label for="position"><b>Position *</b></label>
-    <input type="text" id="position" value= <%= vacancy.getPosition() %>><br>
+    <input type="text" id="position" value= "<%= vacancy.getPosition() %>"><br>
    	
    	<label for=""><b>Qualifications:</b></label>
     <input type="text" id="qualification_1" value = "<%=vacancy.getReq().getQualification1() %>"><br>
@@ -175,19 +175,19 @@
 	<label for="Degree"><b>Degree</b></label>
 	<% String degree = vacancy.getReq().getDegree(); %>
 	<select id = degree>
-	  <option value="Bachelor's"
-	  <% if(degree.equals("Bachelor's"))
+	  <option
+	  <% if(degree.equals("Bachelor"))
 		  	out.print("selected = \"selected\"");
 		  %>
-	  >Bachelor's</option>
+	  >Bachelor</option>
 	  <option value="Associate"
 	  <% if(degree.equals("Bachelor"))
 		  	out.print("selected = \"selected\"");
 		  %>>Associate</option>
-	  <option value="Master's"
+	  <option value="Master"
 	  <% if(degree.equals("Master"))
 		  	out.print("selected = \"selected\"");
-		  %>>Master's</option>
+		  %>>Master</option>
 	  <option value="Ph.D"
 	  <% if(degree.equals("Ph.D"))
 		  	out.print("selected = \"selected\"");

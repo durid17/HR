@@ -27,11 +27,12 @@ public class VacanciesServlet extends HttpServlet {
      */
     public VacanciesServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Gets all required information for VacancyCart from base and send to it
+	 * Redirects to VacancyCart.jsp
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");

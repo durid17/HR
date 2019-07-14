@@ -25,23 +25,27 @@ classes.EmployeeProfile, classes.EmployeeEducation, java.util.ArrayList" %>
 	String ida = request.getParameter("id"); //Stalking
 	Employee employee = manager.getEmployee(acc.getID()); 
 	
-	if(ida != null){ //Another user's page
-		int id = Integer.parseInt(ida);
-		employee = manager.getEmployee(id);
-	} else {
-		employee = manager.getEmployee(acc.getID());
-	}
-	
-
-	EmployeeProfile profile = employee.getProfile();
-	
-
 	List<WorkExperience> workList = manager.getWorkExps(acc.getID());
 	request.setAttribute("works", workList);
 	
 	List<EmployeeEducation> educList = manager.getEducation(acc.getID());
 	request.setAttribute("educations", educList);
 	
+	
+	if(ida != null){ //Another user's page
+		int id = Integer.parseInt(ida);
+		employee = manager.getEmployee(id);
+		
+		workList = manager.getWorkExps(id);
+		request.setAttribute("works", workList);
+		
+		educList = manager.getEducation(id);
+		request.setAttribute("educations", educList);
+	} else {
+		employee = manager.getEmployee(acc.getID());
+	}
+	
+	EmployeeProfile profile = employee.getProfile();
 	
 %> 
 

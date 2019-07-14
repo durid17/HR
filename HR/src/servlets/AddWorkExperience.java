@@ -1,4 +1,4 @@
-	package servlets;
+package servlets;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.Account;
 import classes.DBManager;
-import classes.Employee;
-import classes.EmployeeProfile;
 import classes.WorkExperience;
 
 /**
@@ -22,25 +20,28 @@ import classes.WorkExperience;
 @WebServlet("/AddWorkExperience")
 public class AddWorkExperience extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddWorkExperience() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public AddWorkExperience() {
+		super();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 *      Gets Parameters for work experience , adds in base.
+	 *      Redirects to AddWorkExperience.jsp .
+	 * 
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String company = request.getParameter("company");
@@ -51,42 +52,33 @@ public class AddWorkExperience extends HttpServlet {
 		String achievement = request.getParameter("achievement");
 		String duty = request.getParameter("duty");
 		String profession = request.getParameter("profession");
-		
+
 		java.sql.Date sqlStart = null;
 		java.sql.Date sqlEnd = null;
-		
+
 		try {
-			if(start != null) {
-				java.util.Date utilDate=new java.util.Date();
+			if (start != null) {
+				java.util.Date utilDate = new java.util.Date();
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
 				sqlStart = new java.sql.Date(utilDate.getTime());
-			
-			} else {
-				System.out.println("Date start carielia!");
+
 			}
-			if(end != null) {
-				java.util.Date utilDate=new java.util.Date();
+			if (end != null) {
+				java.util.Date utilDate = new java.util.Date();
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
 				sqlEnd = new java.sql.Date(utilDate.getTime());
-			
-			} else {
-				System.out.println("Date end carielia!");
+
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
-		
-		Account account = (Account)request.getSession().getAttribute("account");
-		DBManager manager = (DBManager)getServletContext().getAttribute("DBManager");
-		WorkExperience workExperience = new WorkExperience(account.getID(), sqlStart, sqlEnd, company, profession, position, empType, duty, achievement);
-		System.out.println("Added " + workExperience.getEmploymentType());
-		System.out.println("Added " + workExperience.getDuty());
-		System.out.println("Added " + workExperience.getAchievement());
-		System.out.println("Pro " + workExperience.getProfession());
+		}
+
+		Account account = (Account) request.getSession().getAttribute("account");
+		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
+		WorkExperience workExperience = new WorkExperience(account.getID(), sqlStart, sqlEnd, company, profession,
+				position, empType, duty, achievement);
 		manager.addWorkExp(account.getID(), workExperience);
-		request.getRequestDispatcher("/JSP/AddWorkExperience.jsp").forward(request, response);	
-		//doGet(request, response);
+		request.getRequestDispatcher("/JSP/AddWorkExperience.jsp").forward(request, response);
 	}
 
 }
