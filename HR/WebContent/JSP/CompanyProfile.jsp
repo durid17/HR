@@ -27,6 +27,9 @@
 	if(ida != null){ //Another user's page
 		int id = Integer.parseInt(ida);
 		company = manager.getCompany(id);
+		vacancies = manager.getCompanyVacancies(id);
+	  	getServletContext().setAttribute("vacancies", vacancies);	
+	  	getServletContext().setAttribute("employeeId", acc.getID());	
 	} else { 
 		company = manager.getCompany(acc.getID());
 	}
@@ -67,7 +70,18 @@
         <li class="vacancy" >
         
           <div class="vacancy_header">
-          	<a href="VacancyEdit.jsp?vacancyId=${vacancy.getId()}" id = "edit"> Edit </a>
+          
+          	<%if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)){ %>
+	          	<a href="VacancyEdit.jsp?vacancyId=${vacancy.getId()}" id = "edit"> Edit </a>
+		    <%} else { %>
+		    	<c:if test="${DBManager.hasApplied(employeeId,vacancy.getId())}">
+		            <input id = "interest" type="checkbox" class="interest" value = "${vacancy.getId()}" checked />          	
+	          	</c:if>
+	          	
+	          	<c:if test="${!DBManager.hasApplied(employeeId,vacancy.getId())}">
+		            <input id = "interest" type="checkbox" class="interest" value = "${vacancy.getId()}"  />          	
+	          	</c:if>
+		    <%} %>
           	
           	  	
             <h2> ${vacancy.getHeading()} </h2>
