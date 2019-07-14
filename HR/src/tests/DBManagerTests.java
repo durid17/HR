@@ -28,7 +28,7 @@ import classes.Vacancy;
 import classes.WorkExperience;
 
 class DBManagerTests {
-	DBManager manager = new DBManager(DBConnection.getCon());
+	DBManager manager = new DBManager(DBConnection.getTestCon());
 	
 	@BeforeEach
 	void setUp() throws Exception {

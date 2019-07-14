@@ -63,7 +63,7 @@ public class DBConnection {
 			if(testCon == null) {
 				Class.forName("com.mysql.jdbc.Driver");
 				testCon = DriverManager.getConnection("jdbc:mysql://" + server, account, password);		
-				Statement statement = con.createStatement();
+				Statement statement = testCon.createStatement();
 				statement.executeQuery("USE " + testDatabase);
 			}
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 		
-		return con;
+		return testCon;
 	}
 	
 	/**
