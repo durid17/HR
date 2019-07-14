@@ -58,11 +58,7 @@ display:inline-block;
 
 }
 
-
-
 </style>
-
-
 
 <% 
 	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
@@ -145,10 +141,5 @@ display:inline-block;
 	</c:forEach>
 	
 	</div>
-	 
-	
-	
-	
-
 </body>
 </html>

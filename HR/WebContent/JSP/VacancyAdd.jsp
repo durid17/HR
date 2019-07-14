@@ -27,7 +27,6 @@
 		var res = "";
 		for (var i = 0; i < arrayLength; i++) {
 			res = res + myStringArray[i].trim() + ",";
-			//console.log(myStringArray[i]);
 		}
 		return res;
 	}
@@ -35,8 +34,6 @@
 		$("#add").click(function(){
 			var GivenDate = document.getElementById("endDate").value;
 		    var CurrentDate = new Date();
-		    //console.log("op");
-		    //console.log(GivenDate);
 		    if(GivenDate == "") {
 		    	alert('Date can not be empty');
 		        return;
@@ -98,12 +95,6 @@
 </head>
 
 <body>
-	
-<!-- 
- <form action="">
- -->
- 
-
 	<div class="container">
     <h1>Add Vacancy</h1>
     <p>Please fill in this form to add a vacancy.</p>
@@ -117,12 +108,6 @@
     <%
 		DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
 		List<String> professions = manager.getProfessions();
-    	/*
-    	professions.add("prof1");
-    	professions.add("prof2");
-    	professions.add("prof3");
-    	professions.add("prof4");
-    	*/
     	for(int i = 0 ; i < professions.size(); i++){
     		out.print("<option value = \"");
 			out.print(professions.get(i) + "\">");
@@ -183,13 +168,6 @@
 		</select><br>
 	<%
 		List<String> languages = manager.getLanguages();
-		/*
-		languages.add("opa");
-		languages.add("opa1");
-		languages.add("opa2");
-		languages.add("opa3");
-		languages.add("opa4");
-		*/
 	%>
 		<label for="languages"><b>Languages</b></label>
 		<select id = "languages" class="selectpicker" multiple data-live-search="true">
@@ -206,11 +184,6 @@
 		<select id = "tags" class="selectpicker" multiple data-live-search="true">
 	<%	
 			List<String> tags = manager.getTags();
-			/*
-			tags.add("opa");
-			tags.add("opa1");
-			tags.add("opa2");
-			*/
 			for(int i = 0 ; i < tags.size(); i++){
 				out.print("<option value = \"");
 				out.print(tags.get(i) + "\">");

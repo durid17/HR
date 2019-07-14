@@ -27,11 +27,9 @@
  	DBManager manager = (DBManager) getServletContext().getAttribute("DBManager");
 	List<String> professions = manager.getProfessions();
 	int id = Integer.parseInt(request.getParameter("vacancyId"));
-	//int id = 91;
    	Vacancy vacancy = manager.getVacancy(id);
    	JSONObject jobj = new JSONObject();
 	jobj.put("vacancyId", vacancy.getId());
-	//System.out.println(jobj.toString());
 %>
 
 <script>
@@ -42,7 +40,6 @@
 		var res = "";
 		for (var i = 0; i < arrayLength; i++) {
 			res = res + myStringArray[i].trim() + ",";
-			//console.log(myStringArray[i]);
 		}
 		return res;
 	}
@@ -50,8 +47,6 @@
 		$("#edit").click(function(){
 			var GivenDate = document.getElementById("endDate").value;
 		    var CurrentDate = new Date();
-		    //console.log("op");
-		    //console.log(GivenDate);
 		    if(GivenDate == ""){
 		        alert('You should choose end date.');
 		        return;
@@ -126,13 +121,6 @@
     <label for="profession"><b>Profession</b></label>
     <select id = "profession">
     <%
-		
-    	/*
-    	professions.add("prof1");
-    	professions.add("prof2");
-    	professions.add("prof3");
-    	professions.add("prof4");
-    	*/
     	for(int i = 0 ; i < professions.size(); i++){
     		out.print("<option value = \"");
 			out.print(professions.get(i) + "\"");
@@ -216,13 +204,6 @@
 		</select><br>
 	<%
 		List<String> languages = manager.getLanguages();
-		/*
-		languages.add("opa");
-		languages.add("opa1");
-		languages.add("opa2");
-		languages.add("opa3");
-		languages.add("opa4");
-		*/
 	%>
 		<label for="languages"><b>Languages</b></label>
 		<select id = "languages" class="selectpicker" multiple data-live-search="true">
@@ -249,11 +230,6 @@
 	<%	
 			List<String> tags = manager.getTags();
 			List<String> myTags = manager.getVacancyTags(id);
-			/*
-			tags.add("opa");
-			tags.add("opa1");
-			tags.add("opa2");
-			*/
 			for(int i = 0 ; i < tags.size(); i++){
 				out.print("<option value = \"");
 				out.print(tags.get(i) + "\"");

@@ -164,7 +164,6 @@ display:inline-block;
     </ol>
   </div>
 	
-	<!-- Kalaaaaaaaaaaaaaa ###################3 Useeeeeeeeeeeeeeeeeeeeeeersssssssssssssssssssssssss -->
 	<%	
 	//First
 		List<Employee> list = manager.getVacancyApplicants(vac.getId());	
@@ -188,11 +187,6 @@ display:inline-block;
 	
 	</div>
 	
-
-	
-	
-	<!-- #########################################################################################3 -->
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/JS/VacancyCartJS.js" charset="utf-8"></script>
 </body>

@@ -51,12 +51,6 @@
 			    <select id = "major" name="major" class="selectpicker">
 			    <%
 					List<String> majors = manager.getProfessions();
-			    	/*
-			    	professions.add("prof1");
-			    	professions.add("prof2");
-			    	professions.add("prof3");
-			    	professions.add("prof4");
-			    	*/
 			    	for(int i = 0 ; i < majors.size(); i++){
 			    		out.print("<option value = \"");
 						out.print(majors.get(i) + "\">");
@@ -70,12 +64,6 @@
 			    	<option value="None" selected>None</option>
 			    <%
 					List<String> minors = manager.getProfessions();
-			    	/*
-			    	professions.add("prof1");
-			    	professions.add("prof2");
-			    	professions.add("prof3");
-			    	professions.add("prof4");
-			    	*/
 			    	for(int i = 0 ; i < minors.size(); i++){
 			    		out.print("<option value = \"");
 						out.print(minors.get(i) + "\">");

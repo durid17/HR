@@ -51,12 +51,6 @@
 			    <select id = "profession" name="profession" class="selectpicker">
 			    <%
 					List<String> professions = manager.getProfessions();
-			    	/*
-			    	professions.add("prof1");
-			    	professions.add("prof2");
-			    	professions.add("prof3");
-			    	professions.add("prof4");
-			    	*/
 			    	for(int i = 0 ; i < professions.size(); i++){
 			    		out.print("<option value = \"");
 						out.print(professions.get(i) + "\">");

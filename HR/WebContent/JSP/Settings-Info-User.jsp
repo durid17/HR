@@ -39,7 +39,6 @@
 		var res = "";
 		for (var i = 0; i < arrayLength; i++) {
 			res = res + myStringArray[i].trim() + ",";
-			//console.log(myStringArray[i]);
 		}
 		return res;
 	}
@@ -83,10 +82,6 @@
 		</div>
 		
 		  <div class="right">
-		  <!-- 
-		  	<form action = "${pageContext.request.contextPath}/UpdateInfo" method ="post">
-		   -->
-	
 			    <label for="firstName"><b>First Name *</b></label>
 			    <textarea class="area" id="firstName" name="firstName"><%=profile.getName()%></textarea>
 			  
@@ -106,20 +101,15 @@
 			    <label for="phoneNumber"><b>Phone Number *</b></label>
 			    <input type="number"  class="inp" id = "phoneNumber" name = "phoneNumber"  value=<%=profile.getPhoneNumber()%> required>
 			    
-			    <label for="locations"><b>Locations</b></label>
+			    <label for="locations"><b>Location</b></label>
 				<select id = "address" class="selectpicker">
 				<%
 						List<String> locations = manager.getLocations();
-						List<Language> loc = manager.getEmployeeLanguages(employee.getId());
-						List<String> mylocations = new ArrayList<>();
-						for(int i = 0; i < loc.size(); i++){
-							mylocations.add(loc.get(i).getLanguage());
-						}
-							
+						String mylocation = profile.getAddress();							
 						for(int i = 0 ; i < locations.size(); i++){
 							out.print("<option value = \" ");
 							out.print(locations.get(i) + "\"");
-							if(mylocations.contains(locations.get(i))) 
+							if(mylocation.equals(locations.get(i))) 
 								out.print("selected = \"selected\"");
 							out.print(">");
 							out.print(locations.get(i) + "</option>");
@@ -176,9 +166,6 @@
 			<hr>
 			  
 			    <button type="submit" id = "save" class="submitButton">Save Changes</button> <br><br>
-	  		<!-- 
-	  		</form>
-	  		 -->
   		 </div>
 		
 	

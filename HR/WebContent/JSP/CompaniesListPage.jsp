@@ -40,7 +40,7 @@
 						<img class="labClass" id = "profileImage" src="${company.getProfile().getLogo()}" alt="Avatar">
 						<label class="labClass" id="name"> ${company.getProfile().getName()} </label>
 						<label class="labClass" id="essence"> ${company.getProfile().getEssence()} </label> 			
-				
+			
 			</div>
 			</a>
 		</c:forEach>
