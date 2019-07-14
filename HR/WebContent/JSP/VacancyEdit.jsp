@@ -149,9 +149,9 @@
     <input type="text" id="position" value= <%= vacancy.getPosition() %>><br>
    	
    	<label for=""><b>Qualifications:</b></label>
-    <input type="text" id="qualification_1" value = <%=vacancy.getReq().getQualification1() %>><br>
-    <input type="text" id="qualification_2" value = <%=vacancy.getReq().getQualification2() %>><br>
-    <input type="text" id="qualification_3" value = <%=vacancy.getReq().getQualification3() %>><br>
+    <input type="text" id="qualification_1" value = "<%=vacancy.getReq().getQualification1() %>"><br>
+    <input type="text" id="qualification_2" value = "<%=vacancy.getReq().getQualification2() %>"><br>
+    <input type="text" id="qualification_3" value = "<%=vacancy.getReq().getQualification3() %>"><br>
      
     <label for="description"><b>Description</b></label><br>
     <textarea  id="description" rows="5"><%= vacancy.getDescription() %></textarea>

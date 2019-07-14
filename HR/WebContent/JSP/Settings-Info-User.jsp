@@ -131,11 +131,11 @@
 			    <textarea  class="area"style=" resize: vertical;" id = "description" name="description"><%=profile.getDescription()%></textarea>
 				
 				<label for="image"><b>Image</b></label>
-			    <input type="text"  id = "image" class="inp" name = "image"  value=<%=profile.getProfilePicture()%> required>
+			    <input type="text"  id = "image" class="inp" name = "image"  value="<%=profile.getProfilePicture()%>" required>
 			    
 			 
 			 
-			 	<label for="languages"><b>Languages</b></label>
+			 	<label for="languages"><b>Languages</b></label> 
 				<select id = "languages" class="selectpicker" multiple data-live-search="true">
 			<%
 					List<String> languages = manager.getLanguages();
