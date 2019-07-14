@@ -1,17 +1,24 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import org.junit.jupiter.api.Test;
 
 import classes.MyDateFormatter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DateFormaterTests.
+ */
 class DateFormaterTests {
 
+	/**
+	 * Test years between of two dates.
+	 */
 	@Test
 	void test() {
 		Date date = null;
@@ -30,6 +37,12 @@ class DateFormaterTests {
 		
 	}
 
+	/**
+	 * Convert util to sql.
+	 *
+	 * @param uDate the u date
+	 * @return the java.sql. date
+	 */
 	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
 		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
 		return sDate;

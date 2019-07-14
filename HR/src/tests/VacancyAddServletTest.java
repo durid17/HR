@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +9,6 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,13 +23,22 @@ import classes.Account;
 import classes.DBManager;
 import classes.Requirement;
 import classes.Vacancy;
-import servlets.UpdateInfoCompany;
 import servlets.VacancyAddServlet;
 
+/**
+ * The Class VacancyAddServletTest.
+ */
 class VacancyAddServletTest extends Mockito {
 
+	/**
+	 * Test Situation when Date is empty.
+	 *
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	void dateIsEmpty() throws ServletException, IOException {
+		// mocks classes using mockito
 		HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
@@ -45,7 +53,7 @@ class VacancyAddServletTest extends Mockito {
         };
         serv = spy(serv);
         
-        
+        // mocks return statements with mockito
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("account")).thenReturn(acc);
         when(acc.getID()).thenReturn(2);
@@ -81,8 +89,10 @@ class VacancyAddServletTest extends Mockito {
         JSONObject jobj = new JSONObject();
 		jobj.put("vacancyId", 0);
         
+		// call servlet
         serv.doPost(request, response);
         
+        // check if methods called correctly
         verify(manager).addReqLanguage(0, "lan1");
         verify(manager).addReqLanguage(0, "lan2");
         verify(manager).addReqLanguage(0, "lan3");
@@ -95,8 +105,16 @@ class VacancyAddServletTest extends Mockito {
         assertTrue(stringWriter.toString().equals(jobj.toString())); 
 	}
 	
+	/**
+	 * Test Situation when Date is not empty.
+	 *
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ParseException the parse exception
+	 */
 	@Test
 	void dateIsNotEmpty() throws ServletException, IOException, ParseException {
+		// mocks classes using mockito
 		HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
@@ -111,7 +129,7 @@ class VacancyAddServletTest extends Mockito {
         };
         serv = spy(serv);
         
-        
+        // mocks return statements with mockito
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("account")).thenReturn(acc);
         when(acc.getID()).thenReturn(2);
@@ -151,8 +169,10 @@ class VacancyAddServletTest extends Mockito {
         JSONObject jobj = new JSONObject();
 		jobj.put("vacancyId", 0);
         
+		// call servlet
         serv.doPost(request, response);
         
+        // check if methods called correctly
         verify(manager).addReqLanguage(0, "lan1");
         verify(manager).addReqLanguage(0, "lan2");
         verify(manager).addReqLanguage(0, "lan3");

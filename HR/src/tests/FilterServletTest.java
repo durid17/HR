@@ -1,7 +1,5 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -17,45 +15,57 @@ import org.mockito.Mockito;
 import classes.Account;
 import classes.DBManager;
 import servlets.FilterServlet;
-import servlets.VacanciesServlet;
 
-class FilterServletTest extends Mockito{
+/**
+ * The Class FilterServletTest.
+ */
+class FilterServletTest extends Mockito {
 
+	/**
+	 * This methods Checks if parameters is correct.
+	 *
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	void checkParameters() throws ServletException, IOException {
+		// mock classes
 		HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-        HttpSession session = mock(HttpSession.class);
-        DBManager manager = mock(DBManager.class);
-        Account acc = mock(Account.class);
-        
-        final ServletContext servletContext = mock(ServletContext.class);
-        FilterServlet serv = new FilterServlet(){
-            public ServletContext getServletContext() {
-                return servletContext;
-            }
-        };
-        
-        when(servletContext.getAttribute("DBManager")).thenReturn(manager);
-        when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("account")).thenReturn(acc);
-        when(request.getRequestDispatcher("JSP/VacancyCart.jsp")).thenReturn(dispatcher);
-        
-        when(request.getParameter("professions")).thenReturn("professions");
-        when(request.getParameter("companies")).thenReturn("companies");
-        when(request.getParameter("locations")).thenReturn("locations");
-        when(request.getParameter("tags")).thenReturn("tags");
-        when(request.getParameter("jobs_type")).thenReturn("jobs_type");
-        when(request.getParameter("degree")).thenReturn("degree");
-         
-        serv.doGet(request, response);
-        verify(manager).getFilterVacancies("professions", "companies", "locations", "tags", "jobs_type", "degree");
-        verify(manager).getCompanies();
-        verify(manager).getProfessions();
-        verify(manager).getLocations();
-        verify(manager).getTags();
-        verify(manager).getDegrees();
-        verify(dispatcher).forward(request,response);  
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
+		HttpSession session = mock(HttpSession.class);
+		DBManager manager = mock(DBManager.class);
+		Account acc = mock(Account.class);
+
+		// mock servletContext
+		final ServletContext servletContext = mock(ServletContext.class);
+		FilterServlet serv = new FilterServlet() {
+			public ServletContext getServletContext() {
+				return servletContext;
+			}
+		};
+
+		// override methods
+		when(servletContext.getAttribute("DBManager")).thenReturn(manager);
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("account")).thenReturn(acc);
+		when(request.getRequestDispatcher("JSP/VacancyCart.jsp")).thenReturn(dispatcher);
+
+		when(request.getParameter("professions")).thenReturn("professions");
+		when(request.getParameter("companies")).thenReturn("companies");
+		when(request.getParameter("locations")).thenReturn("locations");
+		when(request.getParameter("tags")).thenReturn("tags");
+		when(request.getParameter("jobs_type")).thenReturn("jobs_type");
+		when(request.getParameter("degree")).thenReturn("degree");
+
+		// call servelt and check if parameters are correct
+		serv.doGet(request, response);
+		verify(manager).getFilterVacancies("professions", "companies", "locations", "tags", "jobs_type", "degree");
+		verify(manager).getCompanies();
+		verify(manager).getProfessions();
+		verify(manager).getLocations();
+		verify(manager).getTags();
+		verify(manager).getDegrees();
+		verify(dispatcher).forward(request, response);
 	}
 }

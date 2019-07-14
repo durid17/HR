@@ -1,7 +1,5 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -17,14 +15,22 @@ import org.mockito.Mockito;
 import classes.Account;
 import classes.DBManager;
 import classes.Hash;
-import servlets.LoginServlet;
 import servlets.UpdatePassword;
-import servlets.logOut;
 
+/**
+ * The Class UpdatePasswordTest.
+ */
 class UpdatePasswordTest extends Mockito {
 
+	/**
+	 * This method checks if Password updated correctly.
+	 *
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	void passwordUpdated() throws ServletException, IOException {
+		// mock classes
 		HttpServletRequest request = mock(HttpServletRequest.class);
 	    HttpServletResponse response = mock(HttpServletResponse.class);
 	    HttpSession session = mock(HttpSession.class);
@@ -32,8 +38,7 @@ class UpdatePasswordTest extends Mockito {
         DBManager manager = mock(DBManager.class);
         Account acc = mock(Account.class);
         
-        
-        
+        // mock servlet context
         final ServletContext servletContext = mock(ServletContext.class);
         UpdatePassword serv = new UpdatePassword(){
             public ServletContext getServletContext() {
@@ -41,13 +46,14 @@ class UpdatePasswordTest extends Mockito {
             }
         };
         
+        // override return statements
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("newPassword")).thenReturn("hola");
         when(session.getAttribute("account")).thenReturn(acc);
         when(servletContext.getAttribute("DBManager")).thenReturn(manager);
         when(request.getRequestDispatcher("/JSP/Settings.jsp")).thenReturn(dispatcher);
         
-        
+        // call servlet and check if new password is correct 
         serv.doPost(request, response);
         verify(acc).setPassHash(Hash.getHash("hola"));
         verify(manager).updateAccount(acc);

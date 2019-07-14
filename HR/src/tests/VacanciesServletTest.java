@@ -1,9 +1,6 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -16,19 +13,23 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import classes.Account;
-import classes.Company;
 import classes.DBManager;
-import classes.Hash;
-import classes.Pairing;
-import classes.Vacancy;
-import servlets.LoginServlet;
-import servlets.PairingServlet;
 import servlets.VacanciesServlet;
 
+/**
+ * The Class VacanciesServletTest.
+ */
 class VacanciesServletTest extends Mockito {
 
+	/**
+	 * This test Checks parameters.
+	 *
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	void checkParameters() throws ServletException, IOException {
+		// mocks classes
 		HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -36,6 +37,7 @@ class VacanciesServletTest extends Mockito {
         DBManager manager = mock(DBManager.class);
         Account acc = mock(Account.class);
         
+        // mock servletContext
         final ServletContext servletContext = mock(ServletContext.class);
         VacanciesServlet serv = new VacanciesServlet(){
             public ServletContext getServletContext() {
@@ -43,12 +45,14 @@ class VacanciesServletTest extends Mockito {
             }
         };
         
+        // override return methods
         when(servletContext.getAttribute("DBManager")).thenReturn(manager);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("account")).thenReturn(acc);
         when(request.getRequestDispatcher("JSP/VacancyCart.jsp")).thenReturn(dispatcher);
         when(acc.getID()).thenReturn(1);
         
+        // call servlet and check if parameters is correct
         serv.doGet(request, response);
         verify(manager).getVacancies();
         verify(manager).getCompanies();
