@@ -146,7 +146,7 @@
     
     
     <label for="position"><b>Position *</b></label>
-    <input type="text" id="position" value= <%= vacancy.getPosition() %>><br>
+    <input type="text" id="position" value= "<%= vacancy.getPosition() %>"><br>
    	
    	<label for=""><b>Qualifications:</b></label>
     <input type="text" id="qualification_1" value = "<%=vacancy.getReq().getQualification1() %>"><br>

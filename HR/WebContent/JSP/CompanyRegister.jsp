@@ -19,7 +19,7 @@
 		<h3 style="color: red"> User name is already taken </h3>
 	<%} %>
 	</h1>
-    <p>Please fill in this form to create an account. Required fields are marked with an asterisk (*).</p>
+    <p>Please fill in this form to create an account.</p>
     <hr>
     
     <label for="username"><b>Username </b></label>

@@ -76,11 +76,11 @@
 				  <option value="Temporary">Temporary</option>
 				</select><br>
   				
-  				<label for="duty"><b>Duty</b></label>
+  				<label for="duty"><b>Duty *</b></label>
 			    <textarea class="area" name="duty" required></textarea>
 			    
 			    <label for="achievement" ><b>Achievement</b></label>
-			    <textarea class="area" name="achievement" required></textarea>
+			    <textarea class="area" name="achievement"></textarea>
 			    
   				<label for="start" ><b>Start Date *</b></label>
   				<input type="date" class="inp" name="start" required >
