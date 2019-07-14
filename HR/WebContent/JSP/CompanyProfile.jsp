@@ -124,7 +124,13 @@
             </ul>
 
             <br> <br>
-            <a href="${pageContext.request.contextPath}/JSP/MyVacancy.jsp?id=${vacancy.getId()}" class="button read_more open_vacancy">OPEN</a>
+            
+            <%if(acc.getAccountType().equals(Account.COMPANY_ACCOUNT_TYPE)){ %>
+            	<a href="${pageContext.request.contextPath}/JSP/MyVacancy.jsp?id=${vacancy.getId()}" class="button read_more open_vacancy">OPEN</a>
+		    <%} else { %>		    	
+	            <a href="${pageContext.request.contextPath}/JSP/VacancyPage.jsp?id=${vacancy.getId()}" class="button read_more open_vacancy">OPEN</a>	          	
+		    <%} %>
+		    
           </div>
 
         </li>
