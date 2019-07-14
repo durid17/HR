@@ -16,27 +16,28 @@ import java.util.Set;
  */
 public class DBManager {
 
-	/** The con. */
+	/** The connection kit. */
 	private Connection con;
 
 	/**
 	 * Instantiates a new DB manager.
 	 *
-	 * @param con the con
+	 * @param connection the con
 	 */
 	public DBManager(Connection con) {
 		this.con = con;
 	}
 
 	/**
-	 * Adds the account.
+	 * Adds account to database.
 	 *
-	 * @param account the account
+	 * @param type account, name - account
 	 * @return the account
 	 */
 	public Account addAccount(Account account) {
 		try {
-			PreparedStatement stmt1 = con.prepareStatement("INSERT INTO accounts (username, password_hash, account_type) VALUES (?, ?, ?)");
+			PreparedStatement stmt1 = con.prepareStatement("INSERT INTO accounts (username, password_hash, "
+										+ "account_type) VALUES (?, ?, ?)");
 			stmt1.setString(1, account.getUsername());
 			stmt1.setString(2, account.getPassHash());
 			stmt1.setString(3, account.getAccountType());
@@ -44,7 +45,7 @@ public class DBManager {
 
 			int accountID = getAccountID(account);
 
-			if (account.getAccountType().equals(Account.EMPLOYEE_ACCOUNT_TYPE)) {
+			if (account.getAccountType().equals(Account.EMPLOYEE_ACCOUNT_TYPE)) { //checks account is employee or company
 				PreparedStatement stmt2 = con.prepareStatement("INSERT INTO employees (id) VALUES (?)");
 				stmt2.setInt(1, accountID);
 				stmt2.executeUpdate();
@@ -61,9 +62,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the account ID.
+	 * Gets the account ID for specific account.
 	 *
-	 * @param account the account
+	 * @param type account, name - account
 	 * @return the account ID
 	 */
 	private int getAccountID (Account account) {
@@ -83,9 +84,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Update account.
+	 * Updates account in database.
 	 *
-	 * @param account the account
+	 * @param type account, name - account
 	 */
 	public void updateAccount(Account account) {
 		try {
@@ -99,9 +100,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Delete account.
+	 * Deletes account in database.
 	 *
-	 * @param account the account
+	 * @param type account, name - account
 	 */
 	public void deleteAccount(Account account) {
 		try {
@@ -114,9 +115,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the account.
+	 * Gets account from database using username.
 	 *
-	 * @param username the username
+	 * @param string username the username
 	 * @return the account
 	 */
 	public Account getAccount(String username) {
@@ -139,9 +140,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the account.
+	 * Gets the account from database using account's id.
 	 *
-	 * @param id the id
+	 * @param type int, name id
 	 * @return the account
 	 */
 	public Account getAccount(int id) {
@@ -162,12 +163,12 @@ public class DBManager {
 	}
 
 	/**
-	 * Update company.
+	 * Updates company profile in database.
 	 *
-	 * @param company the company
+	 * @param type Company, name - company
 	 */
 	public void updateCompany(Company company) {
-		CompanyProfile profile = company.getProfile();
+		CompanyProfile profile = company.getProfile(); //gets profile of parameter company and sets new values.
 		PreparedStatement updateCompany = null;
 		String updateString = "UPDATE companies SET name = ?, "
 												 + "description = ?, "
@@ -198,9 +199,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the company.
+	 * Gets the company from database using id.
 	 *
-	 * @param companyId the company id
+	 * @param type companyId, name - companyId
 	 * @return the company
 	 */
 	public Company getCompany(int companyId) {
@@ -237,9 +238,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the companies.
+	 * Gets the companies list from database.
 	 *
-	 * @return the companies
+	 * @return the list of companies
 	 */
 	public List<Company> getCompanies() {
 		PreparedStatement getCompany = null;
@@ -276,10 +277,10 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the company vacancies.
+	 * Gets vacancies from database for particular company using id.
 	 *
-	 * @param companyId the company id
-	 * @return the company vacancies
+	 * @param type int, name - companyId
+	 * @return list of vacancies
 	 */
 	public List<Vacancy> getCompanyVacancies(int companyId) {
 		List<Vacancy> res = new ArrayList<Vacancy>();
@@ -310,9 +311,10 @@ public class DBManager {
 				String qualification2 = resultSet.getString("qualification_2");
 				String qualification3 = resultSet.getString("qualification_3");
 
-				Requirement req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
+				Requirement req = new Requirement(location, yearsOfExp, degree, prof, 
+										qualification1, qualification2, qualification3); // requirements object 
 				Vacancy vac = new Vacancy(id, title, position, description, empType,
-						company_id, req, creationDate, expiryDate);
+										company_id, req, creationDate, expiryDate);
 				res.add(vac);
 			}
 
@@ -324,9 +326,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the employee.
+	 * Gets the employee from database using id.
 	 *
-	 * @param employeeId the employee id
+	 * @param type int, name - employeeId
 	 * @return the employee
 	 */
 	public Employee getEmployee(int employeeId) {
@@ -358,7 +360,7 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the employees.
+	 * Gets the list of employees from database.
 	 *
 	 * @return the employees
 	 */
@@ -391,12 +393,13 @@ public class DBManager {
 	}
 	
 	/**
-	 * Update employee.
+	 * Updates specific employee in database.
 	 *
-	 * @param employee the employee
+	 * @param type Employee, name - employee
 	 */
 	public void updateEmployee(Employee employee) {
 		try {
+			//updates all fields of table. 
 			PreparedStatement stmt1 = con.prepareStatement("UPDATE employees SET firstname = ?, " 
 																			  + "lastname = ?, "
 																			  + "gender = ?, " 
@@ -431,10 +434,10 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the employee applications.
+	 * Gets interested vacancies for employee using id.
 	 *
-	 * @param employeeId the employee id
-	 * @return the employee applications
+	 * @param type int, name - employeeId
+	 * @return the list of vacancies
 	 */
 	public List<Vacancy> getEmployeeApplications(int employeeId) {
 		try {
@@ -455,10 +458,10 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the employee following.
+	 * Gets list of followed companies for employee using id
 	 *
-	 * @param employeeId the employee id
-	 * @return the employee following
+	 * @param type int, name - employeeId
+	 * @return the list of companies
 	 */
 	public List<Company> getEmployeeFollowing(int employeeId) {
 		try {
@@ -479,9 +482,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Adds the vacancy.
+	 * Adds new vacancy to database.
 	 *
-	 * @param vacancy the vacancy
+	 * @param type Vacancy, name - vacancy
 	 * @return the vacancy
 	 */
 	public Vacancy addVacancy(Vacancy vacancy) {
@@ -532,14 +535,14 @@ public class DBManager {
 	}
 
 	/**
-	 * Update vacancy.
+	 * Updates specific vacancy in database.
 	 *
-	 * @param vacancy the vacancy
+	 * @param type Vacancy, name - vacancy
 	 */
 	public void updateVacancy(Vacancy vacancy) {
 		Requirement req = vacancy.getReq();
 		PreparedStatement updateVacancy = null;
-		String updateQuery = "UPDATE vacancies SET heading = ?, "
+		String updateQuery = "UPDATE vacancies SET heading = ?, " // updates all fields in vacancy table.
 												+ "description = ?, "
 												+ "expiry_date = ?, "
 												+ "emp_type = ?, "
@@ -577,9 +580,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Delete vacancy.
+	 * Deletes vacancy using id.
 	 *
-	 * @param id the id
+	 * @param type int, name - id
 	 */
 	public void deleteVacancy(int id) {
 		PreparedStatement stmt = null;
@@ -596,10 +599,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the vacancy.
+	 * Gets the specific vacancy from database using id.
 	 *
-	 * @param id the id
-	 * @return the vacancy
+	 * @param type int, name - id
+	 * @return Vacancy
 	 */
 	public Vacancy getVacancy(int id) {
 		PreparedStatement getCompany = null;
@@ -629,9 +632,10 @@ public class DBManager {
 				String qualification2 = resultSet.getString("qualification_2");
 				String qualification3 = resultSet.getString("qualification_3");
 
-				req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
+				req = new Requirement(location, yearsOfExp, degree, prof, 
+										qualification1, qualification2, qualification3); // requirement object for specific vacancy
 				vac = new Vacancy(vacId, title, position, description, empType,
-						 company_id, req, creationDate, expiryDate);
+										company_id, req, creationDate, expiryDate);
 
 			}
 
@@ -642,10 +646,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the vacancy applicants.
+	 * gets the list of following employees from database for specific vacancy using id
 	 *
-	 * @param vacancyId the vacancy id
-	 * @return the vacancy applicants
+	 * @param type int, name - vacancyId
+	 * @return the list of employees
 	 */
 	public List<Employee> getVacancyApplicants(int vacancyId) {
 		try {
@@ -666,9 +670,9 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the vacancies.
+	 * Gets the list of vacancies from database
 	 *
-	 * @return the vacancies
+	 * @return the list of vacancies
 	 */
 	public List<Vacancy> getVacancies() {
 		List<Vacancy> res = new ArrayList<Vacancy>();
@@ -699,9 +703,10 @@ public class DBManager {
 				String qualification2 = resultSet.getString("qualification_2");
 				String qualification3 = resultSet.getString("qualification_3");
 
-				req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
+				req = new Requirement(location, yearsOfExp, degree, prof, 
+										qualification1, qualification2, qualification3); //requirement object for specific vacancy
 				vac = new Vacancy(vacId, title, position, description, empType,
-						 company_id, req, creationDate, expiryDate);
+						 				company_id, req, creationDate, expiryDate);
 				res.add(vac);
 			}
 
@@ -712,10 +717,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Adds the follower.
+	 * adds employee as a new follower for company in database
 	 *
-	 * @param companyId the company id
-	 * @param employeeId the employee id
+	 * @param type int, name - companyId
+	 * @param type int, name - employeeId
 	 */
 	public void addFollower(int companyId, int employeeId) {
 		PreparedStatement stmt = null;
@@ -733,10 +738,10 @@ public class DBManager {
 	}
 
 	/**
-	 * Un follow.
+	 * removes the specific employee from the followers list of company
 	 *
-	 * @param companyId the company id
-	 * @param employeeId the employee id
+	 * @param type int, name - companyId
+	 * @param type int, name - employeeId
 	 */
 	public void unFollow(int companyId, int employeeId) {
 		PreparedStatement stmt = null;
@@ -754,10 +759,10 @@ public class DBManager {
 	}
 
 	/**
-	 * Adds the application.
+	 * Marks vacancy as interested for employee in database..
 	 *
-	 * @param employeeId the employee id
-	 * @param vacancyId the vacancy id
+	 * @param type int, name - employeeId
+	 * @param type int, name - vacancyId
 	 */
 	public void addApplication(int employeeId, int vacancyId) {
 		PreparedStatement stmt = null;
@@ -775,10 +780,10 @@ public class DBManager {
 	}
 
 	/**
-	 * Removes the application.
+	 * Removes employeeId from the list of interested employees of a particular vacancy
 	 *
-	 * @param employeeId the employee id
-	 * @param vacancyId the vacancy id
+	 * @param type int, name - employeeId
+	 * @param type int, name - vacancyId
 	 */
 	public void removeApplication(int employeeId, int vacancyId) {
 		PreparedStatement stmt = null;
@@ -796,11 +801,11 @@ public class DBManager {
 	}
 	
 	/**
-	 * Checks for applied.
+	 * this method checks if employee is interested with vacancy or not
 	 *
-	 * @param employeeId the employee id
-	 * @param vacancyId the vacancy id
-	 * @return true, if successful
+	 * @param type int, name - employeeId
+	 * @param type int, name - vacancyId
+	 * @return true, if is interested
 	 */
 	public boolean hasApplied(int employeeId, int vacancyId) {
 		PreparedStatement stmt = null;
@@ -820,10 +825,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Adds the vacancy tag.
+	 * Adds new tag for a particular vacancy
 	 *
-	 * @param vacancyId the vacancy id
-	 * @param tag the tag
+	 * @param type int, name - vacancyId
+	 * @param type String, name - tag
 	 */
 	public void addVacancyTag(int vacancyId, String tag) {
 		try {
@@ -842,10 +847,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Removes the vacancy tag.
+	 * Removes tag from the database for a particular vacancy
 	 *
-	 * @param vacancyId the vacancy id
-	 * @param tag the tag
+	 * @param type int, name - vacancyId
+	 * @param type String, name - tag
 	 */
 	public void removeVacancyTag(int vacancyId, String tag) {
 		try {
@@ -864,10 +869,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Adds the employee tag.
+	 * Adds new tag for a particular employee in database
 	 *
-	 * @param employeeId the employee id
-	 * @param tag the tag
+	 * @param type int, name - employeeId
+	 * @param type String, name - tag
 	 */
 	public void addEmployeeTag(int employeeId, String tag) {
 		try {
@@ -886,10 +891,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Removes the employee tag.
+	 * Removes tag for a particular employee in database
 	 *
-	 * @param employeeId the employee id
-	 * @param tag the tag
+	 * @param type int, name - employeeId
+	 * @param type String, name - tag
 	 */
 	public void removeEmployeeTag(int employeeId, String tag) {
 		try {
@@ -908,10 +913,10 @@ public class DBManager {
 	}
 
 	/**
-	 * Gets the work exps.
+	 * Gets the list of work Experiences for a particular employee from database using id
 	 *
-	 * @param employeeId the employee id
-	 * @return the work exps
+	 * @param int, name - employeeId
+	 * @return the list of workExperiences
 	 */
 	public List<WorkExperience> getWorkExps(int employeeId) {
 		List<WorkExperience> res = new ArrayList<WorkExperience>();
@@ -936,7 +941,8 @@ public class DBManager {
 				String duty = resultSet.getString("job_description");
 				String award = resultSet.getString("achievement");
 
-				WorkExperience exp = new WorkExperience(id, start, end, company, prof, position, empType, duty, award);
+				WorkExperience exp = new WorkExperience(id, start, end, company, prof, position,
+										empType, duty, award);
 				res.add(exp);
 			}
 
@@ -949,10 +955,10 @@ public class DBManager {
 	
 	
 	/**
-	 * Gets the education.
+	 * Gets the list of Education for a particular employee from database using id
 	 *
-	 * @param employeeId the employee id
-	 * @return the education
+	 * @param int, name - employeeId
+	 * @return the list of EmployeeEducation
 	 */
 	public List<EmployeeEducation> getEducation(int employeeId) {
 		List<EmployeeEducation> res = new ArrayList<EmployeeEducation>();
@@ -977,8 +983,8 @@ public class DBManager {
 				String degree = resultSet.getString("degree");
 				double grade = resultSet.getDouble("grade");
 				
-				EmployeeEducation edu = new EmployeeEducation(id, start, end, educationalInstitution, institutionName,
-						major, minor, degree, grade);
+				EmployeeEducation edu = new EmployeeEducation(id, start, end, educationalInstitution, 
+											institutionName, major, minor, degree, grade);
 				res.add(edu);
 			}
 
@@ -991,10 +997,10 @@ public class DBManager {
 	
 	
 	/**
-	 * Gets the employee languages.
+	 * Gets the list of known languages for a particular employee from database using id
 	 *
-	 * @param employeeId the employee id
-	 * @return the employee languages
+	 * @param int, name - employeeId
+	 * @return the list of Language
 	 */
 	public List<Language> getEmployeeLanguages(int employeeId){
 		List<Language> res = new ArrayList<Language>();
@@ -1025,10 +1031,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the requirement languages.
+	 * Gets the list of required languages for a particular vacancy from database using id
 	 *
-	 * @param vacancyId the vacancy id
-	 * @return the requirement languages
+	 * @param int, name - vacancyId
+	 * @return the list of Language
 	 */
 	public List<Language> getRequirementLanguages(int vacancyId){
 		List<Language> res = new ArrayList<Language>();
@@ -1058,10 +1064,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the employee tags.
+	 * Gets the list of tags for a particular employee from database using id
 	 *
-	 * @param employeeId the employee id
-	 * @return the employee tags
+	 * @param int, name - employeeId
+	 * @return the list of strings (tags)
 	 */
 	public List<String> getEmployeeTags(int employeeId){
 		List<String> res = new ArrayList<String>();
@@ -1088,7 +1094,7 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the locations.
+	 * Gets the default list of locations from database
 	 *
 	 * @return the locations
 	 */
@@ -1117,10 +1123,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the vacancy tags.
+	 * Gets the list of tags for a particular vacancy from database
 	 *
-	 * @param vacancyId the vacancy id
-	 * @return the vacancy tags
+	 * @param type int, name - vacancyId
+	 * @return the list of strings (tags)
 	 */
 	public List<String> getVacancyTags(int vacancyId){
 		List<String> res = new ArrayList<String>();
@@ -1147,9 +1153,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the languages.
+	 * Gets the default languages from database.
 	 *
-	 * @return the languages
+	 * @return the list of strings (languages)
 	 */
 	public List<String> getLanguages(){
 		List<String> res = new ArrayList<String>();
@@ -1176,9 +1182,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the tags.
+	 * Gets the list of tags from database.
 	 *
-	 * @return the tags
+	 * @return the list of strings (tags)
 	 */
 	public List<String> getTags(){
 		List<String> res = new ArrayList<String>();
@@ -1205,9 +1211,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the qualities.
+	 * Gets the list of qualities from database.
 	 *
-	 * @return the qualities
+	 * @return the list of strings (qualities)
 	 */
 	public List<String> getQualities(){
 		List<String> res = new ArrayList<String>();
@@ -1234,9 +1240,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the degrees.
+	 * Gets the default list of degrees from database
 	 *
-	 * @return the degrees
+	 * @return the list of strings (degrees)
 	 */
 	public List<String> getDegrees(){
 		List<String> res = new ArrayList<String>();
@@ -1263,9 +1269,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the educational institution types.
+	 * Gets the default list of education institution types from database
 	 *
-	 * @return the educational institution types
+	 * @return the list of strings (educational Institution Types)
 	 */
 	public List<String> getEducationalInstitutionTypes(){
 		List<String> res = new ArrayList<String>();
@@ -1292,9 +1298,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the professions.
+	 * Gets the default list of professions from database.
 	 *
-	 * @return the professions
+	 * @return the list of strings (professions).
 	 */
 	public List<String> getProfessions(){
 		List<String> res = new ArrayList<String>();
@@ -1321,10 +1327,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Adds the work exp.
+	 * Adds new work experience for a particular employee in database
 	 *
-	 * @param employeeId the employee id
-	 * @param workExp the work exp
+	 * @param type int, name - employeeId
+	 * @param type WorkExperience, name - workExp
 	 */
 	public void addWorkExp(int employeeId, WorkExperience workExp) {
 		
@@ -1340,7 +1346,7 @@ public class DBManager {
 		PreparedStatement stmt = null;
 		String query = "insert into experiences (employee_id, company_name, start_date, end_date, "
 							+ "position, profession, job_description, emp_type, achievement) " 
-								+ "VALUES (?,?,?,?,?,?,?,?,?)";
+								+ "VALUES (?,?,?,?,?,?,?,?,?)"; //query to insert new work experience into database
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -1363,10 +1369,10 @@ public class DBManager {
 	
 	
 	/**
-	 * Adds the education.
+	 * Adds new education for a particular employee in database
 	 *
-	 * @param employeeId the employee id
-	 * @param empEdu the emp edu
+	 * @param type int, name - employeeId
+	 * @param type EmployeeEducation, name - empEdu
 	 */
 	public void addEducation(int employeeId, EmployeeEducation empEdu) {
 		
@@ -1382,7 +1388,7 @@ public class DBManager {
 		PreparedStatement stmt = null;
 		String query = "insert into education (employee_id, educational_institution, "
 							+ "educational_institution_name, start_date, end_date, major, minor, "
-								+ "degree, grade) " + "VALUES (?,?,?,?,?,?,?,?,?)";
+								+ "degree, grade) " + "VALUES (?,?,?,?,?,?,?,?,?)"; // sql query to add new education into database
 
 		try {
 			stmt = con.prepareStatement(query);
@@ -1404,10 +1410,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Adds the employee language.
+	 * Adds new language for a particular employee in database
 	 *
-	 * @param employeeId the employee id
-	 * @param lan the lan
+	 * @param type int, name - employeeId
+	 * @param type Language, name - lan
 	 */
 	public void addEmployeeLanguage(int employeeId, Language lan) {
 		
@@ -1433,10 +1439,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Adds the req language.
+	 * Adds new required language for a particular vacancy in database
 	 *
-	 * @param vacancyId the vacancy id
-	 * @param lan the lan
+	 * @param type int, name - vacancyId
+	 * @param type String, name - lan
 	 */
 	public void addReqLanguage(int vacancyId, String lan) {
 		
@@ -1456,9 +1462,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Removes the work exp.
+	 * Removes work experience for a particular employee in database
 	 *
-	 * @param workExpId the work exp id
+	 * @param type int, name - workExpId
 	 */
 	public void removeWorkExp(int workExpId) {
 		
@@ -1476,9 +1482,9 @@ public class DBManager {
 	}
 	
 	/**
-	 * Removes the education.
+	 * Removes education for a particular employee in database
 	 *
-	 * @param empEduId the emp edu id
+	 * @param type int, name - empEduId
 	 */
 	public void removeEducation(int empEduId) {
 		
@@ -1496,10 +1502,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Removes the employee language.
+	 * Removes language for a particular employee in database
 	 *
-	 * @param employeeId the employee id
-	 * @param language the language
+	 * @param type int, name - employeeId
+	 * @param type String, name - language
 	 */
 	public void removeEmployeeLanguage(int employeeId, String language) {
 		
@@ -1518,10 +1524,10 @@ public class DBManager {
 	}
 	
 	/**
-	 * Removes the req language.
+	 * Removes required language for a particular vacancy in database
 	 *
-	 * @param vacancyId the vacancy id
-	 * @param language the language
+	 * @param type int, name - vacancyId
+	 * @param type String, name - language
 	 */
 	public void removeReqLanguage(int vacancyId, String language) {
 		
@@ -1540,17 +1546,18 @@ public class DBManager {
 	}
 	
 	/**
-	 * Gets the filter vacancies.
+	 * Gets the data of vacancies filtered by inputs of a client
 	 *
-	 * @param prof the prof
-	 * @param comp the comp
-	 * @param loc the loc
-	 * @param tags the tags
-	 * @param jobs_type the jobs type
-	 * @param degrees the degrees
-	 * @return the filter vacancies
+	 * @param type String, name - prof
+	 * @param type String, name - comp
+	 * @param type String, name - loc
+	 * @param type String, name - tags
+	 * @param type String, name - jobs_type
+	 * @param type String, name - degrees
+	 * @return the list of vacancies
 	 */
-	public List<Vacancy> getFilterVacancies(String prof, String comp, String loc, String tags, String jobs_type, String degrees) {
+	public List<Vacancy> getFilterVacancies(String prof, String comp, String loc, 
+												String tags, String jobs_type, String degrees) {
 		
 		Set<Vacancy> currSet = new HashSet<Vacancy>();
 
@@ -1563,7 +1570,7 @@ public class DBManager {
 				"on v.company_id = c.id " + 
 				"left join vacancy_tags tg " + 
 				"on v.id = tg.vacancy_id " +  
-				"where 1 = 1";
+				"where 1 = 1"; // sql query to get filtered data
 		
 		if(prof.length() > 2) {
 			query += (" and v.profession in " + prof); 
@@ -1610,9 +1617,10 @@ public class DBManager {
 				String qualification2 = resultSet.getString("qualification_2");
 				String qualification3 = resultSet.getString("qualification_3");
 
-				req = new Requirement(location, yearsOfExp, degree, prof, qualification1, qualification2, qualification3);
+				req = new Requirement(location, yearsOfExp, degree, prof, 
+										qualification1, qualification2, qualification3); //requirement object for a particular vacancy
 				vac = new Vacancy(vacId, title, position, description, empType,
-						 company_id, req, creationDate, expiryDate);
+						 				company_id, req, creationDate, expiryDate);
 				currSet.add(vac);
 			}
 
