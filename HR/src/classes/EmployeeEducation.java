@@ -55,7 +55,7 @@ public class EmployeeEducation {
 			String institutionName, String major, String minor, String degree, double grade) {
 		this.id = id;
 		this.startDate = MyDateFormatter.truncate(start);
-		this.endDate = MyDateFormatter.truncate(start);
+		this.endDate = MyDateFormatter.truncate(end);
 		this.educationalInstitution = educationalInstitution;
 		this.institutionName = institutionName;
 		this.major = major;
