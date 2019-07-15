@@ -116,7 +116,7 @@
     <hr>
     
     <label for="heading"><b>Heading *</b></label>
-    <input type="text" id="heading" value= <%= vacancy.getHeading() %>><br>
+    <input type="text" id="heading" value= "<%= vacancy.getHeading() %>"><br>
     
     <label for="profession"><b>Profession</b></label>
     <select id = "profession">
