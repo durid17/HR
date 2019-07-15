@@ -1,3 +1,4 @@
+<%@page import="classes.Pairing"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -167,6 +168,8 @@ display:inline-block;
 	<%	
 	//First
 		List<Employee> list = manager.getVacancyApplicants(vac.getId());	
+		Pairing pairing = new Pairing(manager);
+		list = pairing.getEmoloyees(vac.getId());
 		request.setAttribute("employees", list);
 	%>
 	
